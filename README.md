@@ -1,1 +1,1 @@
-# Arcacia - a Pac-man clone
+# Arcacia - A Pac-man clone
