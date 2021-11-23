@@ -4,7 +4,7 @@ import java.io.File;
 import java.main.game.util.Location;
 
 public abstract class GameObject {
-    Location location;
+    protected Location location;
     File texture;
 
     public GameObject() {
