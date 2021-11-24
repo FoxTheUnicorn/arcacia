@@ -1,7 +1,6 @@
 <h1>Handler</h1>
 Here are all Handlers which give static methods for Objects
 <h2>LevelHandler</h2>
-
 [<code>LevelHandler</code>](LevelHandler.java): stores the Level and gives some useful Methods for the Objects
 
 [<code>int: level_width</code>](LevelHandler.java#L8): The constant width of each level.<br>
