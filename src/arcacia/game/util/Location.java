@@ -1,4 +1,4 @@
-package java.main.game.util;
+package arcacia.game.util;
 
 public class Location {
     //Tile Location and not Pixel Location

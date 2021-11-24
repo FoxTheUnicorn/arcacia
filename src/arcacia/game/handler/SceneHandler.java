@@ -1,6 +1,7 @@
-package java.main.game.scene;
+package arcacia.game.handler;
 
-import java.main.game.scene.menu.MainMenu;
+import arcacia.game.scene.MainFrame;
+import arcacia.game.scene.menu.MainMenu;
 
 public class SceneHandler {
     private static final MainFrame frame = new MainFrame();

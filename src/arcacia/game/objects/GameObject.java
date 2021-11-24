@@ -1,23 +1,25 @@
-package java.main.game.objects;
+package arcacia.game.objects;
 
 import java.io.File;
-import java.main.game.util.Location;
+import arcacia.game.util.Location;
 
 public abstract class GameObject {
-    protected Location location;
+    protected Location currentLocation;
     File texture;
 
-    public GameObject() {
+    public GameObject(Location currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
     //region Getter and Setter
 
+
     public Location getLocation() {
-        return location;
+        return currentLocation;
     }
 
     public void setLocation(Location location) {
-        this.location = location;
+        this.currentLocation = location;
     }
 
     public File getTexture() {

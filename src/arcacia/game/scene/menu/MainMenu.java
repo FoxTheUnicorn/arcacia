@@ -1,4 +1,4 @@
-package java.main.game.scene.menu;
+package arcacia.game.scene.menu;
 
 import javax.swing.*;
 

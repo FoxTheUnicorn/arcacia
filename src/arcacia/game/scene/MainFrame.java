@@ -1,4 +1,4 @@
-package java.main.game.scene;
+package arcacia.game.scene;
 
 import javax.swing.*;
 

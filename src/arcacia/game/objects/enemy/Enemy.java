@@ -1,7 +1,7 @@
-package java.main.game.objects.enemy;
+package arcacia.game.objects.enemy;
 
-import java.main.game.objects.GameObject;
-import java.main.game.util.Location;
+import arcacia.game.objects.GameObject;
+import arcacia.game.util.Location;
 
 public class Enemy extends GameObject {
 
@@ -11,7 +11,8 @@ public class Enemy extends GameObject {
     * @l position an der der Gegner startet und an die der Gegner immer zurückgesetzt wird
      */
     public Enemy(Location l){
-      start = location = l;
+        super(l);
+        start = l;
     }
 
     public boolean bewegeX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung
