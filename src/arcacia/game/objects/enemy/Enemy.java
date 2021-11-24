@@ -51,20 +51,18 @@ public class Enemy extends GameObject {
     }
     
     public boolean spieler_collision(const Position& spieler_location);{
-	//if (position.x > i_spieler_position.x - CELL_SIZE && position.x < CELL_SIZE + i_spieler_position.x)
-	//{
-	//	if (position.y > i_pacman_position.y - CELL_SIZE && position.y < CELL_SIZE + i_spieler_position.y)
-	//	{
-	//		return 1;
-	//	}
-	//}
-	return 0;
+	//if location.issame(){
+	//    return 1
+	 //   }
+	//else 
+	  //  return 0;
 	}
     
     void bewege_auf_position(Location spieler_location){
     //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
     //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
     }
+	
     //Gegner auf dem Bildschirm anzugeben
 	//public void draw();
 }
