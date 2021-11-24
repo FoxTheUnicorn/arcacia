@@ -6,6 +6,11 @@ import arcacia.game.util.Location;
 public class Enemy extends GameObject {
 
     Location start;
+    
+    Location spieler;
+    
+    int Countdown;
+    
 
     /*
     * @l position an der der Gegner startet und an die der Gegner immer zurückgesetzt wird
@@ -27,7 +32,8 @@ public class Enemy extends GameObject {
     boolean siehtSpieler(){
         //checkt ob der spieler sichtbar ist, wenn ja gibt true zurück
         //spieler sollte nur in einer bestimmten entfernung sichtbar werden
-        //merkt sich der gegner wo der spieler zuletzt gesehen wurde?
+        //merkt sich der gegner wo der spieler zuletzt gesehen wurde
+        //resetttet Countdown
         return false;
     }
     void geheRandom(){
@@ -43,4 +49,22 @@ public class Enemy extends GameObject {
     void setzeAufStart(){
         //setzt die Position des Gegners auf die StartPosition zurück
     }
+    
+    public boolean spieler_collision(const Position& spieler_location);{
+	//if (position.x > i_spieler_position.x - CELL_SIZE && position.x < CELL_SIZE + i_spieler_position.x)
+	//{
+	//	if (position.y > i_pacman_position.y - CELL_SIZE && position.y < CELL_SIZE + i_spieler_position.y)
+	//	{
+	//		return 1;
+	//	}
+	//}
+	return 0;
+	}
+    
+    void bewege_auf_position(Location spieler_location){
+    //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
+    //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
+    }
+    //Gegner auf dem Bildschirm anzugeben
+	//public void draw();
 }
