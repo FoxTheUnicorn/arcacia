@@ -16,9 +16,7 @@ public class Location {
 
     public static boolean isSame(Location locA, Location locB) {
         if(locB.x == locA.x) {
-            if(locB.y == locA.y) {
-                return true;
-            }
+            return locB.y == locA.y;
         }
         return false;
     }
