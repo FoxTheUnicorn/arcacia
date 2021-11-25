@@ -1,4 +1,4 @@
-# Arcacia - A Pac-man clone
+<h1>Arcacia - A Pac-man clone</h1>
 
 <h2>Readme Format</h2>
 
