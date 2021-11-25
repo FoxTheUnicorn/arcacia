@@ -17,6 +17,12 @@ public class LevelHandler {
         return (getObjectAt(loc) instanceof WallTile);
     }
 
+    public static GameObject setObjectAt(Location loc, GameObject obj) {
+        GameObject out = grid[loc.getX()][loc.getY()];
+        grid[loc.getX()][loc.getY()] = obj;
+        return out;
+    }
+
     public static void debugInitGrid() {
         for(int x = 0; x < level_width; x++) {
             for(int y = 0; y < level_height; y++) {
