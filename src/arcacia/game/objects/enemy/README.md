@@ -1,11 +1,18 @@
 <h2>Enemy</h2>
-<h3>Enemy(Location currentlocation) : Konstruktor</h3>
-<h3>Enemy(int x, int y) : Konstruktor</h3>
-<h3>+ boolean bewegeX : move horizontally if possible</h3>
-<h3>+ boolean bewegeY : move vertically if possible </h3>
-<h3>+ boolean siehtSpieler(spieler_location) : true if Enemy sees Player</h3>
-<h3>+ void geheRandom : Enemy moves randomly on the map</h3>
-<h3>+ void geheSchritt : moves 1 Step</h3>
-<h3>+ void setzeAufStart : reset Enemy on Starposition</h3>
-<h3>+ boolean spieler_collision(spieler_location,enemy_location) : true if Enemy collides with Player</h3>
-<h3>+ void bewegeAufPosition : moves on location where Player was last seen</h3>
+[<code>Enemy</code>](Enemy.java): stores the Enemy class and all Attributes and Methods
+
+<h3>Attributes</h3>
+
+
+
+<h3>Methods</h3>
+[<code>Enemy(Location currentlocation)</code>] : Konstruktor
+[<code>Enemy(int x, int y)</code>] : Konstruktor
+[<code>boolean: bewegeX</code>] : move horizontally if possible
+[<code>boolean: bewegeY</code>] : move vertically if possible
+[<code>boolean: siehtSpieler</code>] : returns true if Enemy sees Player
+[<code>void: geheRandom</code>] : Enemy moves randomly on the map
+[<code>void: geheSchritt</code>] : moves 1 Step
+[<code>void: setzeAufStart</code>] : resets Enemy on startlocation
+[<code>boolean: spieler_collision(spieler_location,enemy_location)</code>] : returns true if Enemy collides with Player
+[<code>void: bewegeAufPosition</code>] : moves to the location where the Player was last seen
