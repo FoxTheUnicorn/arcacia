@@ -1,5 +1,40 @@
 <h1>Arcacia - A Pac-man clone</h1>
 
+<h2>Ein Projekt der Praktikumsgruppe B3</h2>
+
+<details>
+  <summary>Mitarbeiter</summary>
+  <details>
+    <summary>Projektmanager</summary>
+    <ul>
+      <li>Lucas Beyel</li>
+      <li>Elliot Schibilla</li>
+    </ul>
+  </details>
+  <details>
+    <summary>Vertriebsmanager</summary>
+    <ul>
+      <li>Oscar Heuwes</li>
+      <li>Mert Öztürk</li>
+    </ul>
+  </details>
+  <details>
+    <summary>Qualitätsmanager</summary>
+    <ul>
+      <li>Farhan Sasono</li>
+      <li>Byungjun Kim</li>
+      <li>I Made Paundra Daran</li>
+    </ul>
+  </details>
+  <details>
+    <summary>Technologiemanager</summary>
+    <ul>
+      <li>Mert Tanrısever</li>
+      <li>Vincent Salgado</li>
+    </ul>
+  </details>
+ </details>
+
 <h2>Readme Format</h2>
 
 Each readme should reflect the classes and methods in its package.
