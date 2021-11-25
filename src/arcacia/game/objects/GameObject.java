@@ -5,7 +5,6 @@ import arcacia.game.util.Location;
 
 public abstract class GameObject {
     protected Location currentLocation;
-    protected int speed;
     File texture;
 
     public GameObject(Location currentLocation) {

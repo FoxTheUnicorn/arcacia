@@ -8,11 +8,19 @@ import java.awt.*;
 
 
 public class PlayerObject extends GameObject{
-    
+
+    Location startPlayer;
+    int speed;
+
     public PlayerObject(Location currentLocation, int speed) {
         super(currentLocation);
         this.speed = speed;
+
+
+
+       // update();
     }
+
     public PlayerObject(int x, int y){
 
         super(new Location(x,y));
