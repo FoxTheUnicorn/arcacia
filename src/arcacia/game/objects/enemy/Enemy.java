@@ -15,10 +15,14 @@ public class Enemy extends GameObject {
     /*
     * @l position an der der Gegner startet und an die der Gegner immer zurückgesetzt wird
      */
-    public Enemy(Location l){
-        super(l);
-        start = l;
-    }
+	public Enemy(Location currentLocation){
+		super(currentLocation);
+	}
+
+
+	public Enemy(int x , int y){
+		super(new Location(x,y));
+	}
 
     public boolean bewegeX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung
         //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück
@@ -50,13 +54,16 @@ public class Enemy extends GameObject {
         //setzt die Position des Gegners auf die StartPosition zurück
     }
     
-    public boolean spieler_collision(const Position& spieler_location);{
-	//if location.issame(){
-	//    return 1
-	 //   }
-	//else 
-	  //  return 0;
+    public boolean spieler_collision(spieler_location.getLocation());{
+	if (location.x == spieler_location.x)
+	{
+		if (location.y == spieler_location.y)
+		{
+			return 1;
+		}
 	}
+
+	return 0;
     
     void bewege_auf_position(Location spieler_location){
     //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
