@@ -4,8 +4,10 @@
 
 <details>
   <summary>Mitarbeiter</summary>
+  <br>
   <details>
     <summary>Projektmanager</summary>
+    <br>
     <ul>
       <li>Lucas Beyel</li>
       <li>Elliot Schibilla</li>
@@ -13,6 +15,7 @@
   </details>
   <details>
     <summary>Vertriebsmanager</summary>
+    <br>
     <ul>
       <li>Oscar Heuwes</li>
       <li>Mert Öztürk</li>
@@ -20,6 +23,7 @@
   </details>
   <details>
     <summary>Qualitätsmanager</summary>
+    <br>
     <ul>
       <li>Farhan Sasono</li>
       <li>Byungjun Kim</li>
@@ -28,6 +32,7 @@
   </details>
   <details>
     <summary>Technologiemanager</summary>
+    <br>
     <ul>
       <li>Mert Tanrısever</li>
       <li>Vincent Salgado</li>
