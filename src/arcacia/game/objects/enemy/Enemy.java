@@ -55,12 +55,9 @@ public class Enemy extends GameObject {
     }
     
     public boolean spieler_collision(spieler_location.getLocation());{
-	if (location.x == spieler_location.x)
+	if (isSame(enemy.getLocation(),spieler.getLocation()))
 	{
-		if (location.y == spieler_location.y)
-		{
-			return 1;
-		}
+		return 1
 	}
 
 	return 0;
