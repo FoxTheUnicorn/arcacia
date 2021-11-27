@@ -4,8 +4,10 @@ import arcacia.game.objects.GameObject;
 import arcacia.game.util.Location;
 
 public class Enemy extends GameObject {
-
-    Location start;
+	private int = x;
+	private int = y;
+	private int = speed;
+     Location start;
     
     Location spieler;
     
@@ -33,10 +35,15 @@ public class Enemy extends GameObject {
         return true;
     }
 
-    boolean siehtSpieler(){
-        //checkt ob der spieler sichtbar ist, wenn ja gibt true zurück
-        //spieler sollte nur in einer bestimmten entfernung sichtbar werden
-        //merkt sich der gegner wo der spieler zuletzt gesehen wurde
+    public boolean siehtSpieler(){
+	    //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.
+	    //unter der bedingung das zwischen den beiden positionen keine Wand ist
+	    if((spieler.getlocationX()-enemy.getlocationX())<=10||spieler.getlocationY()-enemy.getlocationY())<=10){
+		    if(!isWall()){
+			target = bewege_auf_position();    
+			return true;
+		    }
+	    }
         //resetttet Countdown
         return false;
     }
