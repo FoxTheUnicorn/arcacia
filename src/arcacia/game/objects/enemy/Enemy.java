@@ -28,11 +28,21 @@ public class Enemy extends GameObject {
 
     public boolean bewegeX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung
         //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück
-        return true;
+       int currentX = currentLocation.getX();
+       this.currentLocation.setX(currentX + x);
+       return LevelHandler.isWall(this.currentLocation); //(Location.isSame(this.currentLocation, WallLocation)
     }
     public boolean bewegeY(int y){ //nimmt 1 oder -1 an, und bewegt in diese richtung
         //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück
-        return true;
+          //alternative schreibweise, falls eingabe parameter eingeschränkt (nur 1 und -1) muss
+        int currentY = currentLocation.getY();
+        if (y == 1){
+            this.currentLocation.setY(currentY =+ 1);
+        }
+        else if (y ==-1){
+            this.currentLocation.setY(currentY =- 1);
+        }
+        return LevelHandler.isWall(this.currentLocation);
     }
 
     public boolean siehtSpieler(){
