@@ -40,17 +40,27 @@ public class Enemy extends GameObject {
        this.currentLocation.setX(currentX + x);
        return LevelHandler.isWall(this.currentLocation); //(Location.isSame(this.currentLocation, WallLocation)
     }
-    public boolean bewegeY(int y){ //nimmt 1 oder -1 an, und bewegt in diese richtung
+      public boolean bewegeY(int y){ //nimmt 1 oder -1 an, und bewegt in diese richtung
         //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück
           //alternative schreibweise, falls eingabe parameter eingeschränkt (nur 1 und -1) muss
         int currentY = currentLocation.getY();
         if (y == 1){
             this.currentLocation.setY(currentY =+ 1);
+            if (!LevelHandler.isWall(this.currentLocation)){return true;}
+            if (LevelHandler.isWall(this.currentLocation)) {
+                this.currentLocation.setY(currentY = -1);
+                return false;
+            }
         }
         else if (y ==-1){
             this.currentLocation.setY(currentY =- 1);
+            if (!LevelHandler.isWall(this.currentLocation)){return true;}
+            if (LevelHandler.isWall(this.currentLocation)) {
+                this.currentLocation.setY(currentY = +1);
+                return false;
+            }
         }
-        return LevelHandler.isWall(this.currentLocation);
+        return !LevelHandler.isWall(this.currentLocation); //weiss noch nicht genau was bedingung für true ist
     }
 
     public boolean siehtSpieler(){
@@ -118,7 +128,65 @@ public class Enemy extends GameObject {
     void bewege_auf_position(Location spieler_location){
     //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
     //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
-    }
+        if (!Location.isSame(this.currentLocation, spieler));
+        {
+            if (this.currentLocation.getX() <= spieler.getX() && this.currentLocation.getY() <= spieler.getY()) {
+                int richtung = ThreadLocalRandom.current().nextInt(1, 2);//generiert eine zahl aus {1,2}
+                switch (richtung) {
+                    case 1:
+                        if (bewegeY(1)) {
+                            //falls es ne wand gibt, dann konnte hier vllt else geheRandom hinzugefügt
+                            break;
+                        }
+                    case 2:
+                        if (bewegeX(1)) {
+                            break;
+                        }
+                }
+            }
+            if (this.currentLocation.getX() >= spieler.getX() && this.currentLocation.getY() <= spieler.getY()) {
+                int richtung = ThreadLocalRandom.current().nextInt(1, 2);//generiert eine zahl aus {1,2}
+
+                switch (richtung) {
+                    case 1:
+                        if (bewegeY(1)) {
+                            break;
+                        }
+                    case 2:
+                        if (bewegeX(-1)) {
+                            break;
+                        }
+                }
+            }
+            if (this.currentLocation.getX() <= spieler.getX() && this.currentLocation.getY() >= spieler.getY()) {
+                int richtung = ThreadLocalRandom.current().nextInt(1, 2);//generiert eine zahl aus {1,2}
+
+                switch (richtung) {
+                    case 1:
+                        if (bewegeY(-1)) {
+                            break;
+                        }
+                    case 2:
+                        if (bewegeX(1)) {
+                            break;
+                        }
+                }
+            }
+            if (this.currentLocation.getX() >= spieler.getX() && this.currentLocation.getY() >= spieler.getY()) {
+                int richtung = ThreadLocalRandom.current().nextInt(1, 2);//generiert eine zahl aus {1,2}
+
+                switch (richtung) {
+                    case 1:
+                        if (bewegeY(-1)) {
+                            break;
+                        }
+                    case 2:
+                        if (bewegeX(-1)) {
+                            break;
+                        }
+                }
+            }
+        }
 	
     //Gegner auf dem Bildschirm anzugeben
 	//public void draw();
