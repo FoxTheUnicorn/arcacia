@@ -10,22 +10,30 @@ import java.awt.*;
 public class PlayerObject extends GameObject{
 
     Location startPlayer;
-    int speed;
+    protected int Spielerspeed = 4 ;
 
-    public PlayerObject(Location currentLocation, int speed) {
+    public PlayerObject(Location currentLocation, int Spielerspeed){
         super(currentLocation);
-        this.speed = speed;
+        startPlayer = new Location(currentLocation.getX(),currentLocation.getY());
+        this.Spielerspeed = Spielerspeed;
 
-
-
-       // update();
+        // update();
     }
 
     public PlayerObject(int x, int y){
 
         super(new Location(x,y));
+        startPlayer = new Location(x,y);
 
     }
+
+    //Default COnst, wenn es nötig ist
+    /*public PlayerObject(int Spielerspeed){
+
+        this.Spielerspeed = Spielerspeed;
+
+
+    }*/
 
 
     public void update(){
