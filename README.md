@@ -55,7 +55,7 @@ Use <code> tags for references in the Code:
 ```
 <code>int: number_a</code>: Some number.
 ```
-You !can! also combine them with relative links and line references:
+You !an also combine them with relative links and line references:
 
 [<code>int: number_a</code>](example.java#L2): Some number at Line 2.
 ```
