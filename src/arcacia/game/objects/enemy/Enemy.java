@@ -206,18 +206,54 @@ public class Enemy extends GameObject {
     void bewege_auf_position(Location location){
     //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
     //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
-        if (!Location.isSame(this.currentLocation, spieler))
+        if (!Location.isSame(this.currentLocation, location))
+        {int randomizer = ThreadLocalRandom.current().nextInt(1, 5);//generiert eine zahl aus {1,2,3,4,5}
+         int hit_wall =0;
+          do {
+              switch (randomizer) {
+                  case 1:
+                      if (this.currentLocation.getX() < location.getX()) {
+                          if (bewegeX(1)) {bewegeX(1);}
+                          break;
+                      }
+                  case 2:
+                      if (this.currentLocation.getX() > location.getX()) {
+                          if (bewegeX(-1)) {bewegeX(-1);}
+                          break;
+                      }
+                  case 3:
+                      if (this.currentLocation.getY() < location.getY()) {
+                          if (bewegeY(1)) {bewegeY(1);}
+                          break;
+                      }
+                  case 4:
+                      if (this.currentLocation.getY() > location.getY()) {
+                          if (bewegeY(-1)) {bewegeY(-1);}
+                          break;
+                      }
+              }hit_wall++;
+          } while (hit_wall <= 10);
+          if (hit_wall == 10) {
+              geheRandom();
+          }
+
+        }
+
+
+
+      /*  if (!Location.isSame(this.currentLocation, location))
         {
             if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() <= location.getY()) {
                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
                 switch (richtung) {
                     case 1:
                         if (bewegeY(1)) {
-                            //falls es ne wand gibt, dann konnte hier vllt else geheRandom hinzugefügt
+                            bewegeY(1);
                             break;
                         }
                     case 2:
                         if (bewegeX(1)) {
+                            bewegeX(1);
                             break;
                         }
                 }
@@ -228,10 +264,12 @@ public class Enemy extends GameObject {
                 switch (richtung) {
                     case 1:
                         if (bewegeY(1)) {
+                            bewegeY(1);
                             break;
                         }
                     case 2:
                         if (bewegeX(-1)) {
+                            bewegeX(-1);
                             break;
                         }
                 }
@@ -242,10 +280,12 @@ public class Enemy extends GameObject {
                 switch (richtung) {
                     case 1:
                         if (bewegeY(-1)) {
+                            bewegeY(-1);
                             break;
                         }
                     case 2:
                         if (bewegeX(1)) {
+                            bewegeX(1);
                             break;
                         }
                 }
@@ -256,15 +296,19 @@ public class Enemy extends GameObject {
                 switch (richtung) {
                     case 1:
                         if (bewegeY(-1)) {
+                            bewegeY(-1);
                             break;
                         }
                     case 2:
                         if (bewegeX(-1)) {
+                            bewegeX(-1);
                             break;
                         }
                 }
             }
         }
+
+       */
 
 
     }
