@@ -203,7 +203,7 @@ public class Enemy extends GameObject {
      * bewegt sich in die richtung der Location die der funktion übergebenen wird
      * @param location übergibt ein Location Object, gegner geht in diese richtung wenn möglich
      */
-    void bewege_auf_position(Location location){
+    void bewege_in_richtung(Location location){
     //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
     //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
         if (!Location.isSame(this.currentLocation, location))
