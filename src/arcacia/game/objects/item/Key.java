@@ -9,7 +9,6 @@ public class Key extends Item{
         setPoints(100);
     }
 
-    @Override
     public void collecting() {
         if(!isPickedUp() && this.currentLocation.getX()== PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
             setPickedUp(true);

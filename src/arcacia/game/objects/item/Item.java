@@ -60,6 +60,4 @@ public abstract class Item extends GameObject {
         this.pickedUp = pickedUp;
     }
 
-    //Methods for when the Item is picked up
-    public abstract void collecting();
 }
