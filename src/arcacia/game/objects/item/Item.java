@@ -6,6 +6,10 @@ import java.awt.image.BufferedImage;
 
 public abstract class Item extends GameObject {
 
+    public Item(Location currentLocation) {
+        super(currentLocation);
+    }
+
     String name;
     BufferedImage image;
     Location position;

@@ -10,8 +10,8 @@ public class StopwatchItem extends Item{
     }
 
     public void collecting() {
-        if(!isPickedUp() && this.currentLocation.getX()== PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
-            setPickedUp(true);
+        if(!isEingesammelt() && this.currentLocation.getX()== PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
+            setEingesammelt(true);
             GameHandler.setPauseEnemies(true); //will be implemented
         }
     }
