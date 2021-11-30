@@ -5,19 +5,21 @@ import arcacia.game.util.Location;
 import java.awt.image.BufferedImage;
 
 public abstract class Item extends GameObject {
-    public Item(Location currentLocation) {
-        super(currentLocation);
+
+    String name;
+    BufferedImage image;
+    Location position;
+    int dauer = 10;//How long the item will last
+    long points = 0;//what will be added to the score after the item is picked up
+    boolean eingesammelt = false;//If the item was picked up
+
+    public String getName() {
+        return name;
     }
-    private BufferedImage image;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    private int x;//Location X of item
-    private int y;//Location Y of item
-
-    private long points; //what will be added to the score after the item is picked up
-    private int dauer; //How long the item will last
-    private boolean eingesammelt = false; //If the item was picked up
-
-    //Getter and setter of every attribute
     public BufferedImage getImage() {
         return image;
     }
@@ -25,18 +27,18 @@ public abstract class Item extends GameObject {
         this.image = image;
     }
 
-    public int getX() {
-        return x;
+    public Location getPosition() {
+        return position;
     }
-    public void setX(int x) {
-        this.x = x;
+    public void setPosition(Location position) {
+        this.position = position;
     }
 
-    public int getY() {
-        return y;
+    public int getDauer() {
+        return dauer;
     }
-    public void setY(int y) {
-        this.y = y;
+    public void setDauer(int dauer) {
+        this.dauer = dauer;
     }
 
     public long getPoints() {
@@ -46,18 +48,13 @@ public abstract class Item extends GameObject {
         this.points = points;
     }
 
-    public double getTimer() {
-        return timer;
+    public boolean isEingesammelt() {
+        return eingesammelt;
     }
-    public void setTimer(int timer) {
-        this.timer = timer;
+    public void setEingesammelt(boolean eingesammelt) {
+        this.eingesammelt = eingesammelt;
     }
 
-    public boolean isEingesammelt() {
-        return pickedUp;
-    }
-    public void setEingesammelt(boolean pickedUp) {
-        this.pickedUp = pickedUp;
-    }
+
 
 }
