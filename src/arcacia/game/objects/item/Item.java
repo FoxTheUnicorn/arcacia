@@ -5,7 +5,6 @@ import arcacia.game.util.Location;
 import java.awt.image.BufferedImage;
 
 public abstract class Item extends GameObject {
-
     public Item(Location currentLocation) {
         super(currentLocation);
     }
@@ -58,7 +57,4 @@ public abstract class Item extends GameObject {
     public void setEingesammelt(boolean eingesammelt) {
         this.eingesammelt = eingesammelt;
     }
-
-
-
 }
