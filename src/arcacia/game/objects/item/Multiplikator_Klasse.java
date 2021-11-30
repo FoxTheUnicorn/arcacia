@@ -12,7 +12,7 @@ public class Multiplikator_Klasse extends Item_Klasse{
         this.scale = scale;
     }
 
-    public Multiplikator_Klasse(String name, Location multiplikator, double dauer, int scale) {
+    public Multiplikator_Klasse(String name, Location multiplikator, int dauer, int scale) {
         setName(name);
         setPosition(multiplikator);
         setDauer(dauer);
@@ -23,9 +23,11 @@ public class Multiplikator_Klasse extends Item_Klasse{
         setPoints((getPoints()+100)*scale);
     }
 
-    public void einsammeln(Object object){
-        setEingesammelt(true);
-        ((Multiplikator_Klasse) object).multiplicate();
-        setDauer(0);
+    public void einsammeln(){
+        if(!isEingesammelt() && this.currentLocation.getX() == PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
+            setEingesammelt(true);
+            this.multiplicate();
+            setDauer(0);
+        }
     }
 }

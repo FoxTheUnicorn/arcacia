@@ -14,8 +14,8 @@ public abstract class Item extends GameObject {
     private int y;//Location Y of item
 
     private long points; //what will be added to the score after the item is picked up
-    private int timer; //How long the item will last
-    private boolean pickedUp = false; //If the item was picked up
+    private int dauer; //How long the item will last
+    private boolean eingesammelt = false; //If the item was picked up
 
     //Getter and setter of every attribute
     public BufferedImage getImage() {
@@ -53,10 +53,10 @@ public abstract class Item extends GameObject {
         this.timer = timer;
     }
 
-    public boolean isPickedUp() {
+    public boolean isEingesammelt() {
         return pickedUp;
     }
-    public void setPickedUp(boolean pickedUp) {
+    public void setEingesammelt(boolean pickedUp) {
         this.pickedUp = pickedUp;
     }
 

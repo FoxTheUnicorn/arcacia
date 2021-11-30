@@ -5,14 +5,14 @@ public class GegnerTöten_Klasse extends Item_Klasse {
         setPosition(gegnerTöten);
         setDauer(dauer);
     }
-    public void einsammeln(Object object, Vector<Enemy> enemies, KeyHandler handler){
-        Vector<Enemy> enemiesCopy = new Vector <Enemy>();
-        ((GegnerTöten_Klasse) object).setPoints(getPoints() + 100);
-        setEingesammelt(true);
-        double dauer = getDauer();
-       // if(getEingesammelt()){
+    public void einsammeln(Vector<Enemy> enemies){
+        if(!isEingesammelt() && this.currentLocation.getX() == PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
+            Vector<Enemy> enemiesCopy = new Vector <Enemy>();
+            this.setPoints(getPoints() + 100);
+            setEingesammelt(true);
+            double dauer = getDauer();
             while(getDauer() != 0){
-                if(handler.isBewegt()){
+                if(KeyHandler.isBewegt()){
                     setDauer(dauer--);
                     for(int i = 0; i < enemies.size(); i++){
                         if(Location.isSame(enemies.get(i).currentLocation, enemies.get(i).getSpieler)){
@@ -24,7 +24,7 @@ public class GegnerTöten_Klasse extends Item_Klasse {
                     }
                 }
             }
-        //}
-        enemies = enemiesCopy;
+            enemies = enemiesCopy;
+        }
     }
 }
