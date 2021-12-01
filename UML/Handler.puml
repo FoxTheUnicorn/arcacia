@@ -1,0 +1,64 @@
+@startuml
+class arcacia.game.handler.CollisionHandler {
+==
++ collision(GameObject, GameObject): GameObject
+- playerCollision(PlayerObject, GameObject): GameObject
+- enemyCollision(EnemyObject, GameObject): GameObject
+}
+
+class arcacia.game.handler.ConstantHandler {
++ scoreEnemyKill: int
++ gamePlayerStepsPerTurn: int
++ gameEnemyStepsPerTurn: int
+==
+}
+
+class arcacia.game.handler.InputHandler {
+}
+
+class arcacia.game.handler.LevelHandler {
+==
++ getObjectAt(Location): GameObject
++ setObjectAt(Location, GameObject): GameObject
++ debugInitGrid(): void
+--
++ isWall(Location): boolean
++ isWall(x, y): boolean
++ setLevelGrid(GameObject[][]): void
+}
+
+class arcacia.game.handler.PlayerHandler {
+- hasKey: boolean
+- lives: int
+- score: int
+- player: PlayerObject
+==
++ incrementLives(): void
++ decrementLives(): void
++ addScore(int): int
+--
++ hasKey(): boolean
++ setHasKey(boolean): void
++ getLives(): int
++ setLives(int): void
++ getScore(): int
++ setScore(int): void
++ getPlayer(): PlayerObject
++ setPlayer(PlayerObject): void
+}
+
+class arcacia.game.handler.SceneHandler {
+- frame: MainFrame
+- mainMenu: MainMenu
+- initialised: boolean
+==
++ showMainMenu(): void
++ showPauseMenu(): void
++ showHighscore(): void
++ showVictory(): void
++ showLevel(): void
+--
++ isInitialised(): boolean
++ initialise(): void
+}
+@enduml

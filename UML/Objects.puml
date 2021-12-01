@@ -1,0 +1,21 @@
+@startuml
+
+package GameObject {
+abstract class GameObject {
+# currentLocation: Location
+~ texture: File
+==
++GameObject(Location)
+--
++ getLocation(): Location
++ setLocation(Location): void
++ getTexture(): File
++ setTexture(File): void
+}
+class PlayerObject {
+~ startPlayer: Location
+# int: playerSpeed
+}
+}
+
+@enduml

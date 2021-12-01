@@ -1,21 +1,19 @@
 package arcacia.game.objects;
 
-import arcacia.game.handler.KeyHandler;
-import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
-import arcacia.game.handler.LevelHandler;
+
 import java.awt.*;
 
 
 public class PlayerObject extends GameObject{
 
     Location startPlayer;
-    protected int Spielerspeed = 4 ;
+    protected int speed = 4 ;
 
-    public PlayerObject(Location currentLocation, int Spielerspeed){
+    public PlayerObject(Location currentLocation, int newSpeed){
         super(currentLocation);
         startPlayer = new Location(currentLocation.getX(),currentLocation.getY());
-        this.Spielerspeed = Spielerspeed;
+        this.speed = newSpeed;
 
         // update();
     }
