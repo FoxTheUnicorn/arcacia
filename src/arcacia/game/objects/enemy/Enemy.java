@@ -238,7 +238,7 @@ public class Enemy extends GameObject {
                 geheRandom();
             }
         }
-        else if (Location.isSame(this.currentLocation, location) ) { //ob siehtSpieler() wahr ist in geheSchritt:void überpruft
+        else if (Location.isSame(this.currentLocation, location) ) {
             geheRandom();
         }
     }
