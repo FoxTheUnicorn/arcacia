@@ -16,7 +16,13 @@ public class LevelHandler {
     public static boolean isWall(Location loc) {
         return (getObjectAt(loc) instanceof WallTile);
     }
-    public static boolean isWall(int x, int y) { return (getObjectAt(new Location(x,y)) instanceof WallTile);}
+    public static boolean isWall(int x, int y) {
+        return (getObjectAt(new Location(x,y)) instanceof WallTile);
+    }
+
+    public static void setLevelGrid(GameObject[][] grid) {
+        LevelHandler.grid = grid;
+    }
 
     public static GameObject setObjectAt(Location loc, GameObject obj) {
         GameObject out = grid[loc.getX()][loc.getY()];
