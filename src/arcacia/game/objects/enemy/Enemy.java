@@ -173,7 +173,7 @@ public class Enemy extends GameObject {
             last_seen = spieler;
         }
         if (Countdown > 0){
-            bewege_auf_position(last_seen);
+            bewege_in_richtung(last_seen);
             Countdown--;
         }else {
             geheRandom();
@@ -203,41 +203,47 @@ public class Enemy extends GameObject {
      * bewegt sich in die richtung der Location die der funktion übergebenen wird
      * @param location übergibt ein Location Object, gegner geht in diese richtung wenn möglich
      */
-    void bewege_in_richtung(Location location){
-    //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
-    //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
-        if (!Location.isSame(this.currentLocation, location))
-        {int randomizer = ThreadLocalRandom.current().nextInt(1, 5);//generiert eine zahl aus {1,2,3,4,5}
-         int hit_wall =0;
-          do {
-              switch (randomizer) {
-                  case 1:
-                      if (this.currentLocation.getX() < location.getX()) {
-                          if (bewegeX(1)) {bewegeX(1);}
-                          break;
-                      }
-                  case 2:
-                      if (this.currentLocation.getX() > location.getX()) {
-                          if (bewegeX(-1)) {bewegeX(-1);}
-                          break;
-                      }
-                  case 3:
-                      if (this.currentLocation.getY() < location.getY()) {
-                          if (bewegeY(1)) {bewegeY(1);}
-                          break;
-                      }
-                  case 4:
-                      if (this.currentLocation.getY() > location.getY()) {
-                          if (bewegeY(-1)) {bewegeY(-1);}
-                          break;
-                      }
-              }hit_wall++;
-          } while (hit_wall <= 10);
-          if (hit_wall == 10) {
-              geheRandom();
-          }
-
+    void bewege_in_richtung(Location location) {
+        //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
+        //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
+        if (!Location.isSame(this.currentLocation, location)) {
+            int randomizer = ThreadLocalRandom.current().nextInt(1, 5);//generiert eine zahl aus {1,2,3,4}
+            int hit_wall =0;
+            do {
+                switch (randomizer) {
+                    case 1:
+                        if (this.currentLocation.getX() < location.getX()) {
+                            if (bewegeX(1)) {bewegeX(1);}
+                            break;
+                        }
+                    case 2:
+                        if (this.currentLocation.getX() > location.getX()) {
+                            if (bewegeX(-1)) {bewegeX(-1);}
+                            break;
+                        }
+                    case 3:
+                        if (this.currentLocation.getY() < location.getY()) {
+                            if (bewegeY(1)) {bewegeY(1);}
+                            break;
+                        }
+                    case 4:
+                        if (this.currentLocation.getY() > location.getY()) {
+                            if (bewegeY(-1)) {bewegeY(-1);}
+                            break;
+                        }
+                }
+                hit_wall++;
+            } while (hit_wall <= 25);
+            if (hit_wall == 25) {
+                geheRandom();
+            }
         }
+        else if (Location.isSame(this.currentLocation, location) ) {
+            geheRandom();
+        }
+    }
+
+}
 
 
 
@@ -310,6 +316,3 @@ public class Enemy extends GameObject {
 
        */
 
-
-    }
-}
