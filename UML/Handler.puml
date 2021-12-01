@@ -1,22 +1,24 @@
 @startuml
-class arcacia.game.handler.CollisionHandler {
+
+
+class CollisionHandler {
 ==
 + collision(GameObject, GameObject): GameObject
 - playerCollision(PlayerObject, GameObject): GameObject
 - enemyCollision(EnemyObject, GameObject): GameObject
 }
 
-class arcacia.game.handler.ConstantHandler {
+class ConstantHandler {
 + scoreEnemyKill: int
 + gamePlayerStepsPerTurn: int
 + gameEnemyStepsPerTurn: int
 ==
 }
 
-class arcacia.game.handler.InputHandler {
+class InputHandler {
 }
 
-class arcacia.game.handler.LevelHandler {
+class LevelHandler {
 ==
 + getObjectAt(Location): GameObject
 + setObjectAt(Location, GameObject): GameObject
@@ -27,7 +29,7 @@ class arcacia.game.handler.LevelHandler {
 + setLevelGrid(GameObject[][]): void
 }
 
-class arcacia.game.handler.PlayerHandler {
+class PlayerHandler {
 - hasKey: boolean
 - lives: int
 - score: int
@@ -47,7 +49,7 @@ class arcacia.game.handler.PlayerHandler {
 + setPlayer(PlayerObject): void
 }
 
-class arcacia.game.handler.SceneHandler {
+class SceneHandler {
 - frame: MainFrame
 - mainMenu: MainMenu
 - initialised: boolean

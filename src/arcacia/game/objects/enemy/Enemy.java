@@ -186,16 +186,13 @@ public class Enemy extends GameObject {
      */
     void setzeAufStart(){
         //setzt die Position des Gegners auf die StartPosition zurück
-
-        this.currentLocation.setX(this.start.getX());
-        this.currentLocation.setY(this.start.getY());
+        this.currentLocation = start;
         Countdown = -1;
     }
 
 
     public boolean spieler_collision() {
         return (Location.isSame(this.currentLocation, this.spieler)) ;
-
     }
 
 

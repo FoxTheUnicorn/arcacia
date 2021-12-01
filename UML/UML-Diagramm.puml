@@ -1,6 +1,21 @@
 @startuml
-!include Handler.puml
 
+package arcacia {
+    package game {
+        package objects {
+            !includesub Objects.puml!base
+            package item {
+                !includesub Objects.puml!item
+            }
+            package tile {
+                !includesub Objects.puml!tile
+            }
+        }
+        package handler{
+            !include Handler.puml
+        }
+    }
+}
 
 
 @enduml

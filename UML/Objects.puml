@@ -1,6 +1,6 @@
 @startuml
 
-package GameObject {
+!startsub base
 abstract class GameObject {
 # currentLocation: Location
 ~ texture: File
@@ -12,10 +12,125 @@ abstract class GameObject {
 + getTexture(): File
 + setTexture(File): void
 }
+
 class PlayerObject {
 ~ startPlayer: Location
-# int: playerSpeed
+# speed: int
+
++ PlayerObject(Location, int)
++ PlayerObject(int, int)
++ update(): void
++ draw(Graphics2D): void
 }
+!endsub
+
+!startsub enemy
+class EnemyObject {
+~ start: Location
+~ spieler: Location
+~ last_seen: Location
+~ Countdown: int
+- maxVerfolgen: int
+- sichtWeite: int
+==
++ Enemy(Location)
++ Enemy(int, int)
+--
++ bewegeX(int): boolean
++ bewegeY(int): boolean
++ siehtSpieler(): boolean
++ geheRandom(): void
++ geheSchritt(Location): void
++ setzeAufStart(): void
++ spieler_collision(): boolean
++ bewege_in_richtung(): void
 }
+!endsub
+
+!startsub item
+class ExtraLeben_Klasse {
+~ healthbar: boolean[]
+~ emptyhealthbar: boolean[]
+~ fullhealthbar: boolean[]
+==
++ExtraLeben_Klasse(String name,Location extraleben,int dauer)
+--
++void einsammeln()
+--
++boolean[] getHealthbar()
++void setHealthbar(boolean[])
+}
+
+class GegnerTöten_Klasse {
+==
++ GegnerTöten_Klasse(String, Location, double)
+--
++ einsammeln(Vector<Enemy>): void
+}
+abstract class Item {
+public abstract class Item extends GameObject {
+~ name: String
+~ image: BufferedImage
+~ position: Location
+~ dauer: int
+~ points: long
+~ eingesammelt: boolean
+==
++ Item(Location)
+--
++ getName(): String
++ setName(String): void
++ getImage(): BufferedImage
++ setImage(BufferedImage): void
++ getPosition(): Location
++ setPosition(Location): void
++ getDauer(): int
++ setDauer(int): void
++ getPoints(): long
++ setPoints(long): void
++ isEingesammelt(): boolean
++ setEingesammelt(boolean): void
+}
+
+class Key {
+--
++ Key(Location)
++ collecting(): void
+}
+
+class Multiplikator_Klasse {
+~ scale: int
+==
++ Multiplikator_Klasse(String, Location, int, int)
+--
++ multiplicate(): void
++ einsammeln(): void
+--
++ getScale(): int
++ setScale(int): void
+}
+
+class SpeedItem {
++ SpeedItem(Location)
++ collecting(): void
+}
+
+class StopwatchItem {
++ StopwatchItem(Location)
++ collecting(): void
+}
+
+!endsub
+
+!startsub tile
+class EmptyTile {
++ EmptyTile(Location)
+}
+
+class WallTile{
++ WallTile(Location)
++ WallTile(int, int)
+}
+!endsub
 
 @enduml
