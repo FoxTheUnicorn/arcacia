@@ -204,36 +204,37 @@ public class Enemy extends GameObject {
         //bewegt sich in Richtung der zuletzt gesehen Position des Spieler
         //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
         if (!Location.isSame(this.currentLocation, location)) {
-            int randomizer = ThreadLocalRandom.current().nextInt(1, 5);//generiert eine zahl aus {1,2,3,4}
-            int hit_wall =0;
-            do {
+
+            int hit_wall_limit =25;
+            for (int i = 0; i <= hit_wall_limit; i++){
+                int randomizer = ThreadLocalRandom.current().nextInt(1, 5);//generiert eine zahl aus {1,2,3,4}
                 switch (randomizer) {
                     case 1:
                         if (this.currentLocation.getX() < location.getX()) {
-                            if (bewegeX(1)) {bewegeX(1);}
-                            break;
+                            if (bewegeX(1)) {bewegeX(1);break;}
+                            else i++;
                         }
                     case 2:
                         if (this.currentLocation.getX() > location.getX()) {
-                            if (bewegeX(-1)) {bewegeX(-1);}
-                            break;
+                            if (bewegeX(-1)) {bewegeX(-1);break;}
+                            else i++;
                         }
                     case 3:
                         if (this.currentLocation.getY() < location.getY()) {
-                            if (bewegeY(1)) {bewegeY(1);}
-                            break;
+                            if (bewegeY(1)) {bewegeY(1);break;}
+                            else i++;
                         }
                     case 4:
                         if (this.currentLocation.getY() > location.getY()) {
-                            if (bewegeY(-1)) {bewegeY(-1);}
-                            break;
+                            if (bewegeY(-1)) {bewegeY(-1);break;}
+                            else i++;
                         }
                 }
-                hit_wall++;
-            } while (hit_wall <= 25);
-            if (hit_wall == 25) {
-                geheRandom();
+                if (i == 25) {
+                    geheRandom();
+                }
             }
+
         }
         else if (Location.isSame(this.currentLocation, location) ) {
             geheRandom();
