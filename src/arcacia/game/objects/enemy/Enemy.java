@@ -238,7 +238,7 @@ public class Enemy extends GameObject {
             }
 
         }
-        else if (Location.isSame(this.currentLocation, location) && !siehtSpieler()) { //gebe ich hier !siehtSpieler() ein oder wird das in geheSchritt() geregelt
+        else if (Location.isSame(this.currentLocation, location) && !siehtSpieler()) { //gebe ich hier !siehtSpieler() ein oder wird das in geheSchritt() geregelt?
             geheRandom();                                                                       //meiner Meinung nach passt das besser in geheSchritt()
         }
     }
