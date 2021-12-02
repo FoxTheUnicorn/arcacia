@@ -205,32 +205,34 @@ public class Enemy extends GameObject {
         //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben
         if (!Location.isSame(this.currentLocation, location)) {
 
+            int hit_wall = 0;
             int hit_wall_limit =25;
-            for (int i = 0; i <= hit_wall_limit; i++){
+
+            move : while (hit_wall <= hit_wall_limit){
                 int randomizer = ThreadLocalRandom.current().nextInt(1, 5);//generiert eine zahl aus {1,2,3,4}
                 switch (randomizer) {
                     case 1:
                         if (this.currentLocation.getX() < location.getX()) {
-                            if (bewegeX(1)) {bewegeX(1);break;}
-                            else i++;
+                            if (bewegeX(1)) {bewegeX(1);break move;}
+                            else hit_wall++;
                         }
                     case 2:
                         if (this.currentLocation.getX() > location.getX()) {
-                            if (bewegeX(-1)) {bewegeX(-1);break;}
-                            else i++;
+                            if (bewegeX(-1)) {bewegeX(-1);break move;}
+                            else hit_wall++;
                         }
                     case 3:
                         if (this.currentLocation.getY() < location.getY()) {
-                            if (bewegeY(1)) {bewegeY(1);break;}
-                            else i++;
+                            if (bewegeY(1)) {bewegeY(1);break move;}
+                            else hit_wall++;
                         }
                     case 4:
                         if (this.currentLocation.getY() > location.getY()) {
-                            if (bewegeY(-1)) {bewegeY(-1);break;}
-                            else i++;
+                            if (bewegeY(-1)) {bewegeY(-1);break move;}
+                            else hit_wall++;
                         }
                 }
-                if (i == 25) {
+                if (hit_wall == hit_wall_limit) {
                     geheRandom();
                 }
             }
