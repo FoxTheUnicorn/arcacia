@@ -1,4 +1,6 @@
 package arcacia.game.objects.item;
+
+
 public class ExtraLeben_Klasse extends Item_Klasse {    //Vererbung
     boolean[] healthbar = {true,true,true};
     boolean[] emptyhealthbar = {false,false,false};
@@ -11,7 +13,7 @@ public class ExtraLeben_Klasse extends Item_Klasse {    //Vererbung
         this.healthbar = healthbar;
     }
 
-    public ExtraLeben_Klasse(String name,Location extraleben,int dauer) {
+    public ExtraLeben_Klasse(String name, Location extraleben, int dauer) {
         setName(name);
         setPosition(extraleben);
         setDauer(dauer);

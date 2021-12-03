@@ -1,5 +1,6 @@
 package arcacia.game.objects.item;
 
+import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
 public class Key extends Item{

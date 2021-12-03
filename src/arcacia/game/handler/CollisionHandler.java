@@ -4,6 +4,7 @@ import arcacia.game.objects.GameObject;
 import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.enemy.Enemy;
 import arcacia.game.objects.item.Item;
+import arcacia.game.objects.tile.DoorObject;
 
 public class CollisionHandler {
 
@@ -15,7 +16,10 @@ public class CollisionHandler {
         }
         else if (initiator instanceof Enemy) {
             return enemyCollision((Enemy) initiator, collider);
+        }else if(initiator instanceof DoorObject){
+            return doorCollision((DoorObject) initiator,collider);
         }
+
         return null;
     }
 
@@ -34,5 +38,13 @@ public class CollisionHandler {
         if (collider instanceof PlayerObject) {
             PlayerHandler.decrementLives();
         } return collider;
+    }
+
+    private static GameObject doorCollision(DoorObject door, GameObject collider){
+        //Wenn Kollision mit Player und Player hat Key eingesammelt. sonst passiert nichts
+        if(collider instanceof PlayerObject /* Prüfen ob Key eingesammelt ist */ ){
+            /*Load next Level */
+        }
+        return collider;
     }
 }

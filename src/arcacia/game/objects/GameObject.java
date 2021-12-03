@@ -1,6 +1,9 @@
 package arcacia.game.objects;
 
+
 import java.io.File;
+
+import arcacia.game.handler.InputHandler;
 import arcacia.game.util.Location;
 
 public abstract class GameObject {
