@@ -40,6 +40,7 @@ public class SceneHandler {
     public static void initialise() {
         initialised = true;
         frame.add(mainMenu);
+        frame.addKeyListener(new InputHandler());
     }
 
 }

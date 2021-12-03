@@ -62,10 +62,6 @@ public class PlayerObject extends GameObject{
         /*
                 Input
          */
-
-
-
-
     }
 
 
