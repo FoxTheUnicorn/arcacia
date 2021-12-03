@@ -1,16 +1,13 @@
 package arcacia.game.handler;
 
-import arcacia.game.objects.GameObject;
 import arcacia.game.objects.PlayerObject;
-import arcacia.game.util.Location;
 
-import java.util.List;
-
-public class PlayerHandler {
+public class PlayerHandler extends PlayerObject{
     private static boolean hasKey = false;
     private static int lives = 3;
     private static int score = 0;
     private static PlayerObject player;
+
 
     public static void incrementLives() {
         lives++;
@@ -26,6 +23,10 @@ public class PlayerHandler {
 
 
     //region Getter/Setter
+    public static void setSpeed(int speed){PlayerObject.speed = speed;}
+    
+    public static int getSpeed(){return speed;};
+
     public static boolean hasKey() {
         return hasKey;
     }

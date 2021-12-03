@@ -1,19 +1,15 @@
 package arcacia.game.objects;
 
-import arcacia.game.handler.InputHandler;
-import arcacia.game.objects.item.Key;
-import arcacia.game.scene.MainFrame;
 import arcacia.game.util.Location;
-import java.awt.event.KeyListener;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 
 public class PlayerObject extends GameObject{
 
-     private Location startPlayer;
-    protected int speed = 4 ;
+    protected static int speed = 4;
+    private final Location startPlayer;
+
 
 //    public void setLocation(int x,int y){
 //        startPlayer.setY(y);
@@ -27,16 +23,21 @@ public class PlayerObject extends GameObject{
 
 
 
-    public PlayerObject(Location currentLocation, int newSpeed){
+    public PlayerObject(Location currentLocation){
         super(currentLocation);
         startPlayer = new Location(currentLocation.getX(),currentLocation.getY());
+
+
 
 
         // update();
     }
 
+    public void setPlayerspeed(int speed){ PlayerObject.speed = speed;}
+    public int getPlayerspeed(){return speed;}
 
-    //Standart Konstruktor mit Leeren eingabe werten
+
+    //Standard Konstruktor mit Leeren eingabe werten
     public PlayerObject(){
         super(new Location(0,0));
         startPlayer = new Location(0,0);
@@ -49,14 +50,9 @@ public class PlayerObject extends GameObject{
 
     }
 
-    //Default COnst, wenn es nötig ist
-    /*public PlayerObject(int Spielerspeed){
+    public void run(){
 
-        this.Spielerspeed = Spielerspeed;
-
-
-    }*/
-
+    }
 
     public void update(){
         /*
