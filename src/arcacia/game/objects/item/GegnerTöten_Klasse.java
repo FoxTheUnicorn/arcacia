@@ -1,5 +1,5 @@
 package arcacia.game.objects.item;
-public class GegnerTöten_Klasse extends Item_Klasse {
+public class GegnerTöten_Klasse extends Item {
     public GegnerTöten_Klasse(String name,Location gegnerTöten,double dauer) {
         setName(name);
         setPosition(gegnerTöten);

@@ -22,6 +22,7 @@ public class InputHandler implements KeyListener {
         int yPos = player.getLocation().getY();
         Location NewLocation = new Location();
 
+        //Hier ist die If abfrage noch fehlerhaft eigentlich soll ein allgemeineres objekt geprüft werden damit sauber unterschieden werden kann ob es sicher hier um eingaben für einen Spieler oder im Menü handelt
         if(player instanceof PlayerObject)
         {
             /* Steuerung für in game*/

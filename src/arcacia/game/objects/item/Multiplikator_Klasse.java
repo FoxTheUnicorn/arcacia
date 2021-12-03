@@ -2,7 +2,7 @@ package arcacia.game.objects.item;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
-public class Multiplikator_Klasse extends Item_Klasse{
+public class Multiplikator_Klasse extends Item{
     int scale;
 
     public int getScale() {

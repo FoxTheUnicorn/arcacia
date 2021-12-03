@@ -1,7 +1,9 @@
 package arcacia.game.objects.item;
 
+import arcacia.game.util.Location;
 
-public class ExtraLeben_Klasse extends Item_Klasse {    //Vererbung
+
+public class ExtraLeben_Klasse extends Item {    //Vererbung
     boolean[] healthbar = {true,true,true};
     boolean[] emptyhealthbar = {false,false,false};
     boolean[] fullhealthbar = {true,true,true};
