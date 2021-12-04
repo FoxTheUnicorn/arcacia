@@ -42,7 +42,7 @@ public class CollisionHandler {
 
     private static GameObject doorCollision(DoorObject door, GameObject collider){
         //Wenn Kollision mit Player und Player hat Key eingesammelt. sonst passiert nichts
-        if(collider instanceof PlayerObject /* Prüfen ob Key eingesammelt ist */ ){
+        if(collider instanceof PlayerObject && PlayerHandler.hasKey()  ){
             /*Load next Level */
         }
         return collider;
