@@ -14,6 +14,8 @@ public abstract class GameObject {
         this.currentLocation = currentLocation;
     }
 
+    protected GameObject() {
+    }
 
 
     //region Getter and Setter
