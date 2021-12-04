@@ -69,10 +69,11 @@ public class GameHandler {
                 //Gegner hier wird pausiert( später)
 
                 enemyTimeout--;
+                Enemy.setStopwatchOn(true);
                 Thread.sleep(2000);
 
             }
-
+            Enemy.setStopwatchOn(false);
            // isRunning = true;
             Thread.sleep(2000);
 
