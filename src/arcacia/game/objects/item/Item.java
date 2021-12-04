@@ -12,7 +12,7 @@ public abstract class Item extends GameObject {
     String name;
     BufferedImage image;
     Location position;
-    int dauer = 10;//How long the item will last
+    int dauer = 0;//How long the item will last
     long points = 0;//what will be added to the score after the item is picked up
     boolean eingesammelt = false;//If the item was picked up
 

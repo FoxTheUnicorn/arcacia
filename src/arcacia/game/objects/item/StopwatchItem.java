@@ -2,7 +2,7 @@ package arcacia.game.objects.item;
 
 import arcacia.game.util.Location;
 import arcacia.game.handler.PlayerHandler;
-import arcacia.game.objects.PlayerObject;
+import arcacia.game.objects.enemy.Enemy;
 
 public class StopwatchItem extends Item{
 
@@ -11,10 +11,24 @@ public class StopwatchItem extends Item{
         setPoints(100);
     }
 
-    public void collecting() {
-        if(!isEingesammelt() && this.currentLocation.getX() == PlayerObject.super().getLocation().getX() && this.currentLocation.getY() == PlayerObject.super.getLocation().getY()) { //Changes noch nicht abgesprochen aber ein vorschlag für die Item Klasse
+    public void collecting(Enemy[] enemies) {
+        if(!isEingesammelt() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
+            setDauer(10);
             setEingesammelt(true);
-            GameHandler.setPauseEnemies(true); //will be implemented
+            PlayerHandler.setScore(PlayerHandler.getScore()+100);
+            for(int i = 0; i < enemies.length; i++)
+            {
+                enemies[i].setStopWatchOn(true);
+            }
+        }
+        if(getDauer() > 0)
+            setDauer(getDauer()-1);
+        else if(getDauer() == 0)
+        {
+            for(int i = 0; i < enemies.length; i++)
+            {
+                enemies[i].setStopWatchOn(false);
+            }
         }
     }
 }

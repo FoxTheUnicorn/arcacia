@@ -11,9 +11,10 @@ public class Key extends Item{
     }
 
     public void collecting() {
-        if(!isEingesammelt() && this.currentLocation.getX() == PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
+        if(!isEingesammelt() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
             setEingesammelt(true);
-            PlayerHandler.setKey(true); //will be implemented
+            PlayerHandler.setScore(PlayerHandler.getScore()+100);
+            PlayerHandler.setHasKey(true);
         }
     }
 }
