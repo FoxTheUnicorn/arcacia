@@ -5,9 +5,9 @@ import arcacia.game.util.Location;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
-public class Multiplikator_Klasse extends Item{
+public class Multiplier extends Item {
 
-    public Multiplikator_Klasse(Location currentLocation) {
+    public Multiplier(Location currentLocation) {
         super(currentLocation);
     }
 
