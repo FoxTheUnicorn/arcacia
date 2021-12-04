@@ -8,22 +8,21 @@ public class StopwatchItem extends Item{
 
     public StopwatchItem(Location currentLocation) {
         super(currentLocation);
-        setPoints(100);
     }
 
     public void collecting(Enemy[] enemies) {
-        if(!isEingesammelt() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
-            setDauer(10);
-            setEingesammelt(true);
-            PlayerHandler.setScore(PlayerHandler.getScore()+100);
+        if(!isCollected() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
+            setTimer(10);
+            setCollected(true);
+            PlayerHandler.addToScore(getPoints());
             for(int i = 0; i < enemies.length; i++)
             {
                 enemies[i].setStopWatchOn(true);
             }
         }
-        if(getDauer() > 0)
-            setDauer(getDauer()-1);
-        else if(getDauer() == 0)
+        if(getTimer() > 0)
+            setTimer(getTimer()-1);
+        else if(getTimer() == 0)
         {
             for(int i = 0; i < enemies.length; i++)
             {

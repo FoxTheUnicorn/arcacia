@@ -3,9 +3,8 @@ package arcacia.game.objects.item;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
-public class Key extends Item{
-
-    public Key(Location currentLocation) {
+public class ExtraLife extends Item{
+    public ExtraLife(Location currentLocation) {
         super(currentLocation);
     }
 
@@ -13,7 +12,7 @@ public class Key extends Item{
         if(!isCollected() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
             setCollected(true);
             PlayerHandler.addToScore(getPoints());
-            PlayerHandler.setHasKey(true);
+            PlayerHandler.setLives(PlayerHandler.getLives()+1);
         }
     }
 }

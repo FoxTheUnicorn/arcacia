@@ -1,10 +1,6 @@
 package arcacia.game.objects.item;
 public class GegnerTöten_Klasse extends Item {
-    public GegnerTöten_Klasse(String name,Location gegnerTöten,double dauer) {
-        setName(name);
-        setPosition(gegnerTöten);
-        setDauer(dauer);
-    }
+
     public void einsammeln(Vector<Enemy> enemies){
         if(!isEingesammelt() && this.currentLocation.getX() == PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
             Vector<Enemy> enemiesCopy = new Vector <Enemy>();

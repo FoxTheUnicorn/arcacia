@@ -1,33 +1,25 @@
 package arcacia.game.objects.item;
+import arcacia.game.handler.PlayerHandler;
+import arcacia.game.util.Location;
+
 import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
 public class Multiplikator_Klasse extends Item{
-    int scale;
 
-    public int getScale() {
-        return scale;
-    }
-    public void setScale(int scale) {
-        this.scale = scale;
+    public Multiplikator_Klasse(Location currentLocation) {
+        super(currentLocation);
     }
 
-    public Multiplikator_Klasse(String name, Location multiplikator, int dauer, int scale) {
-        setName(name);
-        setPosition(multiplikator);
-        setDauer(dauer);
-        setScale(scale);
-    }
-
-    public void multiplicate(){
-        setPoints((getPoints()+100)*scale);
-    }
-
-    public void einsammeln(){
-        if(!isEingesammelt() && this.currentLocation.getX() == PlayerHandler.getX() && this.currentLocation.getY() == PlayerHandler.getY()) {
-            setEingesammelt(true);
-            this.multiplicate();
-            setDauer(0);
+    public void collecting() {
+        if(!isCollected() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
+            setCollected(true);
+            setTimer(20);
+            PlayerHandler.setMultiplier(2);
         }
+        if(getTimer() > 0)
+            setTimer(getTimer()-1);
+        else if(getTimer() == 0)
+            PlayerHandler.setMultiplier(1);
     }
 }

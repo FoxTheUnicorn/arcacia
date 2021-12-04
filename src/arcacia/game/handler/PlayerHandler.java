@@ -6,6 +6,7 @@ public class PlayerHandler extends PlayerObject{
     private static boolean hasKey = false;
     private static int lives = 3;
     private static int score = 0;
+    private static int multiplier = 1;
     private static PlayerObject player;
 
 
@@ -51,12 +52,25 @@ public class PlayerHandler extends PlayerObject{
         PlayerHandler.score = score;
     }
 
+    public static void addToScore(int score)
+    {
+        setScore(getScore() + score * multiplier);
+    }
+
     public static PlayerObject getPlayer() {
         return player;
     }
 
     public static void setPlayer(PlayerObject player) {
         PlayerHandler.player = player;
+    }
+
+    public static int getMultiplier() {
+        return multiplier;
+    }
+
+    public static void setMultiplier(int multiplier) {
+        PlayerHandler.multiplier = multiplier;
     }
     //endregion
 }
