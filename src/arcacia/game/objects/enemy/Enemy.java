@@ -244,7 +244,7 @@ public class Enemy extends GameObject {
      * setzt die position auf die initalen werte zurück,
      * setzt Countdown auf -1, da der spieler nun nicht mehr gesehen wird
      */
-    void reset(){
+    public void reset(){
         //setzt die Position des Gegners auf die StartPosition zurück
         LevelHandler.setObjectAt(currentLocation,objectOnPosition);
         this.currentLocation = start;
