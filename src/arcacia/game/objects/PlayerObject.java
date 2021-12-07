@@ -1,10 +1,13 @@
 package arcacia.game.objects;
 
+import arcacia.game.handler.CollisionHandler;
+import arcacia.game.handler.InputHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
 import java.awt.*;
+import java.util.logging.Level;
 
 
 public class PlayerObject extends GameObject {
@@ -34,43 +37,38 @@ public class PlayerObject extends GameObject {
     /**
      * Bewegt den Spieler ein Feld weiter entsprechend der Eingabe. Wenn die neue Position in einer wand wäre passiert nichts
      * @param input die key eingabe in welche richtung sich der Spieler bewegen soll
+     *
      */
-    public void PlayerMove(int input) {
+    public boolean playerMove(int input) {
 
         int xPos = PlayerHandler.getPlayer().getLocation().getX();
         int yPos = PlayerHandler.getPlayer().getLocation().getY();
         Location newLocation = PlayerHandler.getPlayer().getLocation();
         switch (input) {
-            case 0: //UP
-                if (!LevelHandler.isWall(xPos, yPos + 1)) {
-                    newLocation.setX(xPos);
-                    newLocation.setY((yPos++));
-                    PlayerHandler.getPlayer().setLocation(newLocation);
-                }
-                break;
-            case 1: //down
-                if (!LevelHandler.isWall(xPos, yPos - 1)) {
-                    newLocation.setX(xPos);
-                    newLocation.setY((yPos--));
-                    PlayerHandler.getPlayer().setLocation(newLocation);
-                }
-                break;
-            case 2: //left
-                if (!LevelHandler.isWall(xPos - 1, yPos)) {
-                    newLocation.setX(xPos--);
-                    newLocation.setY((yPos));
-                    PlayerHandler.getPlayer().setLocation(newLocation);
-                }
-                break;
-            case 3: //right
-                if (!LevelHandler.isWall(xPos+1, yPos)) {
-                newLocation.setX(xPos++);
+            case InputHandler.DIR_UP -> {
+                if (!LevelHandler.isWall(xPos, yPos + 1)) return false;
+                newLocation.setX(xPos);
+                newLocation.setY((yPos + 1));
+            }
+            case InputHandler.DIR_DOWN -> {
+                if (!LevelHandler.isWall(xPos, yPos - 1)) return false;
+                newLocation.setX(xPos);
+                newLocation.setY((yPos - 1));
+            }
+            case InputHandler.DIR_LEFT -> {
+                if (!LevelHandler.isWall(xPos - 1, yPos)) return false;
+                newLocation.setX(xPos - 1);
                 newLocation.setY((yPos));
-                PlayerHandler.getPlayer().setLocation(newLocation);}
-                break;
+            }
+            case InputHandler.DIR_RIGHT -> {
+                if (LevelHandler.isWall(xPos + 1, yPos)) return false;
+                newLocation.setX(xPos + 1);
+                newLocation.setY((yPos));
+            }
         }
-
-
+        GameObject tmp = LevelHandler.setObjectAt(newLocation, this);
+        CollisionHandler.collision(this, tmp);
+        return true;
     }
 
     //Standard Konstruktor mit Leeren eingabe werten

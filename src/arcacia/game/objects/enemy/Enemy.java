@@ -1,5 +1,6 @@
 package arcacia.game.objects.enemy;
 
+import arcacia.game.handler.CollisionHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.objects.GameObject;
 import arcacia.game.objects.tile.EmptyTile;
@@ -63,9 +64,10 @@ public class Enemy extends GameObject {
             if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY()))){
                 return false;
             }else {
-                LevelHandler.setObjectAt(currentLocation,objectOnPosition);
+                LevelHandler.setObjectAt(currentLocation, objectOnPosition);
                 this.currentLocation.setX(currentLocation.getX() + x);
                 objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);
+                CollisionHandler.collision(this, objectOnPosition);
                 return true;
             }
         }
@@ -89,6 +91,7 @@ public class Enemy extends GameObject {
                 LevelHandler.setObjectAt(currentLocation,objectOnPosition);
                 this.currentLocation.setY(currentLocation.getY()+y);
                 objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);
+                CollisionHandler.collision(this, objectOnPosition);
                 return true;
             }
         }

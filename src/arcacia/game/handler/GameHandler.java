@@ -1,13 +1,8 @@
 package arcacia.game.handler;
 
-import arcacia.game.objects.GameObject;
-import arcacia.game.objects.PlayerObject;
-import arcacia.game.objects.enemy.Enemy;
-import arcacia.game.util.Location;
-
 public class GameHandler {
 
-    private static boolean isRunning;
+    private static boolean running = false;
     private static int playerTimeout = 0;
     private static int playerTurn = 1;
     private static int enemyTimeout = 0;
@@ -63,6 +58,11 @@ public class GameHandler {
     public static void setEnemyTurn(int enemyTurn) {
         GameHandler.enemyTurn = enemyTurn;
     }
+
+    public static void setRunning(boolean running) {
+        GameHandler.running = running;
+    }
+    public static boolean isRunning() { return running; }
     //endregion
 }
 
