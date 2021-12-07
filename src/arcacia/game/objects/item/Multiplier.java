@@ -11,15 +11,8 @@ public class Multiplier extends Item {
         super(currentLocation);
     }
 
-    public void collecting() {
-        if(!isCollected() && this.currentLocation == PlayerHandler.getPlayer().getLocation()) {
-            setCollected(true);
-            setTimer(20);
-            PlayerHandler.setMultiplier(2);
-        }
-        if(getTimer() > 0)
-            setTimer(getTimer()-1);
-        else if(getTimer() == 0)
-            PlayerHandler.setMultiplier(1);
+    public void collect() {
+        setCollected(true);
+        PlayerHandler.setMultiplier(2);
     }
 }

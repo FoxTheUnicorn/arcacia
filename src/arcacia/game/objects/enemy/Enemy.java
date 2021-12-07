@@ -13,9 +13,8 @@ public class Enemy extends GameObject {
     
     Location player;
     Location last_seen;
-    GameObject objectOnPosition ;
+    GameObject objectOnPosition;
 
-    boolean stopwatchOn; //wenn true dann bewegt sich der gegner nicht
     int countdown;
     // maximale anzahl wie oft der zu letzt gesehene punkt des spielers verfolgt wird
     private static final int maxFollwo = 10;// static sagt aus das es nur einmal gemacht wird, wenn die maximale zahl der verfolgung für verschiedene erhöht werden soll muss static entfernt werden
@@ -29,7 +28,6 @@ public class Enemy extends GameObject {
 		super(currentLocation);
         start = new Location(currentLocation.getX(),currentLocation.getY());
         countdown = -1;
-        stopwatchOn = false;
         objectOnPosition = new EmptyTile(start);
 	}
 
@@ -42,17 +40,8 @@ public class Enemy extends GameObject {
 		super(new Location(x,y));
         start = new Location(x,y);
         countdown = -1;
-        stopwatchOn = false;
         objectOnPosition = new EmptyTile(start);
 	}
-
-    /**
-     * setter für stopwatchOn, wenn dieses Attribut TRUE ist dann kann sich der gegner nicht bewegen
-     * @param isOn der hier übertragene wert wird in das attribut geschrieben
-     */
-    public void setStopwatchOn(boolean isOn){
-        stopwatchOn = isOn;
-    }
 
     /**
      *
@@ -225,18 +214,16 @@ public class Enemy extends GameObject {
      * @param s aktuelle Location des Spielers
      */
     public void movement(Location s){ //public? ist die funktion die aufgerufen werden soll um den gegner zu bewegen
-        if (!stopwatchOn) {
-            player = s;
-            if (seePlayer()) {
-                countdown = maxFollwo;
-                last_seen = player;
-            }
-            if (countdown > 0) {
-                move_to_Position(last_seen);
-                countdown--;
-            } else {
-                moveRandom();
-            }
+        player = s;
+        if (seePlayer()) {
+            countdown = maxFollwo;
+            last_seen = player;
+        }
+        if (countdown > 0) {
+            move_to_Position(last_seen);
+            countdown--;
+        } else {
+            moveRandom();
         }
     }
 
@@ -249,7 +236,6 @@ public class Enemy extends GameObject {
         LevelHandler.setObjectAt(currentLocation,objectOnPosition);
         this.currentLocation = start;
         countdown = -1;
-        stopwatchOn = false;
         objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);
     }
 

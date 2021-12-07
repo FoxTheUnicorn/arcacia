@@ -3,8 +3,10 @@ package arcacia.game.handler;
 import arcacia.game.objects.GameObject;
 import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.enemy.Enemy;
+import arcacia.game.objects.item.Coin;
 import arcacia.game.objects.item.Item;
 import arcacia.game.objects.tile.DoorObject;
+import arcacia.game.objects.tile.WallTile;
 
 public class CollisionHandler {
 
@@ -16,34 +18,57 @@ public class CollisionHandler {
         }
         else if (initiator instanceof Enemy) {
             return enemyCollision((Enemy) initiator, collider);
-        }else if(initiator instanceof DoorObject){
-            return doorCollision((DoorObject) initiator,collider);
         }
 
         return null;
     }
 
     private static GameObject playerCollision(PlayerObject player, GameObject collider) {
-        //if (collider instanceof Coin){}
-        /*else*/ if (collider instanceof Enemy enemy) {
-            //if(ItemHandler.hasPowerPill()) { enemy.kill(); PlayerHandler.addScore(ConstantHandler.scoreEnemyKill); return null;
-            PlayerHandler.decrementLives();
-            //reset Level etc.
+        if (collider instanceof Coin coin){
+            coin.collect();
+            return null;
+        }
+        else if (collider instanceof Item item) {
+            item.collect();
+            return null;
+        }
+        else if (collider instanceof Enemy enemy) {
+            if(ItemHandler.isPowerPillActive()) {
+                enemy.reset();
+                PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);
+            } else {
+                PlayerHandler.decrementLives();
+                //Restart Game
+            }
+            return null;
+        }
+        else if (collider instanceof DoorObject) {
+            if(PlayerHandler.hasKey()) {
+                //Lade nächstes Level
+            }
+            return null;
+        }
+        else if (collider instanceof WallTile) {
+            System.out.println("Kritischer Fehler");
         }
 
-        return collider;
+        return null;
     }
 
     private static GameObject enemyCollision(Enemy enemy, GameObject collider) {
         if (collider instanceof PlayerObject) {
-            PlayerHandler.decrementLives();
-        } return collider;
-    }
+            if(ItemHandler.isPowerPillActive()) {
+                enemy.reset();
+                PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);
+            } else {
+                PlayerHandler.decrementLives();
+                //Restart Game
+            }
+            return null;
 
-    private static GameObject doorCollision(DoorObject door, GameObject collider){
-        //Wenn Kollision mit Player und Player hat Key eingesammelt. sonst passiert nichts
-        if(collider instanceof PlayerObject && PlayerHandler.hasKey()  ){
-            /*Load next Level */
+        }
+        else if (collider instanceof WallTile) {
+            System.out.println("Kritischer Fehler");
         }
         return collider;
     }

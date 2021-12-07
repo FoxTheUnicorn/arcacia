@@ -4,15 +4,14 @@ import arcacia.game.handler.ConstantHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
-public class ExtraLife extends Item{
-    public ExtraLife(Location currentLocation) {
+public class Coin extends Item{
+    public Coin(Location currentLocation) {
         super(currentLocation);
     }
 
     public void collect() {
-        //setVisible(false);
+        //setVisible(false)
         setCollected(true);
-        PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
-        PlayerHandler.setLives(PlayerHandler.getLives()+1);
+        PlayerHandler.addToScore(ConstantHandler.scoreCoinCollect);
     }
 }
