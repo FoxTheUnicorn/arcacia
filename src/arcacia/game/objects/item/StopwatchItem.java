@@ -17,7 +17,7 @@ public class StopwatchItem extends Item{
             PlayerHandler.addToScore(getPoints());
             for(int i = 0; i < enemies.length; i++)
             {
-                enemies[i].setStopWatchOn(true);
+                enemies[i].setStopwatchOn(true);
             }
         }
         if(getTimer() > 0)
@@ -26,7 +26,7 @@ public class StopwatchItem extends Item{
         {
             for(int i = 0; i < enemies.length; i++)
             {
-                enemies[i].setStopWatchOn(false);
+                enemies[i].setStopwatchOn(false);
             }
         }
     }
