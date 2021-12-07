@@ -6,7 +6,7 @@
 [<code>Location: start</code>] : starting Location of Enemy Object<br>
 [<code>Location: player</code>] : Location of the Player<br>
 [<code>Location: last_seen</code>] : last seen Location of the Player<br>
-[<code>GameObject: objectOnPosition</code>] : ???<br>
+[<code>GameObject: objectOnPosition</code>] : object which has the same location as the enemy object ( example: coin, EmptyTile)<br>
 [<code>boolean: stopwatchOn</code>] : if the Player has the Item Stopwatch and uses it<br>
 [<code>int: countdown</code>] : countdown for a short period of time <br>
 [<code>static final int: maxFollow</code>] : (10) max. times the last_seen location of the Player is targeted<br>
