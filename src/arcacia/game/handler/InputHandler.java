@@ -5,6 +5,11 @@ import java.awt.event.KeyEvent;
 
 public class InputHandler implements KeyListener {
 
+    public static final int DIR_UP = 0;
+    public static final int DIR_DOWN = 1;
+    public static final int DIR_LEFT = 2;
+    public static final int DIR_RIGHT = 3;
+
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -13,34 +18,16 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-
         int keyCode = e.getKeyCode();
-
-       if(GameHandler.isRunning)
+        if(GameHandler.isRunning())
         {
-            int up = 0;
-            int down =1;
-            int left = 2;
-            int right = 3;
             /* Steuerung für in game*/
-            switch (keyCode){
-                case KeyEvent.VK_UP:
-                case KeyEvent.VK_W:
-                    PlayerHandler.getPlayer().PlayerMove(up);
-                    break;
-                case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_S:
-                    PlayerHandler.getPlayer().PlayerMove(down);
-                    break;
-                case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_A:
-                    PlayerHandler.getPlayer().PlayerMove(left);
-                case KeyEvent.VK_RIGHT:
-                case KeyEvent.VK_D:
-                    PlayerHandler.getPlayer().PlayerMove(right);
+            switch (keyCode) {
+                case KeyEvent.VK_UP, KeyEvent.VK_W -> PlayerHandler.getPlayer().playerMove(DIR_UP);
+                case KeyEvent.VK_DOWN, KeyEvent.VK_S -> PlayerHandler.getPlayer().playerMove(DIR_DOWN);
+                case KeyEvent.VK_LEFT, KeyEvent.VK_A -> PlayerHandler.getPlayer().playerMove(DIR_LEFT);
+                case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> PlayerHandler.getPlayer().playerMove(DIR_RIGHT);
             }
-
         }else{ /* Steuerung für Menüs */ }
 
 

@@ -5,7 +5,6 @@ import arcacia.game.util.Location;
 
 public class DoorObject extends GameObject {
 
-
     public DoorObject(Location currentLocation) {
         super(currentLocation);
     }

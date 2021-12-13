@@ -1,6 +1,7 @@
 package arcacia.game.handler;
 
 import arcacia.game.objects.GameObject;
+import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
 
@@ -36,5 +37,9 @@ public class LevelHandler {
                 grid[x][y] = new WallTile(x, y);
             }
         }
+    }
+
+    public static void removeObjectAt(Location loc) {
+        grid[loc.getX()][loc.getY()] = new EmptyTile(loc);
     }
 }

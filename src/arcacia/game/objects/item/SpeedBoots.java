@@ -1,20 +1,19 @@
 package arcacia.game.objects.item;
 
-import arcacia.game.handler.ConstantHandler;
+import arcacia.game.handler.ItemHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
-public class Key extends Item{
-
-    public Key(Location currentLocation) {
+public class SpeedBoots extends Item{
+    public SpeedBoots(Location currentLocation) {
         super(currentLocation);
     }
 
     public void collect() {
         //setVisible(false);
-        PlayerHandler.addToScore(ConstantHandler.scoreKeyPickup);
-        PlayerHandler.setHasKey(true);
+        PlayerHandler.addToScore(getPoints());
+        ItemHandler.activateSpeedBoots();
         LevelHandler.removeObjectAt(currentLocation);
     }
 }

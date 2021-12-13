@@ -1,87 +1,69 @@
 package arcacia.game.handler;
 
-import arcacia.game.objects.GameObject;
-import arcacia.game.objects.PlayerObject;
-import arcacia.game.objects.enemy.Enemy;
-import arcacia.game.util.Location;
-
 public class GameHandler {
 
-    public static boolean isRunning;
-    public static int playerTimeout = 0;
-    public static volatile int playerTurn = 1;
-    public static int enemyTimeout = 0;
+    private static boolean running = false;
+    private static int playerTimeout = 0;
+    private static int playerTurn = 1;
+    private static int enemyTimeout = 0;
+    private static int enemyTurn = 1;
 
+    public void loop() throws InterruptedException {
+        Thread.sleep(1000);
 
-    //Setter/Getter
+        for (int i = 0; i < playerTurn; i++) {
+            if(playerTimeout > 0) {
+                playerTimeout--;
+            } else {
+                //Player Moves
+            }
+        }
 
-    public void setEnemyTimeout(int enemyTimeout){
+        Thread.sleep(100);
+        for (int i = 0; i < enemyTurn; i++) {
+            if(enemyTimeout > 0) {
+                enemyTimeout--;
+            } else {
+                //Enemy Moves
+            }
+        }
+        ItemHandler.tick();
+    }
+
+    //region Getter/Setter
+    public static void setEnemyTimeout(int enemyTimeout){
         GameHandler.enemyTimeout = enemyTimeout;
     }
     public static int getEnemyTimeout(){
         return enemyTimeout;
     }
 
-    public void setPlayerTimeout(int playerTimeout){
+    public static void setPlayerTimeout(int playerTimeout){
         GameHandler.playerTimeout = playerTimeout;
     }
-
     public static int getPlayerTimeout(){
         return playerTimeout;
     }
 
-    public void setPlayerTurn(int playerTurn){
+    public static void setPlayerTurn(int playerTurn){
         GameHandler.playerTurn = playerTurn;
-
     }
-
     public static int getPlayerTurn(){
         return playerTurn;
     }
 
-
-    public void Gameloop() throws InterruptedException {
-
-
-        while (playerTurn != 0 && isRunning) {
-
-
-            playerTurn++;
-            /*
-                Delay, nach Turn eines Spielers
-             */
-            Thread.sleep(2000); //
-
-            if(enemyTimeout == 0){
-
-                /*
-                    Gegnern Begewen sich
-                 */
-                enemyTimeout++;
-
-                //
-            }
-            else{
-
-                /*
-                    Gegner wird pausiert und dekrementiert
-                 */
-                //Gegner hier wird pausiert( später)
-
-                enemyTimeout--;
-                Enemy.setStopwatchOn(true);
-                Thread.sleep(2000);
-
-            }
-            Enemy.setStopwatchOn(false);
-           // isRunning = true;
-            Thread.sleep(2000);
-
-        }
-
+    public static int getEnemyTurn() {
+        return enemyTurn;
+    }
+    public static void setEnemyTurn(int enemyTurn) {
+        GameHandler.enemyTurn = enemyTurn;
     }
 
-
+    public static void setRunning(boolean running) {
+        GameHandler.running = running;
+    }
+    public static boolean isRunning() { return running; }
+    //endregion
 }
 
 

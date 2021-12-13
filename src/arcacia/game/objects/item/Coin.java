@@ -5,16 +5,14 @@ import arcacia.game.handler.LevelHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
-public class Key extends Item{
-
-    public Key(Location currentLocation) {
+public class Coin extends Item{
+    public Coin(Location currentLocation) {
         super(currentLocation);
     }
 
     public void collect() {
-        //setVisible(false);
-        PlayerHandler.addToScore(ConstantHandler.scoreKeyPickup);
-        PlayerHandler.setHasKey(true);
+        //setVisible(false)
+        PlayerHandler.addToScore(ConstantHandler.scoreCoinCollect);
         LevelHandler.removeObjectAt(currentLocation);
     }
 }
