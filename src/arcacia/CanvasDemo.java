@@ -1,18 +1,6 @@
 package arcacia;
 
-import arcacia.game.handler.LevelHandler;
-import arcacia.game.scene.TutorialFrame;
-import arcacia.game.util.Location;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import static java.awt.Color.black;
 
 public class CanvasDemo extends JFrame {
     MyCanvas myCanvas = new MyCanvas(0);

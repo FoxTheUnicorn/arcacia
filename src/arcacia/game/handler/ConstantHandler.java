@@ -24,5 +24,13 @@ public class ConstantHandler {
     public static final int gameEnemyStepsPerTurn = 1;
     //endregion
 
+    //region Paths
+    public static final String pathImages = "./img/";
+    //endregion
+
+    //region Scenes
+    public static int menuScale = 1;
+    //endregion
+
 
 }

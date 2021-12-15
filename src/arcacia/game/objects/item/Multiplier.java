@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
 public class Multiplier extends Item {
-
+    public static final String path = ConstantHandler.pathImages + "multiplier.png";
     public Multiplier(Location currentLocation) {
         super(currentLocation);
     }

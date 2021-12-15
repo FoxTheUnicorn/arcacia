@@ -1,4 +1,4 @@
-package arcacia.game.scene.menu;
+package arcacia.game.scene.panel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class HighscoreMenu extends JFrame implements WindowListener, ActionListener {
+    //TODO switch to JPanel
     private JButton Back;
     public HighscoreMenu() {
         super("Highscore Menu");
@@ -53,7 +54,7 @@ public class HighscoreMenu extends JFrame implements WindowListener, ActionListe
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == Back) {
             super.dispose();
-            MainMenu mainMenu = new MainMenu();
+            MainMenuPanel mainMenu = new MainMenuPanel();
         }
     }
 

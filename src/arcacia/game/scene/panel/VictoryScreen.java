@@ -1,4 +1,4 @@
-package arcacia.game.scene.menu;
+package arcacia.game.scene.panel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class VictoryScreen extends JFrame implements WindowListener, ActionListener {
+    //TODO switch to JPanel
     private JButton BackButton;
     private JButton NextLevel;
     private JButton Restart;
@@ -59,7 +60,7 @@ public class VictoryScreen extends JFrame implements WindowListener, ActionListe
              super.dispose();
          }else if(e.getSource() == BackButton){
              super.dispose();
-            MainMenu mainMenu = new MainMenu();
+            MainMenuPanel mainMenu = new MainMenuPanel();
             mainMenu.setVisible(true);
         }else{
              super.dispose();

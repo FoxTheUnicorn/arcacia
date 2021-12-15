@@ -5,8 +5,12 @@ import arcacia.game.handler.LevelHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
-public class Coin extends Item{
-    public Coin(Location currentLocation) {
+import java.awt.*;
+import java.io.File;
+
+public class CoinItem extends Item{
+    public static final String path = ConstantHandler.pathImages + "coin.png";
+    public CoinItem(Location currentLocation) {
         super(currentLocation);
     }
 

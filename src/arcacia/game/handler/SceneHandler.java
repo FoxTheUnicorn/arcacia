@@ -1,45 +1,65 @@
 package arcacia.game.handler;
 
 import arcacia.game.scene.MainFrame;
-import arcacia.game.scene.menu.MainMenu;
+import arcacia.game.scene.panel.MainMenuPanel;
+import arcacia.game.scene.panel.PauseMenuPanel;
+import arcacia.game.scene.panel.TutorialPanel;
+
+import java.util.Locale;
 
 public class SceneHandler {
-    private static final MainFrame frame = new MainFrame();//SÜPHELI
-    private static final MainMenu mainMenu = new MainMenu();//SÜPHELI
+    public static String lastMenu = "null";
+    private static final MainFrame frame = new MainFrame();
+    private static final MainMenuPanel mainMenuPanel = new MainMenuPanel();
+    private static final TutorialPanel tutorialPanel = new TutorialPanel();
+    private static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
 
-    private static boolean initialised = false;
 
 
     //region showScene Functions
+
+    public static void goBack() {
+        switch(lastMenu.toLowerCase(Locale.ROOT)) {
+            case "main" -> showMainMenu();
+            case "pause" -> showPauseMenu();
+        }
+    }
+
     public static void showMainMenu() {
-        if(initialised) initialise();
-        mainMenu.setVisible(true);
+        frame.setContentPane(mainMenuPanel);
+        lastMenu = "main";
+        frame.update();
     }
 
     public static void showPauseMenu() {
-        if(initialised) initialise();
+        frame.setContentPane(pauseMenuPanel);
+        lastMenu = "pause";
+        frame.update();
     }
 
     public static void showHighscore() {
-        if(initialised) initialise();
+
     }
 
     public static void showVictory() {
-        if(initialised) initialise();
+
     }
 
     public static void showLevel() {
-        if(initialised) initialise();
+
+    }
+
+    public static void showTutorial() {
+        frame.setContentPane(tutorialPanel);
+        frame.update();
+    }
+
+    public static void dispose() {
+        frame.dispose();
     }
     //endregion
 
-    public static boolean isInitialised() {
-        return initialised;
-    }
-
     public static void initialise() {
-        initialised = true;
-        frame.add(mainMenu);
         frame.addKeyListener(new InputHandler());
     }
 

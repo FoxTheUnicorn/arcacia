@@ -1,4 +1,4 @@
-package arcacia.game.scene.menu;
+package arcacia.game.scene.panel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class SettingsMenu extends JFrame implements WindowListener, ActionListener {
+    //TODO Unused
     private JButton Back;
     private JButton MusicVolume;
     private JButton SEVolume;
@@ -61,7 +62,7 @@ public class SettingsMenu extends JFrame implements WindowListener, ActionListen
             super.dispose();
         }else{
             super.dispose();
-            MainMenu mainMenu = new MainMenu();
+            MainMenuPanel mainMenu = new MainMenuPanel();
             mainMenu.setVisible(true);
         }
     }

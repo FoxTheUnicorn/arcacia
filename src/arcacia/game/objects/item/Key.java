@@ -6,7 +6,7 @@ import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
 public class Key extends Item{
-
+    public static final String path = ConstantHandler.pathImages + "key.png";
     public Key(Location currentLocation) {
         super(currentLocation);
     }
