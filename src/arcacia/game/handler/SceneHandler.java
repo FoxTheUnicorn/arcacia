@@ -4,8 +4,8 @@ import arcacia.game.scene.MainFrame;
 import arcacia.game.scene.menu.MainMenu;
 
 public class SceneHandler {
-    private static final MainFrame frame = new MainFrame();
-    private static final MainMenu mainMenu = new MainMenu();
+    private static final MainFrame frame = new MainFrame();//SÜPHELI
+    private static final MainMenu mainMenu = new MainMenu();//SÜPHELI
 
     private static boolean initialised = false;
 

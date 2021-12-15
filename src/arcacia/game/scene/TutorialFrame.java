@@ -21,19 +21,19 @@ public class TutorialFrame extends javax.swing.JFrame {
 
         JLabel Items = new JLabel("Items:");
         JLabel Coin = new JLabel("Beim aufsammeln erhöht dies die Punkte des Spielers um 1.");
-        Coin.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\Coin.png"));
+        Coin.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\Coin.png"));
         JLabel Key = new JLabel("Wenn der Spieler diesen Schlüssel aufsammelt, kann er zum Ausgang gehen um ins nächste Level zu kommen.");
-        Key.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\Key.png"));
+        Key.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\Key.png"));
         JLabel SpeedItem = new JLabel("Der Spieler kann zwei Züge machen bevor die Gegner wieder ziehen können.");
-        SpeedItem.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\SpeedItem.png"));
+        SpeedItem.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\SpeedItem.png"));
         JLabel Stopwatch = new JLabel("Die Gegner bleiben für 10 Runden stehen.");
-        Stopwatch.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\Stopwatch.png"));
+        Stopwatch.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\Stopwatch.png"));
         JLabel KillEnemy = new JLabel("Wenn der Spieler dieses Item aufgesammelt hat, kann er für 10 Runden lang die Gegner berühren und sie somit zurück zu ihrem Startpunkt befördern.");
-        KillEnemy.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\KillEnemy.png"));
+        KillEnemy.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\KillEnemy.png"));
         JLabel Multiplier = new JLabel("Wenn der Spieler nach dem Aufsammeln dieses Items Punkte bekommt, werden diese verdoppelt.");
-        Multiplier.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\Multiplier.png"));
+        Multiplier.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\Multiplier.png"));
         JLabel HPUp = new JLabel("Der Spieler bekommt ein extra Leben.");
-        HPUp.setIcon(new ImageIcon("C:\\Users\\oscar\\IdeaProjects\\Tests\\HPUp.png"));
+        HPUp.setIcon(new ImageIcon("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\ITEMS\\HPUp.png"));
 
         JLabel game = new JLabel("Spielbeschreibung");
         JTextArea gameDescription = new JTextArea("Allgemein geht es in dem Spiel darum in einem Labyrinth mit Gegnern zu überleben und alle drei Level zu schaffen.\n" +
