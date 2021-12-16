@@ -33,6 +33,18 @@ public class Enemy extends GameObject {
 	}
 
     /**
+     * Konstruktor mit Location Objekt und Objekt welchem an der selben position Liegt
+     * @param currentLocation bergibt location Object welches die start position des Gegners markiert
+     * @param object Übergebe das Object auf dem Der Gegner stehen soll und welches damit am selben ort liegt
+     */
+    public Enemy(Location currentLocation,GameObject object){
+        super(currentLocation);
+        start = new Location(currentLocation.getX(),currentLocation.getY());
+        countdown = -1;
+        objectOnPosition = object;
+    }
+
+    /**
      * Konstruktor mit Location Objekt
      * @param x Wert der den start X-wert des gegners markiert
      * @param y Wert der den start Y-wert des gegners markiert

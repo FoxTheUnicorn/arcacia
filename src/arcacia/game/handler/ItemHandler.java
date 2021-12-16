@@ -9,6 +9,8 @@ public class ItemHandler {
     private static int multiplierDuration = 0;
     private static int speedBootsDuration = 0;
 
+
+
     public static void tick() {
         if(powerPillDuration > 0) powerPillDuration--;
         if(multiplierDuration > 0) multiplierDuration--;
@@ -40,5 +42,28 @@ public class ItemHandler {
         speedBootsDuration = ConstantHandler.itemSpeedBootsDuration;
     }
 
+    public static int getSpeedBootsDuration() {
+        return speedBootsDuration;
+    }
+
+    public static void setSpeedBootsDuration(int speedBootsDuration) {
+        ItemHandler.speedBootsDuration = speedBootsDuration;
+    }
+
+    public static int getMultiplierDuration() {
+        return multiplierDuration;
+    }
+
+    public static void setMultiplierDuration(int multiplierDuration) {
+        ItemHandler.multiplierDuration = multiplierDuration;
+    }
+
+    public static int getPowerPillDuration() {
+        return powerPillDuration;
+    }
+
+    public static void setPowerPillDuration(int powerPillDuration) {
+        ItemHandler.powerPillDuration = powerPillDuration;
+    }
     //endregion
 }
