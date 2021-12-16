@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Highscore implements Serializable {
-    private String description;
+    protected String description;
     protected List<Score> scoreList;
-    private int numberOfEntries;
-    private String dirName = "./highscore/highscore.txt";
-    boolean setAsHighscore; // 1 = serialisiert, 0 = nicht
+    protected static int numberOfEntries = 10;
+    protected String dirName = "./highscore/highscore.txt";
 
-    // number of entries set list limit to 10, set as highscore is always true
+    // number of entries set list limit to 10, setAsHighscore is always true
     public Highscore(String description) {
         this.description = description;
         scoreList = new ArrayList<Score>();
-
-        this.numberOfEntries = 10;
-        this.setAsHighscore = true;
     }
 
     private void sort() {
@@ -35,9 +31,7 @@ public class Highscore implements Serializable {
         if (scoreList.size() < numberOfEntries) {
             scoreList.add(score);
             sort();
-            if (setAsHighscore) {
                 save();
-            }
             return true;
         }
 
@@ -46,9 +40,7 @@ public class Highscore implements Serializable {
             scoreList.remove(lowestScore);
             scoreList.add(score);
             sort();
-            if (setAsHighscore) {
                 save();
-            }
             return true;
         }
         return false;
