@@ -1,10 +1,10 @@
 package arcacia;
 
-import arcacia.game.handler.LevelHandler;
-import arcacia.game.util.Location;
+import arcacia.game.scene.SceneHandler;
 
 public class Arcacia {
     public static void main(String[] args) {
-
+        SceneHandler.initialise();
+        SceneHandler.showMainMenu();
     }
 }

@@ -10,6 +10,7 @@ import arcacia.game.objects.enemy.Enemy;
 import java.util.*;
 
 public class PowerPill extends Item{
+    public static final String path = ConstantHandler.pathImages + "powerpill.png";
     public PowerPill(Location currentLocation) {
         super(currentLocation);
     }

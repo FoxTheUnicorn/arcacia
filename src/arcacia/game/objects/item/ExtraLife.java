@@ -6,6 +6,7 @@ import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
 public class ExtraLife extends Item{
+    public static final String path = ConstantHandler.pathImages + "HPup.png";
     public ExtraLife(Location currentLocation) {
         super(currentLocation);
     }

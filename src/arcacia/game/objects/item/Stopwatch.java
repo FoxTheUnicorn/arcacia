@@ -4,9 +4,9 @@ import arcacia.game.handler.*;
 import arcacia.game.util.Location;
 import arcacia.game.objects.enemy.Enemy;
 
-public class StopwatchItem extends Item{
-
-    public StopwatchItem(Location currentLocation) {
+public class Stopwatch extends Item{
+    public static final String path = ConstantHandler.pathImages + "stopwatch.png";
+    public Stopwatch(Location currentLocation) {
         super(currentLocation);
     }
 

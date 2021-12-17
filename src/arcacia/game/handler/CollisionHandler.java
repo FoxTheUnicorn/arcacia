@@ -3,7 +3,7 @@ package arcacia.game.handler;
 import arcacia.game.objects.GameObject;
 import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.enemy.Enemy;
-import arcacia.game.objects.item.Coin;
+import arcacia.game.objects.item.CoinItem;
 import arcacia.game.objects.item.Item;
 import arcacia.game.objects.tile.DoorObject;
 import arcacia.game.objects.tile.WallTile;
@@ -24,7 +24,7 @@ public class CollisionHandler {
     }
 
     private static GameObject playerCollision(PlayerObject player, GameObject collider) {
-        if (collider instanceof Coin coin){
+        if (collider instanceof CoinItem coin){
             coin.collect();
             return null;
         }
