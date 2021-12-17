@@ -1,7 +1,7 @@
 package arcacia.game.scene.other;
 
 import arcacia.game.handler.ConstantHandler;
-import arcacia.game.handler.SceneHandler;
+import arcacia.game.scene.SceneHandler;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

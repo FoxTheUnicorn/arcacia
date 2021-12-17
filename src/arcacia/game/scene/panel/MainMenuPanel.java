@@ -1,6 +1,6 @@
 package arcacia.game.scene.panel;
 
-    import arcacia.game.handler.SceneHandler;
+    import arcacia.game.scene.SceneHandler;
     import arcacia.game.scene.other.MenuButton;
 
     import java.awt.*;
@@ -26,6 +26,9 @@ public class MainMenuPanel extends AbstractMenu {
         addSpacer(15);
 
         add(new MenuButton("Test Pause Menu", (e) -> SceneHandler.showPauseMenu(), Component.RIGHT_ALIGNMENT));
+        addSpacer(15);
+
+        add(new MenuButton("Test Game Over Menu", (e) -> SceneHandler.showGameOver(), Component.RIGHT_ALIGNMENT));
         addSpacer(15);
 
         add(new MenuButton("Exit to Desktop", (e) -> SceneHandler.dispose(), Component.RIGHT_ALIGNMENT));

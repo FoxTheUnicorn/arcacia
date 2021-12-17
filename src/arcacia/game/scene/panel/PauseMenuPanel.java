@@ -1,6 +1,6 @@
 package arcacia.game.scene.panel;
 
-        import arcacia.game.handler.SceneHandler;
+        import arcacia.game.scene.SceneHandler;
         import arcacia.game.scene.other.MenuButton;
 
         import java.awt.*;

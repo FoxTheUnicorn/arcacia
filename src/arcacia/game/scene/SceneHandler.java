@@ -1,9 +1,7 @@
-package arcacia.game.handler;
+package arcacia.game.scene;
 
-import arcacia.game.scene.MainFrame;
-import arcacia.game.scene.panel.MainMenuPanel;
-import arcacia.game.scene.panel.PauseMenuPanel;
-import arcacia.game.scene.panel.TutorialPanel;
+import arcacia.game.handler.InputHandler;
+import arcacia.game.scene.panel.*;
 
 import java.util.Locale;
 
@@ -13,6 +11,8 @@ public class SceneHandler {
     private static final MainMenuPanel mainMenuPanel = new MainMenuPanel();
     private static final TutorialPanel tutorialPanel = new TutorialPanel();
     private static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
+    private static final GameOverPanel gameOverPanel = new GameOverPanel();
+    private static final HighscorePanel highScorePanel = new HighscorePanel();
 
 
 
@@ -38,11 +38,13 @@ public class SceneHandler {
     }
 
     public static void showHighscore() {
-
+        frame.setContentPane(highScorePanel);
+        frame.update();
     }
 
-    public static void showVictory() {
-
+    public static void showGameOver() {
+        frame.setContentPane(gameOverPanel);
+        frame.update();
     }
 
     public static void showLevel() {
