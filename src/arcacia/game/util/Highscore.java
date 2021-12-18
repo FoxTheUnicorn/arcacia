@@ -4,18 +4,34 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+
+/**
+ * Public Class Highscore,
+ * die eine Scoreboard von Top 10 Scores bilden/darstellen.
+ * implements Serializable, da die Attributen werden Serializiert und Deserializiert
+ * mit den Klassenattributen,
+ * String : description ist der Titel/Beschreibung von Highscore
+ * List   : scoreList, eine (ArrayList) von Score-objekten
+ * int    : numberOfEntries, Size von scoreList (Anzahl von Elementen in List)
+ * String : dirName, path zu .txt datei Ordner
+ */
 public class Highscore implements Serializable {
     protected String description;
     protected List<Score> scoreList;
     protected static int numberOfEntries = 10;
     protected String dirName = "./highscore/highscore.txt";
 
-    // number of entries set list limit to 10, setAsHighscore is always true
+   /** Constructor für Class Highscore
+    * der eine neue ArrayList von Score Objekten erzeugt
+     * @param description ist der Titel
+     */
     public Highscore(String description) {
         this.description = description;
         scoreList = new ArrayList<Score>();
     }
-
+    /**
+     * Sorts scoreList
+     */
     private void sort() {
         scoreList.sort(new Comparator<Score>() {
             @Override
@@ -26,12 +42,16 @@ public class Highscore implements Serializable {
             }
         });
     }
-
+    /**
+     * fügt score zur scoreListe:List hinzu, wenn sie höher als die niedrigste Score ist
+     * @param score übergibt Score Object (neue erreichte Score von Spieler) die in scoreList hinzugefügt wird
+     * @return true wenn score Highscore ist
+     */
     public boolean addScore(Score score) {
         if (scoreList.size() < numberOfEntries) {
             scoreList.add(score);
             sort();
-                save();
+            save();
             return true;
         }
 
@@ -40,12 +60,14 @@ public class Highscore implements Serializable {
             scoreList.remove(lowestScore);
             scoreList.add(score);
             sort();
-                save();
+            save();
             return true;
         }
         return false;
     }
-
+    /**
+     * Objekt ins directory schreiben bzw. speichern
+     */
     public void save() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dirName))) {
             oos.writeObject(this);
@@ -55,7 +77,9 @@ public class Highscore implements Serializable {
         }
         System.out.println("Serialized data is saved in " + dirName);
     }
-
+    /**
+     * Objekt aus directory lesen bzw. laden
+     */
     public void load(){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dirName))){
             Highscore loadedGame = (Highscore) ois.readObject();
@@ -67,7 +91,12 @@ public class Highscore implements Serializable {
         }
         System.out.println("DeSerialized data from " + dirName);
     }
-
+    /**
+     * Methode der Klasse Highscore, der die Klassenattributen description:String
+     * und scoreList:List (und auch deren Inhalt) nach String umwandeln
+     * diese Methode überschrieb den Methode toString() von Klasse Objekt
+     * @return output , die StringBuilder als String
+     */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
