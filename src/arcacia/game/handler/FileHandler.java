@@ -50,7 +50,7 @@ public class FileHandler {
      *
      * @throws FileNotFoundException schmeißt eine FileNotFound Exception, wenn zu öffnende Datei nicht geöffnet werden konnte
      */
-    public void saveGame() throws FileNotFoundException {
+    public static void saveGame() throws FileNotFoundException {
         PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath));
         StringBuilder line = new StringBuilder();
         //schreibt den Aktuellen zustand des Spielfelds in die Datei
@@ -133,7 +133,7 @@ public class FileHandler {
      *
      * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte
      */
-    public void loadGame() throws FileNotFoundException {
+    public static void loadGame() throws FileNotFoundException {
         GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
         BufferedReader bReader = new BufferedReader(new FileReader(filePath));
         String line = "";
@@ -224,11 +224,10 @@ public class FileHandler {
      * und setzt alle zu speichernden werte in PlayerHandler, ItemHandler und GameHandler auf bestimmte werte
      * führt dan die saveGame() methode aus
      */
-    public void debugTestSaveGame(){
+    public static void debugTestSaveGame(){
         LevelHandler.debugInitGrid();
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
-        Location loc = new Location(n,5);
         //Geometry
         LevelHandler.setObjectAt(new Location(n,5),new DoorObject(new Location(n,5)));n++;
         LevelHandler.setObjectAt(new Location(n,5),new PlayerObject(new Location(n,5)));n++;
@@ -277,7 +276,7 @@ public class FileHandler {
      * diese sind die werte die von PlayerHandler, ItemHandler und GameHandler gespeichert wurde, gibt auch aus welcher werte in debugTestSaveGame reingespeichert wurden
      * gibt auch einen string aus der reihe y=5 des Grids in den jeweiligen Buchstaben repräsentiert
      */
-    public void debugTestLoadGame(){
+    public static void debugTestLoadGame(){
         try {
             loadGame();
         } catch (FileNotFoundException e) {

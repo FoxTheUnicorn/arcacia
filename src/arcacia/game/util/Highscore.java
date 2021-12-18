@@ -80,7 +80,7 @@ public class Highscore implements Serializable {
             Highscore loadedGame = (Highscore) ois.readObject();
             System.out.println("\nRead : \n" + loadedGame);
             ois.close();
-
+            this.scoreList = loadedGame.scoreList;
         }catch (Exception e){
             System.out.println(e);
         }
@@ -105,5 +105,26 @@ public class Highscore implements Serializable {
             output.append("\n");
         }
         return output.toString();
+    }
+
+    public List<Score> getScoreList(){
+        load();
+        return scoreList;
+    }
+
+    /**
+     * fügt 10 dummy Werte ein mit einem Höhst score von 379
+     */
+    public void debugDefautlListe(){
+        addScore(new Score("Oscar Heuwes",35));
+        addScore(new Score(" Mert Öztürk",37));
+        addScore(new Score("Lucas Beyel",42));
+        addScore(new Score("Elliot Schibilla",41));
+        addScore(new Score("Farhan Sasono",42));
+        addScore(new Score("I Made Paundra Daran",36));
+        addScore(new Score("Byungjun Kim",51));
+        addScore(new Score("Vincent Salgado",52));
+        addScore(new Score("Mert Tanrisever",43));
+        addScore(new Score("Arcadia",379));
     }
 }

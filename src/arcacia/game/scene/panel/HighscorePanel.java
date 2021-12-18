@@ -5,10 +5,13 @@ import arcacia.game.objects.GameObject;
 import arcacia.game.objects.item.CoinItem;
 import arcacia.game.objects.tile.WallTile;
 import arcacia.game.scene.other.HomeButton;
+import arcacia.game.util.Highscore;
 import arcacia.game.util.Location;
+import arcacia.game.util.Score;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class HighscorePanel extends AbstractMenu {
     public HighscorePanel() {
@@ -28,14 +31,18 @@ public class HighscorePanel extends AbstractMenu {
         highScoreLabel.setIcon(highScoreIcon);
         add(highScoreLabel);
 
-        String[][] rec = {
-                { "1", "Elliot", "100"},
-                { "2", "Lucas", "99"},
-                { "3", "Mert", "98"},
-                { "4", "Alina", "97"},
-                { "5", "Byungjun", "96"},
-        };
+        //ab hier Lucas
+        Highscore highscore = new Highscore("highScoreListe");
+        List<Score> highscoreList = highscore.getScoreList();
 
+        String[][] rec = new String[10][3];
+        for (int i = 0; i<highscoreList.size();i++){
+            rec[i][0] = String.valueOf(i+1);
+            rec[i][1] = highscoreList.get(i).getName();
+            rec[i][2] = String.valueOf(highscoreList.get(i).getPoints());
+        }
+
+        //ende Lucas
 
         //TODO Change to use Highscore.class
         String[] header = { "Rank", "Player", "Score"};
