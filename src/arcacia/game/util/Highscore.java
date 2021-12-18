@@ -1,8 +1,6 @@
 package arcacia.game.util;
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 
 
 /**
@@ -33,13 +31,10 @@ public class Highscore implements Serializable {
      * Sorts scoreList
      */
     private void sort() {
-        scoreList.sort(new Comparator<Score>() {
-            @Override
-            public int compare(Score score1, Score score2) {
-                Integer int1 = score1.getPoints();
-                Integer int2 = score2.getPoints();
-                return int1.compareTo(int2);
-            }
+        scoreList.sort((score1, score2) -> {
+            Integer int1 = score1.getPoints();
+            Integer int2 = score2.getPoints();
+            return int1.compareTo(int2);
         });
     }
     /**
@@ -100,6 +95,7 @@ public class Highscore implements Serializable {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
+        Collections.reverse(scoreList);
         output.append(description);
         output.append("\n\n");
         for (Score score : scoreList) {
