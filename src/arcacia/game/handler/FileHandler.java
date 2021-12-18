@@ -54,9 +54,9 @@ public class FileHandler {
         PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath));
         StringBuilder line = new StringBuilder();
         //schreibt den Aktuellen zustand des Spielfelds in die Datei
-        for (int i = 0; i < HeightGrid; i++) {
-            for (int a = 0; a < WithGrid; a++) {
-                GameObject temp = LevelHandler.getObjectAt(new Location(a, i));
+        for (int y = 0; y < HeightGrid; y++) {
+            for (int x = 0; x < WithGrid; x++) {
+                GameObject temp = LevelHandler.getObjectAt(new Location(x, y));
                 if (temp instanceof WallTile) {
                     line.append(wall);
                 } else if (temp instanceof EmptyTile) {
@@ -217,5 +217,135 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * setzt das LevelGrid auf nur wände, fügt jede Art von Objekt einmal in das Grid ein auf y=5
+     * und setzt alle zu speichernden werte in PlayerHandler, ItemHandler und GameHandler auf bestimmte werte
+     * führt dan die saveGame() methode aus
+     */
+    public void debugTestSaveGame(){
+        LevelHandler.debugInitGrid();
+        //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
+        int n = 1;
+        Location loc = new Location(n,5);
+        //Geometry
+        LevelHandler.setObjectAt(new Location(n,5),new DoorObject(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new PlayerObject(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Key(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new CoinItem(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new EmptyTile(new Location(n,5)));n++;
+        //Itemsnew
+        LevelHandler.setObjectAt(new Location(n,5),new SpeedBoots(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new ExtraLife(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Stopwatch(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new PowerPill(new Location(n,5)));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Multiplier(new Location(n,5)));n++;
+        //Gegner auf Items
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Key(new Location(n,5))));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new CoinItem(new Location(n,5))));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new SpeedBoots(new Location(n,5))));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new ExtraLife(new Location(n,5))));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Stopwatch(new Location(n,5))));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new PowerPill(new Location(n,5))));n++;
+        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Multiplier(new Location(n,5))));
+
+
+        PlayerHandler.setHasKey(true);
+        PlayerHandler.setLives(5);
+        PlayerHandler.setScore(500);
+
+        ItemHandler.setPowerPillDuration(50);
+        ItemHandler.setMultiplierDuration(60);
+        ItemHandler.setSpeedBootsDuration(70);
+
+        GameHandler.setEnemyTimeout(9);
+        GameHandler.setPlayerTurn(4);
+
+        try {
+            saveGame();
+        } catch (FileNotFoundException e) {
+            System.out.println("File nicht gefunden in saveGame");
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * führt loadGame() methode aus und gibt dann ein paar der in debugTestSaveGame() gespeicherten werte aus
+     * diese sind die werte die von PlayerHandler, ItemHandler und GameHandler gespeichert wurde, gibt auch aus welcher werte in debugTestSaveGame reingespeichert wurden
+     * gibt auch einen string aus der reihe y=5 des Grids in den jeweiligen Buchstaben repräsentiert
+     */
+    public void debugTestLoadGame(){
+        try {
+            loadGame();
+        } catch (FileNotFoundException e) {
+            System.out.println("File nicht gefunden in loadGame");
+            e.printStackTrace();
+        }
+
+        System.out.println("hasKey: "+ PlayerHandler.hasKey()+  " Erwartet: true");
+        System.out.println("lives: "+ PlayerHandler.getLives()+  " Erwartet: 5");
+        System.out.println("score: "+ PlayerHandler.getScore()+  " Erwartet: 500");
+
+        System.out.println("PowerPillDuration: "+ ItemHandler.getPowerPillDuration()+  " Erwartet: 50");
+        System.out.println("MultiplierDuration: "+ ItemHandler.getMultiplierDuration()+  " Erwartet: 60");
+        System.out.println("SpeedBootsDuration: "+ ItemHandler.getSpeedBootsDuration()+  " Erwartet: 70");
+
+        System.out.println("EnemyTimeout: "+ GameHandler.getEnemyTimeout()+  " Erwartet: 9");
+        System.out.println("PlayerTurn: "+ GameHandler.getPlayerTurn() +  " Erwartet: 4");
+
+        //gibt Reihe mit y=5 aus inder sollten alle Objekte einmal liegen
+        for (int x = 0; x < WithGrid;x++){
+            GameObject temp = LevelHandler.getObjectAt(new Location(x, 5));
+            if (temp instanceof WallTile) {
+                System.out.print(wall);
+            } else if (temp instanceof EmptyTile) {
+                System.out.print(empty);
+            } else if (temp instanceof DoorObject) {
+                System.out.print(door);
+            } else if (temp instanceof PlayerObject) {
+                System.out.print(player);
+
+            } else if (temp instanceof Enemy) {// hier ist bestimmt das auf der postiton ein gegner steht nun wird bestimmt ob der gegner auf einem Item steht und auf welchem
+
+                if (((Enemy) temp).getObjectOnPosition() instanceof EmptyTile) {
+                    System.out.print(enemy);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof CoinItem) {
+                    System.out.print(Ecoin);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof ExtraLife) {
+                    System.out.print(EhealtUp);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof Key) {
+                    System.out.print(Ekey);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof Multiplier) {
+                    System.out.print(Emultiplikator);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof PowerPill) {
+                    System.out.print(Epower);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof SpeedBoots) {
+                    System.out.print(Espeed);
+                } else if (((Enemy) temp).getObjectOnPosition() instanceof Stopwatch) {
+                    System.out.print(Estopwatch);
+                }
+            } else if (temp instanceof Item) { //hier wurde bestimmt das ein Item auf der Position Liegt, nun wird bestimmt welches
+                if (temp instanceof CoinItem) {
+                    System.out.print(coin);
+                } else if (temp instanceof ExtraLife) {
+                    System.out.print(healtUp);
+                } else if (temp instanceof Key) {
+                    System.out.print(key);
+                } else if (temp instanceof Multiplier) {
+                    System.out.print(multiplikator);
+                } else if (temp instanceof PowerPill) {
+                    System.out.print(power);
+                } else if (temp instanceof SpeedBoots) {
+                    System.out.print(speed);
+                } else if (temp instanceof Stopwatch) {
+                    System.out.print(stopwatch);
+                }
+
+            }
+        }
+
     }
 }
