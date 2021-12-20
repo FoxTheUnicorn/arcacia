@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Enemy extends GameObject {
 
     Location start;
-    
+
     Location player;
     Location last_seen;
     GameObject objectOnPosition;
@@ -25,24 +25,36 @@ public class Enemy extends GameObject {
      * Konstruktor mit Location Objekt
      * @param currentLocation übergibt location Object welches die start position des Gegners markiert
      */
-	public Enemy(Location currentLocation){
-		super(currentLocation);
+    public Enemy(Location currentLocation){
+        super(currentLocation);
         start = new Location(currentLocation.getX(),currentLocation.getY());
         countdown = -1;
         objectOnPosition = new EmptyTile(start);
-	}
+    }
+
+    /**
+     * Konstruktor mit Location Objekt und Objekt welchem an der selben position Liegt
+     * @param currentLocation bergibt location Object welches die start position des Gegners markiert
+     * @param object Übergebe das Object auf dem Der Gegner stehen soll und welches damit am selben ort liegt
+     */
+    public Enemy(Location currentLocation,GameObject object){
+        super(currentLocation);
+        start = new Location(currentLocation.getX(),currentLocation.getY());
+        countdown = -1;
+        objectOnPosition = object;
+    }
 
     /**
      * Konstruktor mit Location Objekt
      * @param x Wert der den start X-wert des gegners markiert
      * @param y Wert der den start Y-wert des gegners markiert
      */
-	public Enemy(int x , int y){
-		super(new Location(x,y));
+    public Enemy(int x , int y){
+        super(new Location(x,y));
         start = new Location(x,y);
         countdown = -1;
         objectOnPosition = new EmptyTile(start);
-	}
+    }
 
     /**
      *
@@ -95,7 +107,7 @@ public class Enemy extends GameObject {
                 return true;
             }
         }
-          return false;
+        return false;
     }
 
     /**
@@ -103,8 +115,8 @@ public class Enemy extends GameObject {
      * @return true wenn spieler gesehen wurde, false wenn spieler nicht gesehen wurde
      */
     public boolean seePlayer(){
-	    //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.
-	    //unter der bedingung das zwischen den beiden positionen keine Wand ist
+        //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.
+        //unter der bedingung das zwischen den beiden positionen keine Wand ist
 
         if(this.player.getX() - this.currentLocation.getX() == 0 || this.player.getY() - this.currentLocation.getY() == 0){// prüft ob beide auf einer achse sind
             if (Math.abs(this.player.getX() - this.currentLocation.getX()) <= maxVisibility || Math.abs(this.player.getY() - this.currentLocation.getY()) <= maxVisibility){ // prüft ob beide weniger als maxVisibility vo einander entfernt sind
@@ -320,7 +332,6 @@ public class Enemy extends GameObject {
             }
             if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() <= location.getY()) {
                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-
                 switch (richtung) {
                     case 1:
                         if (bewegeY(1)) {
@@ -336,7 +347,6 @@ public class Enemy extends GameObject {
             }
             if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() >= location.getY()) {
                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-
                 switch (richtung) {
                     case 1:
                         if (bewegeY(-1)) {
@@ -352,7 +362,6 @@ public class Enemy extends GameObject {
             }
             if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() >= location.getY()) {
                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-
                 switch (richtung) {
                     case 1:
                         if (bewegeY(-1)) {
@@ -367,6 +376,4 @@ public class Enemy extends GameObject {
                 }
             }
         }
-
        */
-

@@ -1,0 +1,390 @@
+Index: src/arcacia/game/handler/ItemHandler.java
+===================================================================
+diff --git a/src/arcacia/game/handler/ItemHandler.java b/src/arcacia/game/handler/ItemHandler.java
+deleted file mode 100644
+--- a/src/arcacia/game/handler/ItemHandler.java	
++++ /dev/null	
+@@ -1,44 +0,0 @@
+-package arcacia.game.handler;
+-
+-import arcacia.game.objects.enemy.Enemy;
+-
+-import java.util.ArrayList;
+-
+-public class ItemHandler {
+-    private static int powerPillDuration = 0;
+-    private static int multiplierDuration = 0;
+-    private static int speedBootsDuration = 0;
+-
+-    public static void tick() {
+-        if(powerPillDuration > 0) powerPillDuration--;
+-        if(multiplierDuration > 0) multiplierDuration--;
+-        if(speedBootsDuration > 0) speedBootsDuration--;
+-
+-        if(speedBootsDuration == 0) GameHandler.setPlayerTurn(ConstantHandler.gamePlayerStepsPerTurn);
+-        if(multiplierDuration == 0) PlayerHandler.setMultiplier(ConstantHandler.scoreDefaultMultiplier);
+-    }
+-
+-    //region Functions
+-    public static boolean isMultiplierActive() { return multiplierDuration > 0; }
+-    public static void activateMultiplier() {
+-        multiplierDuration = ConstantHandler.itemMultiplierDuration;
+-        PlayerHandler.setMultiplier(ConstantHandler.itemMultiplierBuff);
+-    }
+-
+-    public static boolean isPowerPillActive() {
+-        return powerPillDuration > 0;
+-    }
+-    public static void activatePowerPill() {
+-        powerPillDuration = ConstantHandler.itemPowerPillDuration;
+-    }
+-
+-    public static boolean isSpeedBootsActive() {
+-        return speedBootsDuration > 0;
+-    }
+-    public static void activateSpeedBoots() {
+-        GameHandler.setPlayerTurn(ConstantHandler.itemSpeedBootsBuff);
+-        speedBootsDuration = ConstantHandler.itemSpeedBootsDuration;
+-    }
+-
+-    //endregion
+-}
+Index: src/arcacia/Arcacia.java
+===================================================================
+diff --git a/src/arcacia/Arcacia.java b/src/arcacia/Arcacia.java
+deleted file mode 100644
+--- a/src/arcacia/Arcacia.java	
++++ /dev/null	
+@@ -1,96 +0,0 @@
+-package arcacia;
+-
+-import arcacia.game.handler.*;
+-import arcacia.game.scene.TutorialFrame;
+-import arcacia.game.util.Location;
+-
+-public class Arcacia {
+-    public static void main(String[] args) {
+-        //TutorialFrame tutorialFrame = new TutorialFrame();
+-        CanvasDemo display = new CanvasDemo();
+-        CollisionHandler collisionHandler;
+-        /*
+-        public static GameObject collision(GameObject initiator, GameObject collider);
+-        private static GameObject playerCollision(PlayerObject player, GameObject collider);
+-        private static GameObject enemyCollision(Enemy enemy, GameObject collider);
+-        */
+-        ConstantHandler constantHandler;
+-        /*
+-        public static final int scoreEnemyKill = 10;
+-        public static final int scoreCoinCollect = 1;
+-        public static final int scoreItemPickup = 5;
+-        public static final int scoreKeyPickup = 2;
+-
+-        public static final int scoreDefaultMultiplier = 1;
+-
+-        public static final int itemPowerPillDuration = 10;
+-        public static final int itemMultiplierDuration = 10;
+-        public static final int itemMultiplierBuff = 2;
+-        public static final int itemSpeedBootsDuration = 10;
+-        public static final int itemSpeedBootsBuff = 2;
+-        public static final int itemStopwatchDuration = 1;
+-
+-        public static final int gamePlayerStepsPerTurn = 1;
+-        public static final int gameEnemyStepsPerTurn = 1;
+-        */
+-        GameHandler gameHandler;
+-        /*
+-        public void loop() throws InterruptedException;
+-        public static void setEnemyTimeout(int enemyTimeout);
+-        public static int getEnemyTimeout();
+-        public static void setPlayerTimeout(int playerTimeout);
+-        public static int getPlayerTimeout();
+-        public static void setPlayerTurn(int playerTurn);
+-        public static int getPlayerTurn();
+-        public static int getEnemyTurn();
+-        public static void setEnemyTurn(int enemyTurn);
+-        public static void setRunning(boolean running);
+-        public static boolean isRunning();
+-        */
+-        ItemHandler itemHandler;
+-        /*
+-        public static void tick();
+-        public static boolean isMultiplierActive();
+-        public static void activateMultiplier();
+-        public static boolean isPowerPillActive();
+-        public static void activatePowerPill();
+-        public static boolean isSpeedBootsActive();
+-        public static void activateSpeedBoots();
+-        */
+-        LevelHandler levelHandler;
+-        /*
+-        public static GameObject getObjectAt(Location loc);
+-        public static boolean isWall(Location loc);
+-        public static boolean isWall(int x, int y);
+-        public static void setLevelGrid(GameObject[][] grid);
+-        public static GameObject setObjectAt(Location loc, GameObject obj);
+-        public static void debugInitGrid();
+-        public static void removeObjectAt(Location loc),
+-        */
+-        PlayerHandler playerHandler;
+-        /*
+-        public static void incrementLives();
+-        public static void decrementLives();
+-        public static void addToScore(int x);
+-        public static boolean hasKey();
+-        public static void setHasKey(boolean hasKey);
+-        public static int getLives();
+-        public static void setLives(int lives);
+-        public static int getScore();
+-        public static void setScore(int score);
+-        public static PlayerObject getPlayer();
+-        public static void setPlayer(PlayerObject player);
+-        public static int getMultiplier();
+-        public static void setMultiplier(int multiplier);
+-         */
+-        SceneHandler sceneHandler;
+-        /*
+-        SceneHandler yerine getiriyor bu nedenle InputHandler olusturmaya gerek yok.
+-        public static void initialise() {
+-            initialised = true;
+-            frame.add(mainMenu);
+-            frame.addKeyListener(new InputHandler());
+-        }
+-        */
+-    }
+-}
+Index: src/arcacia/MyCanvas.java
+===================================================================
+diff --git a/src/arcacia/MyCanvas.java b/src/arcacia/MyCanvas.java
+deleted file mode 100644
+--- a/src/arcacia/MyCanvas.java	
++++ /dev/null	
+@@ -1,38 +0,0 @@
+-package arcacia;
+-
+-import javax.imageio.ImageIO;
+-import java.awt.*;
+-import java.io.File;
+-import java.io.IOException;
+-
+-public class MyCanvas extends Canvas {
+-    Image image;
+-    @Override
+-    public void paint(Graphics g){
+-        setPreferredSize(new Dimension(750,750));
+-        setMaximumSize(new Dimension(750,750));
+-        setMinimumSize(new Dimension(750,750));
+-        setBackground(Color.black);
+-        //Ilk görsel icin deneme
+-        g.drawImage(image,250,250,this);
+-    }
+-    public MyCanvas(int imageID){
+-        File path = new File("C:\\Users\\mertt\\OneDrive\\Masaüstü\\arcacia\\IMAGES");
+-        /*
+-        The listFiles() method is a part of File class.The function returns an array of Files denoting the files in a given abstract pathname if the
+-        path name is a directory else returns null.
+-        */
+-        File[] allFiles = path.listFiles();
+-        //Kac görsel varsa o kadar yer ayriliyor allImages Array'i icerisinde
+-        Image[] allImages = new Image[allFiles.length];
+-        //To load an image from a specific file use the following code, which is from LoadImageApp.java:
+-        for(int i = 0; i < allFiles.length; i++){
+-            try {
+-                allImages[i] = ImageIO.read(allFiles[i]);
+-            } catch (IOException ex) {
+-                ex.printStackTrace();
+-            }
+-        }
+-        image = allImages[imageID];
+-    }
+-}
+Index: src/arcacia/game/objects/GameObject.java
+===================================================================
+diff --git a/src/arcacia/game/objects/GameObject.java b/src/arcacia/game/objects/GameObject.java
+deleted file mode 100644
+--- a/src/arcacia/game/objects/GameObject.java	
++++ /dev/null	
+@@ -1,41 +0,0 @@
+-package arcacia.game.objects;
+-
+-
+-import java.io.File;
+-
+-import arcacia.game.handler.InputHandler;
+-import arcacia.game.util.Location;
+-
+-public abstract class GameObject {
+-    protected Location currentLocation;
+-    File texture;
+-
+-    public GameObject(Location currentLocation) {
+-        this.currentLocation = currentLocation;
+-    }
+-
+-    protected GameObject() {
+-    }
+-
+-
+-    //region Getter and Setter
+-
+-
+-    public Location getLocation() {
+-        return currentLocation;
+-    }
+-
+-    public void setLocation(Location location) {
+-        this.currentLocation = location;
+-    }
+-
+-    public File getTexture() {
+-        return texture;
+-    }
+-
+-    public void setTexture(File texture) {
+-        this.texture = texture;
+-    }
+-
+-    //endregion
+-}
+Index: src/arcacia/game/objects/PlayerObject.java
+===================================================================
+diff --git a/src/arcacia/game/objects/PlayerObject.java b/src/arcacia/game/objects/PlayerObject.java
+deleted file mode 100644
+--- a/src/arcacia/game/objects/PlayerObject.java	
++++ /dev/null	
+@@ -1,96 +0,0 @@
+-package arcacia.game.objects;
+-
+-import arcacia.game.handler.CollisionHandler;
+-import arcacia.game.handler.InputHandler;
+-import arcacia.game.handler.LevelHandler;
+-import arcacia.game.handler.PlayerHandler;
+-import arcacia.game.util.Location;
+-
+-import java.awt.*;
+-import java.util.logging.Level;
+-
+-
+-public class PlayerObject extends GameObject {
+-
+-    //protected static int speed = 4;
+-    private final Location startPlayer;
+-
+-
+-//    public void setLocation(int x,int y){
+-//        startPlayer.setY(y);
+-//        startPlayer.setX(x);
+-//    }
+-//
+-//    public Location getLocation(){
+-//        return startPlayer;
+-//    }
+-
+-
+-    public PlayerObject(Location currentLocation) {
+-        super(currentLocation);
+-        startPlayer = new Location(currentLocation.getX(), currentLocation.getY());
+-
+-
+-        // update();
+-    }
+-
+-    /**
+-     * Bewegt den Spieler ein Feld weiter entsprechend der Eingabe. Wenn die neue Position in einer wand wäre passiert nichts
+-     * @param input die key eingabe in welche richtung sich der Spieler bewegen soll
+-     *
+-     */
+-    public boolean playerMove(int input) {
+-
+-        int xPos = PlayerHandler.getPlayer().getLocation().getX();
+-        int yPos = PlayerHandler.getPlayer().getLocation().getY();
+-        Location newLocation = PlayerHandler.getPlayer().getLocation();
+-        switch (input) {
+-            case InputHandler.DIR_UP -> {
+-                if (!LevelHandler.isWall(xPos, yPos + 1)) return false;
+-                newLocation.setX(xPos);
+-                newLocation.setY((yPos + 1));
+-            }
+-            case InputHandler.DIR_DOWN -> {
+-                if (!LevelHandler.isWall(xPos, yPos - 1)) return false;
+-                newLocation.setX(xPos);
+-                newLocation.setY((yPos - 1));
+-            }
+-            case InputHandler.DIR_LEFT -> {
+-                if (!LevelHandler.isWall(xPos - 1, yPos)) return false;
+-                newLocation.setX(xPos - 1);
+-                newLocation.setY((yPos));
+-            }
+-            case InputHandler.DIR_RIGHT -> {
+-                if (LevelHandler.isWall(xPos + 1, yPos)) return false;
+-                newLocation.setX(xPos + 1);
+-                newLocation.setY((yPos));
+-            }
+-        }
+-        GameObject tmp = LevelHandler.setObjectAt(newLocation, this);
+-        CollisionHandler.collision(this, tmp);
+-        return true;
+-    }
+-
+-    //Standard Konstruktor mit Leeren eingabe werten
+-    public PlayerObject() {
+-        super(new Location(0, 0));
+-        startPlayer = new Location(0, 0);
+-    }
+-
+-    public PlayerObject(int x, int y) {
+-
+-        super(new Location(x, y));
+-        startPlayer = new Location(x, y);
+-
+-    }
+-
+-
+-    public void draw(Graphics2D g2) {
+-        int tileX = 24;
+-        int tileY = 24;
+-        g2.setColor(Color.white);
+-        g2.fillRect(getLocation().getX(), getLocation().getY(), tileX, tileY);
+-    }
+-
+-
+-}
+Index: src/arcacia/CanvasDemo.java
+===================================================================
+diff --git a/src/arcacia/CanvasDemo.java b/src/arcacia/CanvasDemo.java
+deleted file mode 100644
+--- a/src/arcacia/CanvasDemo.java	
++++ /dev/null	
+@@ -1,33 +0,0 @@
+-package arcacia;
+-
+-import arcacia.game.handler.LevelHandler;
+-import arcacia.game.scene.TutorialFrame;
+-import arcacia.game.util.Location;
+-
+-import javax.imageio.ImageIO;
+-import javax.swing.*;
+-
+-import java.awt.*;
+-import java.awt.image.BufferedImage;
+-import java.io.File;
+-import java.io.IOException;
+-
+-import static java.awt.Color.black;
+-
+-public class CanvasDemo extends JFrame {
+-    MyCanvas myCanvas = new MyCanvas(0);
+-    public static void main(String[] args){
+-        CanvasDemo canvasDemo = new CanvasDemo();
+-    }
+-    public CanvasDemo() {
+-        setTitle("Probe");
+-        setSize(750,750);
+-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+-        setResizable(false);
+-        setLocationRelativeTo(null);
+-        add(myCanvas);
+-        setVisible(true);
+-        //SEEE ALL OF THE CANVAS
+-        pack();
+-    }
+-}

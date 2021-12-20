@@ -1,0 +1,676 @@
+Index: src/arcacia/game/scene/MainFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.scene;\r\nimport arcacia.CanvasDemo;\r\nimport javax.swing.*;\r\npublic class MainFrame extends JFrame {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/scene/MainFrame.java b/src/arcacia/game/scene/MainFrame.java
+--- a/src/arcacia/game/scene/MainFrame.java	
++++ b/src/arcacia/game/scene/MainFrame.java	
+@@ -1,5 +1,4 @@
+ package arcacia.game.scene;
+-import arcacia.CanvasDemo;
+ import javax.swing.*;
+ public class MainFrame extends JFrame {
+ 
+Index: src/arcacia/game/util/Location.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.util;\r\n\r\npublic class Location {\r\n    //Tile Location and not Pixel Location\r\n    private int x = 0;\r\n    private int y = 0;\r\n\r\n    public Location() {\r\n\r\n    }\r\n\r\n    public Location(int x, int y) {\r\n        this.x = x;\r\n        this.y = y;\r\n    }\r\n\r\n    public static boolean isSame(Location locA, Location locB) {\r\n        if(locB.x == locA.x) {\r\n            return locB.y == locA.y;\r\n        }\r\n        return false;\r\n    }\r\n\r\n    //region Getter and Setter\r\n    public int getX() {\r\n        return x;\r\n    }\r\n\r\n    public void setX(int x) {\r\n        this.x = x;\r\n    }\r\n\r\n    public int getY() {\r\n        return y;\r\n    }\r\n\r\n    public void setY(int y) {\r\n        this.y = y;\r\n    }\r\n    //endregion\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/util/Location.java b/src/arcacia/game/util/Location.java
+--- a/src/arcacia/game/util/Location.java	
++++ b/src/arcacia/game/util/Location.java	
+@@ -21,21 +21,17 @@
+         return false;
+     }
+ 
+-    //region Getter and Setter
+     public int getX() {
+         return x;
+     }
+-
+     public void setX(int x) {
+         this.x = x;
+     }
+-
+     public int getY() {
+         return y;
+     }
+-
+     public void setY(int y) {
+         this.y = y;
+     }
+-    //endregion
++
+ }
+Index: src/arcacia/game/handler/ConstantHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\npublic class ConstantHandler {\r\n    //region Scores\r\n    public static final int scoreEnemyKill = 10;\r\n    public static final int scoreCoinCollect = 1;\r\n    public static final int scoreItemPickup = 5;\r\n    public static final int scoreKeyPickup = 2;\r\n\r\n    public static final int scoreDefaultMultiplier = 1;\r\n    //endregion\r\n\r\n    //region Items\r\n    public static final int itemPowerPillDuration = 10;\r\n    public static final int itemMultiplierDuration = 10;\r\n    public static final int itemMultiplierBuff = 2;\r\n    public static final int itemSpeedBootsDuration = 10;\r\n    public static final int itemSpeedBootsBuff = 2;\r\n    public static final int itemStopwatchDuration = 1;\r\n    //endregion\r\n\r\n    //region Game\r\n    public static final int gamePlayerStepsPerTurn = 1;\r\n    public static final int gameEnemyStepsPerTurn = 1;\r\n    //endregion\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/ConstantHandler.java b/src/arcacia/game/handler/ConstantHandler.java
+--- a/src/arcacia/game/handler/ConstantHandler.java	
++++ b/src/arcacia/game/handler/ConstantHandler.java	
+@@ -25,4 +25,4 @@
+     //endregion
+ 
+ 
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/handler/GameHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\npublic class GameHandler {\r\n\r\n    private static boolean running = false;\r\n    private static int playerTimeout = 0;\r\n    private static int playerTurn = 1;\r\n    private static int enemyTimeout = 0;\r\n    private static int enemyTurn = 1;\r\n\r\n    public void loop() throws InterruptedException {\r\n        Thread.sleep(1000);\r\n\r\n        for (int i = 0; i < playerTurn; i++) {\r\n            if(playerTimeout > 0) {\r\n                playerTimeout--;\r\n            } else {\r\n                //Player Moves\r\n            }\r\n        }\r\n\r\n        Thread.sleep(100);\r\n        for (int i = 0; i < enemyTurn; i++) {\r\n            if(enemyTimeout > 0) {\r\n                enemyTimeout--;\r\n            } else {\r\n                //Enemy Moves\r\n            }\r\n        }\r\n        ItemHandler.tick();\r\n    }\r\n\r\n    //region Getter/Setter\r\n    public static void setEnemyTimeout(int enemyTimeout){\r\n        GameHandler.enemyTimeout = enemyTimeout;\r\n    }\r\n    public static int getEnemyTimeout(){\r\n        return enemyTimeout;\r\n    }\r\n\r\n    public static void setPlayerTimeout(int playerTimeout){\r\n        GameHandler.playerTimeout = playerTimeout;\r\n    }\r\n    public static int getPlayerTimeout(){\r\n        return playerTimeout;\r\n    }\r\n\r\n    public static void setPlayerTurn(int playerTurn){\r\n        GameHandler.playerTurn = playerTurn;\r\n    }\r\n    public static int getPlayerTurn(){\r\n        return playerTurn;\r\n    }\r\n\r\n    public static int getEnemyTurn() {\r\n        return enemyTurn;\r\n    }\r\n    public static void setEnemyTurn(int enemyTurn) {\r\n        GameHandler.enemyTurn = enemyTurn;\r\n    }\r\n\r\n    public static void setRunning(boolean running) {\r\n        GameHandler.running = running;\r\n    }\r\n    public static boolean isRunning() { return running; }\r\n    //endregion\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/GameHandler.java b/src/arcacia/game/handler/GameHandler.java
+--- a/src/arcacia/game/handler/GameHandler.java	
++++ b/src/arcacia/game/handler/GameHandler.java	
+@@ -64,6 +64,4 @@
+     }
+     public static boolean isRunning() { return running; }
+     //endregion
+-}
+-
+-
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/enemy/Enemy.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.enemy;\r\n\r\nimport arcacia.game.handler.CollisionHandler;\r\nimport arcacia.game.handler.LevelHandler;\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.tile.EmptyTile;\r\nimport arcacia.game.util.Location;\r\n\r\nimport java.util.concurrent.ThreadLocalRandom;\r\n\r\npublic class Enemy extends GameObject {\r\n\r\n    Location start;\r\n    \r\n    Location player;\r\n    Location last_seen;\r\n    GameObject objectOnPosition;\r\n\r\n    int countdown;\r\n    // maximale anzahl wie oft der zu letzt gesehene punkt des spielers verfolgt wird\r\n    private static final int maxFollwo = 10;// static sagt aus das es nur einmal gemacht wird, wenn die maximale zahl der verfolgung für verschiedene erhöht werden soll muss static entfernt werden\r\n    private static final int maxVisibility = 10;\r\n\r\n    /**\r\n     * Konstruktor mit Location Objekt\r\n     * @param currentLocation übergibt location Object welches die start position des Gegners markiert\r\n     */\r\n\tpublic Enemy(Location currentLocation){\r\n\t\tsuper(currentLocation);\r\n        start = new Location(currentLocation.getX(),currentLocation.getY());\r\n        countdown = -1;\r\n        objectOnPosition = new EmptyTile(start);\r\n\t}\r\n\r\n    /**\r\n     * Konstruktor mit Location Objekt\r\n     * @param x Wert der den start X-wert des gegners markiert\r\n     * @param y Wert der den start Y-wert des gegners markiert\r\n     */\r\n\tpublic Enemy(int x , int y){\r\n\t\tsuper(new Location(x,y));\r\n        start = new Location(x,y);\r\n        countdown = -1;\r\n        objectOnPosition = new EmptyTile(start);\r\n\t}\r\n\r\n    /**\r\n     *\r\n     * @return GameObject welches in objectOnPosition gespeichert ist\r\n     */\r\n    public GameObject getObjectOnPosition(){\r\n        return objectOnPosition;\r\n    }\r\n\r\n    /**\r\n     * Lässt den Gegner einen Schritt in X-Richtung laufen,\r\n     * sowohl in die positive als auch negative Richtung\r\n     * @param x 1 lässt in Positiv gehen, -1 in Negativ\r\n     * @return true wenn erfolgreich, false wenn eine wand im weg ist\r\n     */\r\n    public boolean moveX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung\r\n        //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück\r\n        if (x == 1 || x == -1){\r\n            if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY()))){\r\n                return false;\r\n            }else {\r\n                LevelHandler.setObjectAt(currentLocation, objectOnPosition);\r\n                this.currentLocation.setX(currentLocation.getX() + x);\r\n                objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);\r\n                CollisionHandler.collision(this, objectOnPosition);\r\n                return true;\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    /**\r\n     *  Lässt den Gegner einen Schritt in X-Richtung laufen,\r\n     *      * sowohl in die positive als auch negative Richtung\r\n     * @param y 1 lässt in Positiv gehen, -1 in Negativ\r\n     * @return true wenn erfolgreich, false wenn eine wand im weg ist\r\n     */\r\n    public boolean moveY(int y){ //nimmt 1 oder -1 an, und bewegt in diese richtung\r\n        // fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück\r\n        //alternative schreibweise, falls eingabe parameter eingeschränkt (nur 1 und -1) muss\r\n\r\n        if (y == 1 || y == -1){\r\n            if (LevelHandler.isWall(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y))){\r\n                return false;\r\n            }else {\r\n                LevelHandler.setObjectAt(currentLocation,objectOnPosition);\r\n                this.currentLocation.setY(currentLocation.getY()+y);\r\n                objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);\r\n                CollisionHandler.collision(this, objectOnPosition);\r\n                return true;\r\n            }\r\n        }\r\n          return false;\r\n    }\r\n\r\n    /**\r\n     * überprüft ob spieler in einer der Richtungen (oben, unten, links, rechts ) ist, wenn eine wand da zwischen ist wird der spieler nicht gesehen\r\n     * @return true wenn spieler gesehen wurde, false wenn spieler nicht gesehen wurde\r\n     */\r\n    public boolean seePlayer(){\r\n\t    //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.\r\n\t    //unter der bedingung das zwischen den beiden positionen keine Wand ist\r\n\r\n        if(this.player.getX() - this.currentLocation.getX() == 0 || this.player.getY() - this.currentLocation.getY() == 0){// prüft ob beide auf einer achse sind\r\n            if (Math.abs(this.player.getX() - this.currentLocation.getX()) <= maxVisibility || Math.abs(this.player.getY() - this.currentLocation.getY()) <= maxVisibility){ // prüft ob beide weniger als maxVisibility vo einander entfernt sind\r\n                int difX = this.player.getX() - this.currentLocation.getX();\r\n                if (difX > 0){\r\n                    //spieler ist richtung x Pos vom gegner\r\n\r\n                    for (int i = 1; i <= maxVisibility; i++)\r\n                    {\r\n                        //x positiv richtung\r\n                        Location cu = new Location(this.currentLocation.getX()+i,this.currentLocation.getY());\r\n                        if (LevelHandler.isWall(cu)) {\r\n                            return false;\r\n                        }\r\n                        if (Location.isSame(cu,this.player)) {\r\n                            return true;\r\n                        }\r\n                    }\r\n\r\n                }else if (difX < 0){\r\n                    //spieler ist richtung X Neg vom gegner\r\n\r\n                    for (int i = -1; i >= -maxVisibility; i--)\r\n                    {\r\n                        //x negativ richtung\r\n                        Location cu = new Location(this.currentLocation.getX()+i,this.currentLocation.getY());\r\n                        if (LevelHandler.isWall(cu)) {\r\n                            return false;\r\n                        }\r\n                        if (Location.isSame(cu,this.player)) {\r\n                            return true;\r\n                        }\r\n                    }\r\n\r\n                }else {\r\n                    //spieler ist auf der selben X höhe wie gegner -> prüfe Y richtung\r\n                    int difY = this.player.getY() - this.currentLocation.getY();\r\n                    if (difY > 0){\r\n                        //spieler ist richtung Y Pos vom gegner\r\n\r\n                        for (int i = 1; i <= maxVisibility; i++)\r\n                        {\r\n                            //y positiv richtung\r\n                            Location cu = new Location(this.currentLocation.getX(),this.currentLocation.getY()+i);\r\n                            if (LevelHandler.isWall(cu)) {\r\n                                return false;\r\n                            }\r\n                            if (Location.isSame(cu,this.player)) {\r\n                                return true;\r\n                            }\r\n                        }\r\n\r\n                    }else if (difY < 0){\r\n                        //spieler ist richtung Y neg vom gegner\r\n\r\n                        for (int i = -1; i >= -maxVisibility; i--)\r\n                        {\r\n                            //y negativ richtung\r\n                            Location cu = new Location(this.currentLocation.getX(),this.currentLocation.getY()+i);\r\n                            if (LevelHandler.isWall(cu)) {\r\n                                return false;\r\n                            }\r\n                            if (Location.isSame(cu,this.player)) {\r\n                                return true;\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    /**\r\n     * lässt den gegner in eine der vier richtungen (rechts, oben, links, unten) gehen\r\n     * entscheidet random in welche\r\n     */\r\n    void moveRandom(){\r\n        //aus allen validen Richtungen bestimmt der genera eine und geht einen schritt in diese Richtung\r\n        int richtung = ThreadLocalRandom.current().nextInt(1,5);//generiert eine zahl aus {1,2,3,4}\r\n\r\n        switch (richtung) {\r\n            case 1:\r\n                if (moveY(1)){ break;}\r\n            case 2:\r\n                if (moveX(1)){break;}\r\n            case 3:\r\n                if (moveY(-1)){break;}\r\n            case 4:\r\n                if (moveX(-1)){break;}\r\n            default:\r\n                //wenn in der ersten runde kein erfolgreicher gegangen werden konnte weil z.b. richtung  = 3 war und sowol 3 und 4 nicht ausgeführt werden konnte\r\n                // dann ist hier die möglichkeit gegeben das 1 oder 2 erfolgreich werden kann\r\n                //case 4: ist deshalb nicht ein zwietes mal angegeben da er im ersten fall immer ausgelöst werden würde\r\n                switch (richtung){\r\n                    case 1:\r\n                        if (moveY(1)){ break;}\r\n                    case 2:\r\n                        if (moveX(1)){break;}\r\n                    case 3:\r\n                        if (moveY(-1)){break;}\r\n                }\r\n        }\r\n    }\r\n\r\n    /**\r\n     * generelle bewegung von Gegner,\r\n     * wenn spieler gesehen wurde geht in richtung der zu letzt gesehenen position\r\n     * sonst gehe einen random schritt\r\n     * @param s aktuelle Location des Spielers\r\n     */\r\n    public void movement(Location s){ //public? ist die funktion die aufgerufen werden soll um den gegner zu bewegen\r\n        player = s;\r\n        if (seePlayer()) {\r\n            countdown = maxFollwo;\r\n            last_seen = player;\r\n        }\r\n        if (countdown > 0) {\r\n            move_to_Position(last_seen);\r\n            countdown--;\r\n        } else {\r\n            moveRandom();\r\n        }\r\n    }\r\n\r\n    /**\r\n     * setzt die position auf die initalen werte zurück,\r\n     * setzt Countdown auf -1, da der spieler nun nicht mehr gesehen wird\r\n     */\r\n    public void reset(){\r\n        //setzt die Position des Gegners auf die StartPosition zurück\r\n        LevelHandler.setObjectAt(currentLocation,objectOnPosition);\r\n        this.currentLocation = start;\r\n        countdown = -1;\r\n        objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);\r\n    }\r\n\r\n\r\n    public boolean spieler_collision() {return (Location.isSame(this.currentLocation, this.player)) ;}\r\n\r\n\r\n    /**\r\n     * bewegt sich in die richtung der Location die der funktion übergebenen wird\r\n     * Location ist immer in eine der 4 geraden richtungen ( nie schräg)\r\n     * @param location übergibt ein Location Object, gegner geht in diese richtung wenn möglich\r\n     */\r\n    void move_to_Position(Location location) {\r\n        //bewegt sich in Richtung der zuletzt gesehen Position des Spieler\r\n        //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben\r\n\r\n        if (location.getX() - this.currentLocation.getX() == 0 || location.getY() - this.currentLocation.getY() == 0) {//prüft das die beiden locations auf einer achse liegen\r\n            int difX = location.getX() - this.currentLocation.getX(); // prüft auf welcher achse\r\n            if (difX > 0) {\r\n                //spieler ist richtung x Pos vom gegner\r\n                if (!moveX(1)) {\r\n                    moveRandom();\r\n                } // wenn der gewünschte schritt nicht gegangen werden kann führt moveRandom() aus damitt ein schritt gegangen wird\r\n\r\n            } else if (difX < 0) {\r\n                //spieler ist richtung X Neg vom gegner\r\n                if (!moveX(-1)) {\r\n                    moveRandom();\r\n                }\r\n\r\n            } else {\r\n                //spieler ist auf der selben X höhe wie gegner -> prüfe Y richtung\r\n                int difY = location.getY() - this.currentLocation.getY();\r\n                if (difY > 0) {\r\n                    //spieler ist richtung Y Pos vom gegner\r\n                    if (!moveY(1)) {\r\n                        moveRandom();\r\n                    }\r\n\r\n                } else if (difY < 0) {\r\n                    //spieler ist richtung Y neg vom gegner\r\n                    if (!moveY(-1)) {\r\n                        moveRandom();\r\n                    }\r\n\r\n                } else {// rand fall wo die übergebene position die ist auf der der gegner bereits steht\r\n                    // soll der gegner sich dann überhaupt bewegen oder sollte er dann still stehen?\r\n                    moveRandom();\r\n                }\r\n            }\r\n\r\n        } else { // in dem fall das die übergebenen Location nicht in eine der 4 geraden richtungen liegt, bewegt sich daher random\r\n            //soll der gegner sich dann nicht gerade auf die psoition bewegen? haben keinen fall wo dies benötigt wir\r\n            moveRandom();\r\n        }\r\n\r\n    }\r\n\r\n}\r\n\r\n\r\n\r\n      /*  if (!Location.isSame(this.currentLocation, location))\r\n        {\r\n            if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() <= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(1)) {\r\n                            bewegeY(1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(1)) {\r\n                            bewegeX(1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n            if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() <= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(1)) {\r\n                            bewegeY(1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(-1)) {\r\n                            bewegeX(-1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n            if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() >= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(-1)) {\r\n                            bewegeY(-1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(1)) {\r\n                            bewegeX(1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n            if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() >= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(-1)) {\r\n                            bewegeY(-1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(-1)) {\r\n                            bewegeX(-1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n        }\r\n\r\n       */\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/enemy/Enemy.java b/src/arcacia/game/objects/enemy/Enemy.java
+--- a/src/arcacia/game/objects/enemy/Enemy.java	
++++ b/src/arcacia/game/objects/enemy/Enemy.java	
+@@ -11,7 +11,7 @@
+ public class Enemy extends GameObject {
+ 
+     Location start;
+-    
++
+     Location player;
+     Location last_seen;
+     GameObject objectOnPosition;
+@@ -25,24 +25,24 @@
+      * Konstruktor mit Location Objekt
+      * @param currentLocation übergibt location Object welches die start position des Gegners markiert
+      */
+-	public Enemy(Location currentLocation){
+-		super(currentLocation);
++    public Enemy(Location currentLocation){
++        super(currentLocation);
+         start = new Location(currentLocation.getX(),currentLocation.getY());
+         countdown = -1;
+         objectOnPosition = new EmptyTile(start);
+-	}
++    }
+ 
+     /**
+      * Konstruktor mit Location Objekt
+      * @param x Wert der den start X-wert des gegners markiert
+      * @param y Wert der den start Y-wert des gegners markiert
+      */
+-	public Enemy(int x , int y){
+-		super(new Location(x,y));
++    public Enemy(int x , int y){
++        super(new Location(x,y));
+         start = new Location(x,y);
+         countdown = -1;
+         objectOnPosition = new EmptyTile(start);
+-	}
++    }
+ 
+     /**
+      *
+@@ -95,7 +95,7 @@
+                 return true;
+             }
+         }
+-          return false;
++        return false;
+     }
+ 
+     /**
+@@ -103,8 +103,8 @@
+      * @return true wenn spieler gesehen wurde, false wenn spieler nicht gesehen wurde
+      */
+     public boolean seePlayer(){
+-	    //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.
+-	    //unter der bedingung das zwischen den beiden positionen keine Wand ist
++        //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.
++        //unter der bedingung das zwischen den beiden positionen keine Wand ist
+ 
+         if(this.player.getX() - this.currentLocation.getX() == 0 || this.player.getY() - this.currentLocation.getY() == 0){// prüft ob beide auf einer achse sind
+             if (Math.abs(this.player.getX() - this.currentLocation.getX()) <= maxVisibility || Math.abs(this.player.getY() - this.currentLocation.getY()) <= maxVisibility){ // prüft ob beide weniger als maxVisibility vo einander entfernt sind
+@@ -320,7 +320,6 @@
+             }
+             if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() <= location.getY()) {
+                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
+-
+                 switch (richtung) {
+                     case 1:
+                         if (bewegeY(1)) {
+@@ -336,7 +335,6 @@
+             }
+             if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() >= location.getY()) {
+                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
+-
+                 switch (richtung) {
+                     case 1:
+                         if (bewegeY(-1)) {
+@@ -352,7 +350,6 @@
+             }
+             if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() >= location.getY()) {
+                 int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
+-
+                 switch (richtung) {
+                     case 1:
+                         if (bewegeY(-1)) {
+@@ -367,6 +364,4 @@
+                 }
+             }
+         }
+-
+-       */
+-
++       */
+\ No newline at end of file
+Index: src/arcacia/game/handler/InputHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport java.awt.event.KeyListener;\r\nimport java.awt.event.KeyEvent;\r\n\r\npublic class InputHandler implements KeyListener {\r\n\r\n    public static final int DIR_UP = 0;\r\n    public static final int DIR_DOWN = 1;\r\n    public static final int DIR_LEFT = 2;\r\n    public static final int DIR_RIGHT = 3;\r\n\r\n\r\n    @Override\r\n    public void keyTyped(KeyEvent e) {\r\n\r\n    }\r\n\r\n    @Override\r\n    public void keyPressed(KeyEvent e) {\r\n        int keyCode = e.getKeyCode();\r\n        if(GameHandler.isRunning())\r\n        {\r\n            /* Steuerung für in game*/\r\n            switch (keyCode) {\r\n                case KeyEvent.VK_UP, KeyEvent.VK_W -> PlayerHandler.getPlayer().playerMove(DIR_UP);\r\n                case KeyEvent.VK_DOWN, KeyEvent.VK_S -> PlayerHandler.getPlayer().playerMove(DIR_DOWN);\r\n                case KeyEvent.VK_LEFT, KeyEvent.VK_A -> PlayerHandler.getPlayer().playerMove(DIR_LEFT);\r\n                case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> PlayerHandler.getPlayer().playerMove(DIR_RIGHT);\r\n            }\r\n        }else{ /* Steuerung für Menüs */ }\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public void keyReleased(KeyEvent e) {\r\n\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/InputHandler.java b/src/arcacia/game/handler/InputHandler.java
+--- a/src/arcacia/game/handler/InputHandler.java	
++++ b/src/arcacia/game/handler/InputHandler.java	
+@@ -5,10 +5,10 @@
+ 
+ public class InputHandler implements KeyListener {
+ 
+-    public static final int DIR_UP = 0;
+-    public static final int DIR_DOWN = 1;
+-    public static final int DIR_LEFT = 2;
+-    public static final int DIR_RIGHT = 3;
++    public static boolean DIR_UP;
++    public static boolean DIR_DOWN;
++    public static boolean DIR_LEFT;
++    public static boolean DIR_RIGHT;
+ 
+ 
+     @Override
+@@ -19,26 +19,35 @@
+     @Override
+     public void keyPressed(KeyEvent e) {
+         int keyCode = e.getKeyCode();
+-        if(GameHandler.isRunning())
+-        {
+-            /* Steuerung für in game*/
+-            switch (keyCode) {
+-                case KeyEvent.VK_UP, KeyEvent.VK_W -> PlayerHandler.getPlayer().playerMove(DIR_UP);
+-                case KeyEvent.VK_DOWN, KeyEvent.VK_S -> PlayerHandler.getPlayer().playerMove(DIR_DOWN);
+-                case KeyEvent.VK_LEFT, KeyEvent.VK_A -> PlayerHandler.getPlayer().playerMove(DIR_LEFT);
+-                case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> PlayerHandler.getPlayer().playerMove(DIR_RIGHT);
+-            }
+-        }else{ /* Steuerung für Menüs */ }
+-
+-
+-
+-
++        if (keyCode == KeyEvent.VK_UP) {
++            DIR_UP = true;
++        }
++        if (keyCode == KeyEvent.VK_DOWN) {
++            DIR_DOWN = true;
++        }
++        if (keyCode == KeyEvent.VK_LEFT) {
++            DIR_LEFT = true;
++        }
++        if (keyCode == KeyEvent.VK_RIGHT) {
++            DIR_DOWN = true;
++        }
+     }
+ 
+     @Override
+     public void keyReleased(KeyEvent e) {
+-
+-    }
+-
++        int keyCode = e.getKeyCode();
++        if (keyCode == KeyEvent.VK_UP) {
++            DIR_UP = false;
++        }
++        if (keyCode == KeyEvent.VK_DOWN) {
++            DIR_DOWN = false;
++        }
++        if (keyCode == KeyEvent.VK_LEFT) {
++            DIR_LEFT = false;
++        }
++        if (keyCode == KeyEvent.VK_RIGHT) {
++            DIR_DOWN = false;
++        }
+ 
++    }
+ }
+Index: src/arcacia/game/objects/tile/DoorObject.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.tile;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class DoorObject extends GameObject {\r\n\r\n    public DoorObject(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n\r\n    public DoorObject(int x, int y) {\r\n        super(new Location(x, y));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/tile/DoorObject.java b/src/arcacia/game/objects/tile/DoorObject.java
+--- a/src/arcacia/game/objects/tile/DoorObject.java	
++++ b/src/arcacia/game/objects/tile/DoorObject.java	
+@@ -12,4 +12,4 @@
+     public DoorObject(int x, int y) {
+         super(new Location(x, y));
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/item/ExtraLife.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.item;\r\n\r\nimport arcacia.game.handler.ConstantHandler;\r\nimport arcacia.game.handler.LevelHandler;\r\nimport arcacia.game.handler.PlayerHandler;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class ExtraLife extends Item{\r\n    public ExtraLife(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n\r\n    public void collect() {\r\n        //setVisible(false);\r\n        PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);\r\n        PlayerHandler.setLives(PlayerHandler.getLives()+1);\r\n        LevelHandler.removeObjectAt(currentLocation);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/item/ExtraLife.java b/src/arcacia/game/objects/item/ExtraLife.java
+--- a/src/arcacia/game/objects/item/ExtraLife.java	
++++ b/src/arcacia/game/objects/item/ExtraLife.java	
+@@ -16,4 +16,4 @@
+         PlayerHandler.setLives(PlayerHandler.getLives()+1);
+         LevelHandler.removeObjectAt(currentLocation);
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/handler/PlayerHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.objects.PlayerObject;\r\n\r\npublic class PlayerHandler extends PlayerObject{\r\n    private static boolean hasKey = false;\r\n    private static int lives = 3;\r\n    private static int score = 0;\r\n    private static int multiplier = ConstantHandler.scoreDefaultMultiplier;\r\n    private static PlayerObject player;\r\n\r\n\r\n    public static void incrementLives() {\r\n        lives++;\r\n    }\r\n    public static void decrementLives() {\r\n        lives--;\r\n    }\r\n\r\n    public static void addToScore(int x)\r\n    {\r\n        score += x * multiplier;\r\n    }\r\n\r\n    //region Getter/Setter\r\n    public static boolean hasKey() {\r\n        return hasKey;\r\n    }\r\n\r\n    public static void setHasKey(boolean hasKey) {\r\n        PlayerHandler.hasKey = hasKey;\r\n    }\r\n    public static int getLives() {\r\n        return lives;\r\n    }\r\n    public static void setLives(int lives) {\r\n        PlayerHandler.lives = lives;\r\n    }\r\n    public static int getScore() {\r\n        return score;\r\n    }\r\n    public static void setScore(int score) {\r\n        PlayerHandler.score = score;\r\n    }\r\n    public static PlayerObject getPlayer() {\r\n        return player;\r\n    }\r\n    public static void setPlayer(PlayerObject player) {\r\n        PlayerHandler.player = player;\r\n    }\r\n    public static int getMultiplier() {\r\n        return multiplier;\r\n    }\r\n    public static void setMultiplier(int multiplier) {\r\n        PlayerHandler.multiplier = multiplier;\r\n    }\r\n    //endregion\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/PlayerHandler.java b/src/arcacia/game/handler/PlayerHandler.java
+--- a/src/arcacia/game/handler/PlayerHandler.java	
++++ b/src/arcacia/game/handler/PlayerHandler.java	
+@@ -55,4 +55,4 @@
+         PlayerHandler.multiplier = multiplier;
+     }
+     //endregion
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/tile/EmptyTile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.tile;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class EmptyTile extends GameObject {\r\n    public EmptyTile(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/tile/EmptyTile.java b/src/arcacia/game/objects/tile/EmptyTile.java
+--- a/src/arcacia/game/objects/tile/EmptyTile.java	
++++ b/src/arcacia/game/objects/tile/EmptyTile.java	
+@@ -7,4 +7,4 @@
+     public EmptyTile(Location currentLocation) {
+         super(currentLocation);
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/Game.java b/src/arcacia/Game.java
+new file mode 100644
+--- /dev/null	
++++ b/src/arcacia/Game.java	
+@@ -0,0 +1,164 @@
++package arcacia;
++import arcacia.game.handler.InputHandler;
++
++import javax.swing.plaf.basic.BasicTreeUI;
++import java.awt.*;
++import java.awt.event.KeyEvent;
++import java.awt.event.KeyListener;
++
++public class Game extends Canvas implements Runnable{
++    DrawImageOnCavas drawImageOnCavas;
++    public boolean started = false;
++    public boolean running = false;
++    private Thread gameThread;
++
++    public int playerX = 20;
++    public int playerY = 20;
++    int playerSpeed = 4;
++
++    public static boolean DIR_UP;
++    public static boolean DIR_DOWN;
++    public static boolean DIR_LEFT;
++    public static boolean DIR_RIGHT;
++    private Object KeyListener;
++
++    //KeyListener keyListener;
++
++    public Game(){
++
++    }
++
++    public synchronized void start() {
++        gameThread = new Thread(this);
++        gameThread.start();
++        running = true;
++    }
++
++    public void stop() {
++        try {
++            gameThread.join();
++            running = false;
++        } catch (InterruptedException e) {
++            e.printStackTrace();
++        }
++    }
++
++    public void draw(int x,int y) {
++        if(started == false){
++            drawImageOnCavas = new DrawImageOnCavas("DrawImageOnCanvas", 750, 750);
++            started = true;
++        }
++        drawImageOnCavas.draw(x,y);
++    }
++
++    public void update() {
++        System.out.println("playerX: " + playerX + " playerY: " + playerY);
++        this.addKeyListener(KeyListener);
++        KeyListener keyListener = new KeyListener() {
++            @Override
++            public void keyTyped(KeyEvent e) {
++
++            }
++
++            @Override
++            public void keyPressed(KeyEvent e) {
++                int keyCode = e.getKeyCode();
++                if (keyCode == KeyEvent.VK_UP) {
++                    DIR_UP = true;
++                    playerY -= playerSpeed;
++                }
++                if (keyCode == KeyEvent.VK_DOWN) {
++                    DIR_DOWN = true;
++                    playerY += playerSpeed;
++                }
++                if (keyCode == KeyEvent.VK_LEFT) {
++                    DIR_LEFT = true;
++                    playerX -= playerSpeed;
++                }
++                if (keyCode == KeyEvent.VK_RIGHT) {
++                    DIR_DOWN = true;
++                    playerX += playerSpeed;
++                }
++            }
++
++            @Override
++            public void keyReleased(KeyEvent e) {
++                int keyCode = e.getKeyCode();
++                if (keyCode == KeyEvent.VK_UP) {
++                    DIR_UP = false;
++                }
++                if (keyCode == KeyEvent.VK_DOWN) {
++                    DIR_DOWN = false;
++                }
++                if (keyCode == KeyEvent.VK_LEFT) {
++                    DIR_LEFT = false;
++                }
++                if (keyCode == KeyEvent.VK_RIGHT) {
++                    DIR_DOWN = false;
++                }
++            }
++        };
++        if (DIR_UP) {
++            playerY -= playerSpeed;
++        }
++        if (DIR_DOWN) {
++            playerY += playerSpeed;
++        }
++        if (DIR_LEFT) {
++            playerX -= playerSpeed;
++            //System.out.println(playerX);
++        }
++        if (DIR_RIGHT) {
++            playerX += playerSpeed;
++            //System.out.println(playerX);
++        }
++    }
++
++    public void run() {
++        while (gameThread != null) {
++            this.requestFocus();
++            final int MAX_FRAMES_PER_SECOND = 60;
++            final int MAX_UPDATES_PER_SECOND = 60;
++
++            final double uOPTIMAL_TIME = 1000000000 / MAX_UPDATES_PER_SECOND;
++            final double fOPTIMAL_TIME = 1000000000 / MAX_FRAMES_PER_SECOND;
++
++            double uDeltaTime = 0, fDeltaTime = 0;
++            int frames = 0, updates = 0;
++            long startTime = System.nanoTime();
++            long timer = System.currentTimeMillis();
++            while (running) {
++                long currentTime = System.nanoTime();
++                uDeltaTime += (currentTime - startTime);
++                fDeltaTime += (currentTime - startTime);
++                startTime = currentTime;
++
++                if (uDeltaTime >= uOPTIMAL_TIME) {
++                    update();
++                    updates++;
++                    uDeltaTime -= uOPTIMAL_TIME;
++                }
++                if (fDeltaTime >= fOPTIMAL_TIME) {
++                    draw(playerX,playerY);
++                    frames++;
++                    fDeltaTime -= fOPTIMAL_TIME;
++                }
++                if (System.currentTimeMillis() - timer >= 1000) {
++                    //System.out.println("UPS: " + updates + ", FPS: " + frames);
++                    updates = 0;
++                    frames = 0;
++                    timer += 1000;
++                }
++            }
++            stop();
++        }
++
++    }
++
++    public static void main(String[] args) {
++        Game game = new Game();
++        game.start();
++    }
++
++
++}
+Index: src/arcacia/game/handler/CollisionHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.PlayerObject;\r\nimport arcacia.game.objects.enemy.Enemy;\r\nimport arcacia.game.objects.item.Coin;\r\nimport arcacia.game.objects.item.Item;\r\nimport arcacia.game.objects.tile.DoorObject;\r\nimport arcacia.game.objects.tile.WallTile;\r\n\r\npublic class CollisionHandler {\r\n\r\n    public static GameObject collision(GameObject initiator, GameObject collider) {\r\n        if (collider == null) return null;\r\n\r\n        if(initiator instanceof PlayerObject) {\r\n            return playerCollision((PlayerObject) initiator, collider);\r\n        }\r\n        else if (initiator instanceof Enemy) {\r\n            return enemyCollision((Enemy) initiator, collider);\r\n        }\r\n\r\n        return null;\r\n    }\r\n\r\n    private static GameObject playerCollision(PlayerObject player, GameObject collider) {\r\n        if (collider instanceof Coin coin){\r\n            coin.collect();\r\n            return null;\r\n        }\r\n        else if (collider instanceof Item item) {\r\n            item.collect();\r\n            return null;\r\n        }\r\n        else if (collider instanceof Enemy enemy) {\r\n            if(ItemHandler.isPowerPillActive()) {\r\n                enemy.reset();\r\n                PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);\r\n            } else {\r\n                PlayerHandler.decrementLives();\r\n                //Restart Game\r\n            }\r\n            return null;\r\n        }\r\n        else if (collider instanceof DoorObject) {\r\n            if(PlayerHandler.hasKey()) {\r\n                //Lade nächstes Level\r\n            }\r\n            return null;\r\n        }\r\n        else if (collider instanceof WallTile) {\r\n            System.out.println(\"Kritischer Fehler\");\r\n        }\r\n\r\n        return null;\r\n    }\r\n\r\n    private static GameObject enemyCollision(Enemy enemy, GameObject collider) {\r\n        if (collider instanceof PlayerObject) {\r\n            if(ItemHandler.isPowerPillActive()) {\r\n                enemy.reset();\r\n                PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);\r\n            } else {\r\n                PlayerHandler.decrementLives();\r\n                //Restart Game\r\n            }\r\n            return null;\r\n\r\n        }\r\n        else if (collider instanceof WallTile) {\r\n            System.out.println(\"Kritischer Fehler\");\r\n        }\r\n        return collider;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/CollisionHandler.java b/src/arcacia/game/handler/CollisionHandler.java
+--- a/src/arcacia/game/handler/CollisionHandler.java	
++++ b/src/arcacia/game/handler/CollisionHandler.java	
+@@ -72,4 +72,4 @@
+         }
+         return collider;
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/tile/WallTile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.tile;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class WallTile extends GameObject {\r\n    public WallTile(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n\r\n    public WallTile(int x, int y) {\r\n        super(new Location(x, y));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/tile/WallTile.java b/src/arcacia/game/objects/tile/WallTile.java
+--- a/src/arcacia/game/objects/tile/WallTile.java	
++++ b/src/arcacia/game/objects/tile/WallTile.java	
+@@ -11,4 +11,4 @@
+     public WallTile(int x, int y) {
+         super(new Location(x, y));
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/handler/LevelHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.tile.EmptyTile;\r\nimport arcacia.game.objects.tile.WallTile;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class LevelHandler {\r\n    private final static int level_width = 24; //X //KAFANIZA GÖRE MI YAZDINIZ\r\n    private final static int level_height = 15; //Y //KAFANIZA GÖRE MI YAZDINIZ\r\n    private static GameObject[][] grid = new GameObject[level_width][level_height];\r\n\r\n    public static GameObject getObjectAt(Location loc) {\r\n        return grid[loc.getX()][loc.getY()];\r\n    }\r\n\r\n    public static boolean isWall(Location loc) {\r\n        return (getObjectAt(loc) instanceof WallTile);\r\n    }\r\n    public static boolean isWall(int x, int y) {\r\n        return (getObjectAt(new Location(x,y)) instanceof WallTile);\r\n    }\r\n\r\n    public static void setLevelGrid(GameObject[][] grid) {\r\n        LevelHandler.grid = grid;\r\n    }\r\n\r\n    public static GameObject setObjectAt(Location loc, GameObject obj) {\r\n        GameObject out = grid[loc.getX()][loc.getY()];\r\n        grid[loc.getX()][loc.getY()] = obj;\r\n        return out;\r\n    }\r\n\r\n    public static void debugInitGrid() {\r\n        for(int x = 0; x < level_width; x++) {\r\n            for(int y = 0; y < level_height; y++) {\r\n                grid[x][y] = new WallTile(x, y);\r\n            }\r\n        }\r\n    }\r\n\r\n    public static void removeObjectAt(Location loc) {\r\n        grid[loc.getX()][loc.getY()] = new EmptyTile(loc);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/LevelHandler.java b/src/arcacia/game/handler/LevelHandler.java
+--- a/src/arcacia/game/handler/LevelHandler.java	
++++ b/src/arcacia/game/handler/LevelHandler.java	
+@@ -6,8 +6,8 @@
+ import arcacia.game.util.Location;
+ 
+ public class LevelHandler {
+-    private final static int level_width = 24; //X //KAFANIZA GÖRE MI YAZDINIZ
+-    private final static int level_height = 15; //Y //KAFANIZA GÖRE MI YAZDINIZ
++    private final static int level_width = 24; //X
++    private final static int level_height = 15; //Y
+     private static GameObject[][] grid = new GameObject[level_width][level_height];
+ 
+     public static GameObject getObjectAt(Location loc) {
+@@ -42,4 +42,4 @@
+     public static void removeObjectAt(Location loc) {
+         grid[loc.getX()][loc.getY()] = new EmptyTile(loc);
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/item/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.item;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.util.Location;\r\nimport java.awt.image.BufferedImage;\r\n\r\npublic abstract class Item extends GameObject {\r\n    public Item(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n    BufferedImage bufferedImage;\r\n    /*\r\n    Java BufferedImage class is a subclass of Image class. It is used to handle and manipulate the image data. A BufferedImage is made of ColorModel of\r\n    image data. All BufferedImage objects have an upper left corner coordinate of (0, 0).\r\n    This class supports three types of constructors.\r\n    The second constructor constructs a BufferedImage of one of the predefined image types.\r\n    BufferedImage(int width, int height, int imageType)\r\n    The third constructor constructs a BufferedImage of one of the predefined image types: TYPE_BYTE_BINARY or TYPE_BYTE_INDEXED.\r\n    BufferedImage(int width, int height, int imageType, IndexColorModel cm)\r\n    */\r\n    int timer = 0;//How long the item will last\r\n    int points = 100;//what will be added to the score after the item is picked up\r\n    boolean collected = false;//If the item was picked up\r\n\r\n    public abstract void collect();\r\n    public int getTimer() {\r\n        return timer;\r\n    }\r\n    public void setTimer(int timer) {\r\n        this.timer = timer;\r\n    }\r\n\r\n    public int getPoints() {\r\n        return points;\r\n    }\r\n    public void setPoints(int points) {\r\n        this.points = points;\r\n    }\r\n\r\n    public boolean isCollected() {\r\n        return collected;\r\n    }\r\n    public void setCollected(boolean collected) {\r\n        this.collected = collected;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/item/Item.java b/src/arcacia/game/objects/item/Item.java
+--- a/src/arcacia/game/objects/item/Item.java	
++++ b/src/arcacia/game/objects/item/Item.java	
+@@ -8,16 +8,7 @@
+     public Item(Location currentLocation) {
+         super(currentLocation);
+     }
+-    BufferedImage bufferedImage;
+-    /*
+-    Java BufferedImage class is a subclass of Image class. It is used to handle and manipulate the image data. A BufferedImage is made of ColorModel of
+-    image data. All BufferedImage objects have an upper left corner coordinate of (0, 0).
+-    This class supports three types of constructors.
+-    The second constructor constructs a BufferedImage of one of the predefined image types.
+-    BufferedImage(int width, int height, int imageType)
+-    The third constructor constructs a BufferedImage of one of the predefined image types: TYPE_BYTE_BINARY or TYPE_BYTE_INDEXED.
+-    BufferedImage(int width, int height, int imageType, IndexColorModel cm)
+-    */
++
+     int timer = 0;//How long the item will last
+     int points = 100;//what will be added to the score after the item is picked up
+     boolean collected = false;//If the item was picked up
+@@ -44,3 +35,4 @@
+         this.collected = collected;
+     }
+ }
++
+Index: src/arcacia/game/handler/SceneHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.scene.MainFrame;\r\nimport arcacia.game.scene.menu.MainMenu;\r\n\r\npublic class SceneHandler {\r\n    private static final MainFrame frame = new MainFrame();//SÜPHELI\r\n    private static final MainMenu mainMenu = new MainMenu();//SÜPHELI\r\n\r\n    private static boolean initialised = false;\r\n\r\n\r\n    //region showScene Functions\r\n    public static void showMainMenu() {\r\n        if(initialised) initialise();\r\n        mainMenu.setVisible(true);\r\n    }\r\n\r\n    public static void showPauseMenu() {\r\n        if(initialised) initialise();\r\n    }\r\n\r\n    public static void showHighscore() {\r\n        if(initialised) initialise();\r\n    }\r\n\r\n    public static void showVictory() {\r\n        if(initialised) initialise();\r\n    }\r\n\r\n    public static void showLevel() {\r\n        if(initialised) initialise();\r\n    }\r\n    //endregion\r\n\r\n    public static boolean isInitialised() {\r\n        return initialised;\r\n    }\r\n\r\n    public static void initialise() {\r\n        initialised = true;\r\n        frame.add(mainMenu);\r\n        frame.addKeyListener(new InputHandler());\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/SceneHandler.java b/src/arcacia/game/handler/SceneHandler.java
+--- a/src/arcacia/game/handler/SceneHandler.java	
++++ b/src/arcacia/game/handler/SceneHandler.java	
+@@ -4,8 +4,8 @@
+ import arcacia.game.scene.menu.MainMenu;
+ 
+ public class SceneHandler {
+-    private static final MainFrame frame = new MainFrame();//SÜPHELI
+-    private static final MainMenu mainMenu = new MainMenu();//SÜPHELI
++    private static final MainFrame frame = new MainFrame();
++    private static final MainMenu mainMenu = new MainMenu();
+ 
+     private static boolean initialised = false;
+ 
+@@ -43,4 +43,4 @@
+         frame.addKeyListener(new InputHandler());
+     }
+ 
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/item/Key.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.item;\r\n\r\nimport arcacia.game.handler.ConstantHandler;\r\nimport arcacia.game.handler.LevelHandler;\r\nimport arcacia.game.handler.PlayerHandler;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class Key extends Item{\r\n\r\n    public Key(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n\r\n    public void collect() {\r\n        //setVisible(false);\r\n        PlayerHandler.addToScore(ConstantHandler.scoreKeyPickup);\r\n        PlayerHandler.setHasKey(true);\r\n        LevelHandler.removeObjectAt(currentLocation);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/item/Key.java b/src/arcacia/game/objects/item/Key.java
+--- a/src/arcacia/game/objects/item/Key.java	
++++ b/src/arcacia/game/objects/item/Key.java	
+@@ -17,4 +17,4 @@
+         PlayerHandler.setHasKey(true);
+         LevelHandler.removeObjectAt(currentLocation);
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/item/StopwatchItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.item;\r\n\r\nimport arcacia.game.handler.*;\r\nimport arcacia.game.util.Location;\r\nimport arcacia.game.objects.enemy.Enemy;\r\n\r\npublic class StopwatchItem extends Item{\r\n\r\n    public StopwatchItem(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n\r\n    public void collect() {\r\n        //setVisible(false)\r\n        GameHandler.setEnemyTimeout(ConstantHandler.itemStopwatchDuration);\r\n        LevelHandler.removeObjectAt(currentLocation);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/arcacia/game/objects/item/StopwatchItem.java b/src/arcacia/game/objects/item/StopwatchItem.java
+--- a/src/arcacia/game/objects/item/StopwatchItem.java	
++++ b/src/arcacia/game/objects/item/StopwatchItem.java	
+@@ -15,4 +15,4 @@
+         GameHandler.setEnemyTimeout(ConstantHandler.itemStopwatchDuration);
+         LevelHandler.removeObjectAt(currentLocation);
+     }
+-}
++}
+\ No newline at end of file
+Index: src/arcacia/game/objects/item/Coin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.item;\r\n\r\nimport arcacia.game.handler.ConstantHandler;\r\nimport arcacia.game.handler.LevelHandler;\r\nimport arcacia.game.handler.PlayerHandler;\r\nimport arcacia.game.util.Location;\r\n\r\npublic class Coin extends Item{\r\n    public Coin(Location currentLocation) {\r\n        super(currentLocation);\r\n    }\r\n\r\n    public void collect() {\r\n        //setVisible(false)\r\n        PlayerHandler.addToScore(ConstantHandler.scoreCoinCollect);\r\n        LevelHandler.removeObjectAt(currentLocation);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/arcacia/game/objects/item/Coin.java b/src/arcacia/game/objects/item/Coin.java
+--- a/src/arcacia/game/objects/item/Coin.java	
++++ b/src/arcacia/game/objects/item/Coin.java	
+@@ -16,3 +16,4 @@
+         LevelHandler.removeObjectAt(currentLocation);
+     }
+ }
++

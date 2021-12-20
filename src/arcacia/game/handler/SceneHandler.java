@@ -60,7 +60,7 @@ public class SceneHandler {
     //endregion
 
     public static void initialise() {
-        frame.addKeyListener(new InputHandler());
+        //frame.addKeyListener(new InputHandler());
     }
 
 }

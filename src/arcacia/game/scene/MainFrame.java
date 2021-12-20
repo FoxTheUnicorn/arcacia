@@ -1,5 +1,5 @@
 package arcacia.game.scene;
-import arcacia.CanvasDemo;
+//import arcacia.CanvasDemo;
 import arcacia.game.handler.ConstantHandler;
 
 import javax.swing.*;

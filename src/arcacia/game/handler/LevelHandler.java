@@ -6,8 +6,8 @@ import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
 
 public class LevelHandler {
-    private final static int level_width = 24; //X //KAFANIZA GÖRE MI YAZDINIZ
-    private final static int level_height = 15; //Y //KAFANIZA GÖRE MI YAZDINIZ
+    private final static int level_width = 24; //X
+    private final static int level_height = 15; //Y
     private static GameObject[][] grid = new GameObject[level_width][level_height];
 
     public static GameObject getObjectAt(Location loc) {

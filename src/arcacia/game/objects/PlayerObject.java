@@ -1,7 +1,7 @@
 package arcacia.game.objects;
 
 import arcacia.game.handler.CollisionHandler;
-import arcacia.game.handler.InputHandler;
+//import arcacia.game.handler.InputHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
@@ -36,10 +36,10 @@ public class PlayerObject extends GameObject {
 
     /**
      * Bewegt den Spieler ein Feld weiter entsprechend der Eingabe. Wenn die neue Position in einer wand wäre passiert nichts
-     * @param input die key eingabe in welche richtung sich der Spieler bewegen soll
+     * @param /input/ die key eingabe in welche richtung sich der Spieler bewegen soll
      *
      */
-    public boolean playerMove(int input) {
+    /*public boolean playerMove(int input) {
 
         int xPos = PlayerHandler.getPlayer().getLocation().getX();
         int yPos = PlayerHandler.getPlayer().getLocation().getY();
@@ -69,7 +69,7 @@ public class PlayerObject extends GameObject {
         GameObject tmp = LevelHandler.setObjectAt(newLocation, this);
         CollisionHandler.collision(this, tmp);
         return true;
-    }
+    }*/
 
     //Standard Konstruktor mit Leeren eingabe werten
     public PlayerObject() {
