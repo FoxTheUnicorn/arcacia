@@ -13,7 +13,6 @@ public class SpeedBoots extends Item{
     }
 
     public void collect() {
-        //setVisible(false);
         PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
         ItemHandler.activateSpeedBoots();
         LevelHandler.removeObjectAt(currentLocation);

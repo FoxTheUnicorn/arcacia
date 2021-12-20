@@ -12,9 +12,8 @@ public class ExtraLife extends Item{
     }
 
     public void collect() {
-        //setVisible(false);
         PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
-        PlayerHandler.setLives(PlayerHandler.getLives()+1);
+        PlayerHandler.incrementLives();
         LevelHandler.removeObjectAt(currentLocation);
     }
 }

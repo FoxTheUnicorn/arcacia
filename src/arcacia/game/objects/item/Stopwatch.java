@@ -2,7 +2,6 @@ package arcacia.game.objects.item;
 
 import arcacia.game.handler.*;
 import arcacia.game.util.Location;
-import arcacia.game.objects.enemy.Enemy;
 
 public class Stopwatch extends Item{
     public static final String path = ConstantHandler.pathImages + "stopwatch.png";
@@ -11,7 +10,7 @@ public class Stopwatch extends Item{
     }
 
     public void collect() {
-        //setVisible(false)
+        PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
         GameHandler.setEnemyTimeout(ConstantHandler.itemStopwatchDuration);
         LevelHandler.removeObjectAt(currentLocation);
     }

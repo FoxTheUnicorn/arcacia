@@ -12,7 +12,6 @@ public class Key extends Item{
     }
 
     public void collect() {
-        //setVisible(false);
         PlayerHandler.addToScore(ConstantHandler.scoreKeyPickup);
         PlayerHandler.setHasKey(true);
         LevelHandler.removeObjectAt(currentLocation);
