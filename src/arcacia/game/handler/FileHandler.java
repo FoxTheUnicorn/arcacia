@@ -136,7 +136,7 @@ public class FileHandler {
     public static void loadGame() throws FileNotFoundException {
         GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
         BufferedReader bReader = new BufferedReader(new FileReader(filePath));
-        String line = "";
+        String line;
 
         for (int y = 0; y < HeightGrid; y++) {
 
@@ -225,7 +225,7 @@ public class FileHandler {
      * führt dan die saveGame() methode aus
      */
     public static void debugTestSaveGame(){
-        LevelHandler.debugInitGrid();
+        LevelHandler.debugInitGrid(EmptyTile.class);
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
         //Geometry

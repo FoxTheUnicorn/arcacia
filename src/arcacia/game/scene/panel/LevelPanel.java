@@ -1,40 +1,30 @@
 package arcacia.game.scene.panel;
 
-import arcacia.game.handler.ConstantHandler;
-import arcacia.game.handler.InputHandler;
-import arcacia.game.handler.LevelHandler;
-import arcacia.game.objects.GameObject;
-import arcacia.game.util.Location;
+import arcacia.game.scene.SceneHandler;
+import arcacia.game.scene.other.HomeButton;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 
-public class LevelPanel extends Canvas{
+public class LevelPanel extends JPanel {
+    private final LevelCanvas canvas = new LevelCanvas();
 
-        public Graphics g;
-        public BufferedImage image;
+    public LevelPanel() {
+        setPreferredSize(new Dimension(1000,500));
 
-        public LevelPanel() {
-            setBackground(Color.black);
-            setPreferredSize(new Dimension(LevelHandler.));
-        }
+        JButton testButton = new JButton("Redraw");
+        testButton.addActionListener((e) -> SceneHandler.drawGrid());
+        add(testButton);
 
-        public void draw(BufferedImage image, int x, int y) {
-            getGraphics().drawImage(image, x, y, null);
-        }
+        HomeButton homeButton = new HomeButton();
+        homeButton.setLocation(0,0);
+        add(homeButton);
 
-        public void drawGrid() {
-            for(int x = 0; x < LevelHandler.level_width; x++) {
-                for(int y = 0; y < LevelHandler.level_height; y++) {
-                    GameObject obj = LevelHandler.getObjectAt(new Location(x,y));
-                    draw(obj.getImage(),x*32, y*32);
-                }
-            }
-        }
-
+        add(canvas);
     }
+
+    public void drawGrid() {
+        canvas.drawGrid();
+    }
+}

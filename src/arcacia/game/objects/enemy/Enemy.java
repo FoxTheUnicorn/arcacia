@@ -1,14 +1,21 @@
 package arcacia.game.objects.enemy;
 
 import arcacia.game.handler.CollisionHandler;
+import arcacia.game.handler.ConstantHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.objects.GameObject;
 import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.util.Location;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Enemy extends GameObject {
+
+    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
 
     Location start;
     
@@ -31,6 +38,16 @@ public class Enemy extends GameObject {
         countdown = -1;
         objectOnPosition = new EmptyTile(start);
 	}
+
+    @Override
+    public BufferedImage getImage() {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Konstruktor mit Location Objekt und Objekt welchem an der selben position Liegt
