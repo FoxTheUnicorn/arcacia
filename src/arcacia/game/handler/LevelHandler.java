@@ -9,7 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class LevelHandler {
-    public final static int level_width = 24; //X
+    public final static int level_width = 25; //X
     public final static int level_height = 15; //Y
     public static int level_number = 1;
     private static GameObject[][] grid = new GameObject[level_width][level_height];
