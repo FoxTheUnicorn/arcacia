@@ -44,6 +44,13 @@ public class LevelHandler {
         return out;
     }
 
+    public static GameObject setObjectAt(Location loc, GameObject obj) {
+        GameObject out = grid[loc.getX()][loc.getY()];
+        grid[loc.getX()][loc.getY()] = obj;
+        obj.setLocation(loc);
+        return out;
+    }
+
     public static void debugInitGrid(Class<? extends GameObject> clazz) {
         Constructor<? extends GameObject> constr = null;
         try {
