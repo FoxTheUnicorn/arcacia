@@ -225,7 +225,7 @@ public class FileHandler {
      * führt dan die saveGame() methode aus
      */
     public static void debugTestSaveGame(){
-        LevelHandler.debugInitGrid();
+        //LevelHandler.debugInitGrid();
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
         //Geometry
