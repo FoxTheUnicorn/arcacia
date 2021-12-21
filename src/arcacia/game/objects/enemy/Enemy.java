@@ -38,6 +38,7 @@ public class Enemy extends GameObject {
         start = new Location(currentLocation.getX(),currentLocation.getY());
         countdown = -1;
         objectOnPosition = new EmptyTile(start);
+        LevelHandler.enemies.add(this);
 	}
 
     @Override
@@ -60,6 +61,7 @@ public class Enemy extends GameObject {
         start = new Location(currentLocation.getX(),currentLocation.getY());
         countdown = -1;
         objectOnPosition = object;
+        LevelHandler.enemies.add(this);
     }
 
     /**

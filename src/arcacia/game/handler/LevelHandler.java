@@ -1,17 +1,22 @@
 package arcacia.game.handler;
 
 import arcacia.game.objects.GameObject;
+import arcacia.game.objects.enemy.Enemy;
 import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LevelHandler {
     public final static int level_width = 25; //X
     public final static int level_height = 15; //Y
     public static int level_number = 1;
+    public static List<Enemy> enemies = new ArrayList<Enemy>();
+
     private static GameObject[][] grid = new GameObject[level_width][level_height];
 
     public static GameObject getObjectAt(Location loc) {

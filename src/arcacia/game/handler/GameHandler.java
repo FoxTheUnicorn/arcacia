@@ -11,8 +11,9 @@ public class GameHandler {
     private static int enemyTimeout = 0;
     private static int enemyTurn = 1;
 
-    public void loop(Enemy[] enemies) throws InterruptedException {
+    public void loop() throws InterruptedException {
         this.running = true;
+        SceneHandler.drawGrid();
         Thread.sleep(1000);
 
         for (int i = 0; i < playerTurn; i++) {
@@ -33,7 +34,7 @@ public class GameHandler {
                 enemyTimeout--;
             } else {
                 Thread.sleep(100);
-                for (Enemy e: enemies) {
+                for (Enemy e: LevelHandler.enemies) {
                     e.movement(PlayerHandler.getPlayer().getLocation());
                     SceneHandler.drawGrid();
                 }

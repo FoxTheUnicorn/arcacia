@@ -46,6 +46,7 @@ public class CollisionHandler {
             if(PlayerHandler.hasKey()) {
                  LevelHandler.setLevel_number(LevelHandler.getLevel_number() + 1);
                  FileHandler.loadLevelX(LevelHandler.getLevel_number());
+                 LevelHandler.enemies.clear();
             }
             return null;
         }
