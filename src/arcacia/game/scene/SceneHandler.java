@@ -57,6 +57,10 @@ public class SceneHandler {
         levelPanel.drawGrid();
     }
 
+    public static void updateFocus() {
+        levelPanel.updateFocus();
+    }
+
     public static void showTutorial() {
         frame.setContentPane(tutorialPanel);
         frame.update();
@@ -68,7 +72,6 @@ public class SceneHandler {
     //endregion
 
     public static void initialise() {
-        frame.addKeyListener(new InputHandler());
     }
 
 }

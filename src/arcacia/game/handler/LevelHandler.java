@@ -14,7 +14,6 @@ import java.util.List;
 public class LevelHandler {
     public final static int level_width = 25; //X
     public final static int level_height = 15; //Y
-    public static int level_number = 1;
     public static List<Enemy> enemies = new ArrayList<Enemy>();
 
     private static GameObject[][] grid = new GameObject[level_width][level_height];
@@ -34,9 +33,14 @@ public class LevelHandler {
         LevelHandler.grid = grid;
     }
 
-    public static GameObject setObjectAt(Location loc, GameObject obj) {
+    public static GameObject moveObjectTo(Location loc, GameObject obj) {
+        removeObjectAt(obj.getLocation());
+
         GameObject out = grid[loc.getX()][loc.getY()];
+
         grid[loc.getX()][loc.getY()] = obj;
+
+        obj.setLocation(loc);
         return out;
     }
 
@@ -63,13 +67,5 @@ public class LevelHandler {
 
     public static void removeObjectAt(Location loc) {
         grid[loc.getX()][loc.getY()] = new EmptyTile(loc);
-    }
-
-    public static int getLevel_number() {
-        return level_number;
-    }
-
-    public static void setLevel_number(int level_number) {
-        LevelHandler.level_number = level_number;
     }
 }

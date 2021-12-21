@@ -9,6 +9,11 @@ public class Location {
 
     }
 
+    public Location(Location loc) {
+        x = loc.getX();
+        y = loc.getY();
+    }
+
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
@@ -19,6 +24,10 @@ public class Location {
             return locB.y == locA.y;
         }
         return false;
+    }
+
+    public String toString() {
+        return "x: " + x + " y: "+ y;
     }
 
     //region Getter and Setter

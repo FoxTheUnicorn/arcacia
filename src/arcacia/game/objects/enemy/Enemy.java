@@ -16,6 +16,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Enemy extends GameObject {
 
+    //TODO lässt Münzen verschwinden
+
     public static final String path = ConstantHandler.pathImages + "scorpion.png";
 
     Location start;
@@ -96,9 +98,9 @@ public class Enemy extends GameObject {
             if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY())) || (LevelHandler.getObjectAt(new Location(this.currentLocation.getX() + x,this.currentLocation.getY())) instanceof DoorObject)){
                 return false;
             }else {
-                LevelHandler.setObjectAt(currentLocation, objectOnPosition);
+                LevelHandler.moveObjectTo(currentLocation, objectOnPosition);
                 this.currentLocation.setX(currentLocation.getX() + x);
-                objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);
+                objectOnPosition = LevelHandler.moveObjectTo(currentLocation,this);
                 CollisionHandler.collision(this, objectOnPosition);
                 return true;
             }
@@ -120,9 +122,9 @@ public class Enemy extends GameObject {
             if (LevelHandler.isWall(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y)) || (LevelHandler.getObjectAt(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y)) instanceof DoorObject)){
                 return false;
             }else {
-                LevelHandler.setObjectAt(currentLocation,objectOnPosition);
+                LevelHandler.moveObjectTo(currentLocation,objectOnPosition);
                 this.currentLocation.setY(currentLocation.getY()+y);
-                objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);
+                objectOnPosition = LevelHandler.moveObjectTo(currentLocation,this);
                 CollisionHandler.collision(this, objectOnPosition);
                 return true;
             }
@@ -268,10 +270,10 @@ public class Enemy extends GameObject {
      */
     public void reset(){
         //setzt die Position des Gegners auf die StartPosition zurück
-        LevelHandler.setObjectAt(currentLocation,objectOnPosition);
+        LevelHandler.moveObjectTo(currentLocation,objectOnPosition);
         this.currentLocation = start;
         countdown = -1;
-        objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);
+        objectOnPosition = LevelHandler.moveObjectTo(currentLocation,this);
     }
 
 

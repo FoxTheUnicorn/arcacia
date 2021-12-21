@@ -10,27 +10,23 @@ import arcacia.game.objects.tile.WallTile;
 
 public class CollisionHandler {
 
-    public static GameObject collision(GameObject initiator, GameObject collider) {
-        if (collider == null) return null;
+    public static void collision(GameObject initiator, GameObject collider) {
+        if (collider == null) return;
 
         if(initiator instanceof PlayerObject) {
-            return playerCollision((PlayerObject) initiator, collider);
+            playerCollision((PlayerObject) initiator, collider);
         }
         else if (initiator instanceof Enemy) {
-            return enemyCollision((Enemy) initiator, collider);
+            enemyCollision((Enemy) initiator, collider);
         }
-
-        return null;
     }
 
-    private static GameObject playerCollision(PlayerObject player, GameObject collider) {
+    private static void playerCollision(PlayerObject player, GameObject collider) {
         if (collider instanceof CoinItem coin){
             coin.collect();
-            return null;
         }
         else if (collider instanceof Item item) {
             item.collect();
-            return null;
         }
         else if (collider instanceof Enemy enemy) {
             if(ItemHandler.isPowerPillActive()) {
@@ -40,24 +36,20 @@ public class CollisionHandler {
                 PlayerHandler.decrementLives();
                 //Restart Game
             }
-            return null;
         }
         else if (collider instanceof DoorObject) {
             if(PlayerHandler.hasKey()) {
-                 LevelHandler.setLevel_number(LevelHandler.getLevel_number() + 1);
-                 FileHandler.loadLevelX(LevelHandler.getLevel_number());
+                 GameHandler.setLevelComplete();
                  LevelHandler.enemies.clear();
             }
-            return null;
         }
         else if (collider instanceof WallTile) {
             System.out.println("Kritischer Fehler");
         }
 
-        return null;
     }
 
-    private static GameObject enemyCollision(Enemy enemy, GameObject collider) {
+    private static void enemyCollision(Enemy enemy, GameObject collider) {
         if (collider instanceof PlayerObject) {
             if(ItemHandler.isPowerPillActive()) {
                 enemy.reset();
@@ -66,12 +58,9 @@ public class CollisionHandler {
                 PlayerHandler.decrementLives();
                 //Restart Game
             }
-            return null;
-
         }
         else if (collider instanceof WallTile) {
             System.out.println("Kritischer Fehler");
         }
-        return collider;
     }
 }

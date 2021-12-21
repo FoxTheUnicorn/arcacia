@@ -1,5 +1,6 @@
 package arcacia.game.scene.panel;
 
+    import arcacia.game.handler.GameHandler;
     import arcacia.game.scene.SceneHandler;
     import arcacia.game.scene.other.MenuButton;
 
@@ -13,7 +14,7 @@ public class MainMenuPanel extends AbstractMenu {
 
         addSpacer(35);
 
-        add(new MenuButton("New Game", (e) -> SceneHandler.showLevel(), Component.RIGHT_ALIGNMENT));
+        add(new MenuButton("New Game", (e) -> GameHandler.startNewGame(), Component.RIGHT_ALIGNMENT));
         addSpacer(15);
 
         add(new MenuButton("Load Game", (e) -> SceneHandler.showLevel(), Component.RIGHT_ALIGNMENT));

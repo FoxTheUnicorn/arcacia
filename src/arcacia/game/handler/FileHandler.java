@@ -110,7 +110,7 @@ public class FileHandler {
         //schreibt die Restlichen zu merkenden Variablen in die Datei in einer Bestimten Reihenfolge
 
         //LevelNumber
-        pWriter.println(LevelHandler.getLevel_number());
+        pWriter.println(GameHandler.getLevel_number());
         //PlayerHandler
         pWriter.println(PlayerHandler.hasKey());
         pWriter.println(PlayerHandler.getLives());
@@ -160,7 +160,7 @@ public class FileHandler {
                 switch (now) {
                     case (wall) -> new_grid[x][y] = new WallTile(loc);
                     case (empty) -> new_grid[x][y] = new EmptyTile(loc);
-                    case (player) -> new_grid[x][y] = new PlayerObject(loc);
+                    case (player) -> { new_grid[x][y] = new PlayerObject(loc); PlayerHandler.setPlayer((PlayerObject) new_grid[x][y]); }
                     case (key) -> new_grid[x][y] = new Key(loc);
                     case (coin) -> new_grid[x][y] = new CoinItem(loc);
                     case (door) -> new_grid[x][y] = new DoorObject(loc);
@@ -269,7 +269,7 @@ public class FileHandler {
         try {
             //LevelNumber
             line = bReader.readLine();
-            LevelHandler.setLevel_number(Integer.parseInt(line));
+            GameHandler.setLevel_number(Integer.parseInt(line));
             //PlayerHandler
             //hasKey
             line = bReader.readLine();
@@ -317,28 +317,28 @@ public class FileHandler {
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
         //Geometry
-        LevelHandler.setObjectAt(new Location(n,5),new DoorObject(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new PlayerObject(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Key(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new CoinItem(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new EmptyTile(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new DoorObject(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new PlayerObject(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Key(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new CoinItem(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new EmptyTile(new Location(n,5)));n++;
         //Itemsnew
-        LevelHandler.setObjectAt(new Location(n,5),new SpeedBoots(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new ExtraLife(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Stopwatch(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new PowerPill(new Location(n,5)));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Multiplier(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new SpeedBoots(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new ExtraLife(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Stopwatch(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new PowerPill(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Multiplier(new Location(n,5)));n++;
         //Gegner auf Items
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Key(new Location(n,5))));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new CoinItem(new Location(n,5))));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new SpeedBoots(new Location(n,5))));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new ExtraLife(new Location(n,5))));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Stopwatch(new Location(n,5))));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new PowerPill(new Location(n,5))));n++;
-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Multiplier(new Location(n,5))));
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new Key(new Location(n,5))));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new CoinItem(new Location(n,5))));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new SpeedBoots(new Location(n,5))));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new ExtraLife(new Location(n,5))));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new Stopwatch(new Location(n,5))));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new PowerPill(new Location(n,5))));n++;
+        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new Multiplier(new Location(n,5))));
 
-        LevelHandler.setLevel_number(3);
+        GameHandler.setLevel_number(3);
 
         PlayerHandler.setHasKey(true);
         PlayerHandler.setLives(5);
@@ -373,7 +373,7 @@ public class FileHandler {
             e.printStackTrace();
         }
 
-        System.out.println("LevleNumber: "+LevelHandler.getLevel_number()+ " Erwartet: 3");
+        System.out.println("LevleNumber: "+GameHandler.getLevel_number()+ " Erwartet: 3");
 
         System.out.println("hasKey: "+ PlayerHandler.hasKey()+  " Erwartet: true");
         System.out.println("lives: "+ PlayerHandler.getLives()+  " Erwartet: 5");

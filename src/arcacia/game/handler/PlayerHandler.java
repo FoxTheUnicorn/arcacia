@@ -2,7 +2,7 @@ package arcacia.game.handler;
 
 import arcacia.game.objects.PlayerObject;
 
-public class PlayerHandler extends PlayerObject{
+public class PlayerHandler {
     private static boolean hasKey = false;
     private static int lives = 3;
     private static int score = 0;

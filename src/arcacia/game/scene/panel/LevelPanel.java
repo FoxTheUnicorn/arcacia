@@ -1,5 +1,6 @@
 package arcacia.game.scene.panel;
 
+import arcacia.game.handler.InputHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.scene.SceneHandler;
 import arcacia.game.scene.other.HomeButton;
@@ -12,6 +13,7 @@ public class LevelPanel extends JPanel {
     private final LevelCanvas canvas = new LevelCanvas();
 
     public LevelPanel() {
+        setFocusable(false);
         setPreferredSize(new Dimension(1000,500));
 
         JButton redrawButton = new JButton("Redraw");
@@ -27,6 +29,10 @@ public class LevelPanel extends JPanel {
         add(homeButton);
 
         add(canvas);
+    }
+
+    public void updateFocus() {
+        canvas.requestFocus();
     }
 
     public void drawGrid() {

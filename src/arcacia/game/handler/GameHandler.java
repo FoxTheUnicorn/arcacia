@@ -1,47 +1,27 @@
 package arcacia.game.handler;
 
+import arcacia.game.GameLoop;
 import arcacia.game.objects.enemy.Enemy;
 import arcacia.game.scene.SceneHandler;
 
-public class GameHandler {
+public class GameHandler extends Thread {
+
+    //TODO Fully integrate
 
     private static boolean running = false;
+    private static int level_number = 1;
     private static int playerTimeout = 0;
     private static int playerTurn = 1;
     private static int enemyTimeout = 0;
     private static int enemyTurn = 1;
+    private static boolean levelComplete = false;
 
-    public void loop() throws InterruptedException {
-        this.running = true;
-        SceneHandler.drawGrid();
-        Thread.sleep(1000);
-
-        for (int i = 0; i < playerTurn; i++) {
-            if(playerTimeout > 0) {
-                playerTimeout--;
-            } else {
-                int temp = -1;
-                while(temp == -1) {
-                    temp = InputHandler.getPressedButton();
-                    PlayerHandler.getPlayer().playerMove(temp);
-                }
-                SceneHandler.drawGrid();
-            }
-        }
-
-        for (int i = 0; i < enemyTurn; i++) {
-            if(enemyTimeout > 0) {
-                enemyTimeout--;
-            } else {
-                Thread.sleep(100);
-                for (Enemy e: LevelHandler.enemies) {
-                    e.movement(PlayerHandler.getPlayer().getLocation());
-                    SceneHandler.drawGrid();
-                }
-            }
-        }
-
-        ItemHandler.tick();
+    public static void startNewGame() {
+        SceneHandler.showLevel();
+        FileHandler.loadLevelX(1);
+        GameLoop gameLoop = new GameLoop();
+        Thread t = new Thread(gameLoop);
+        t.start();
     }
 
     //region Getter/Setter
@@ -77,7 +57,20 @@ public class GameHandler {
         GameHandler.running = running;
     }
     public static boolean isRunning() { return running; }
+
+    public static int getLevel_number() {
+        return level_number;
+    }
+
+    public static void setLevel_number(int level_number) {
+        GameHandler.level_number = level_number;
+    }
+
+    public static void setLevelComplete() { levelComplete = true;}
+    public static boolean isLevelComplete() {return levelComplete; }
+
     //endregion
+
 }
 
 

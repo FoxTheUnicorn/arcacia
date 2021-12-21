@@ -4,20 +4,18 @@ import arcacia.game.handler.*;
 import arcacia.game.util.Location;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 
 public class PlayerObject extends GameObject {
     public static final String path = ConstantHandler.pathImages + "James.png";
-    private final Location startPlayer;
 
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
-        startPlayer = new Location(currentLocation.getX(), currentLocation.getY());
+        System.out.println(currentLocation);
+
     }
 
     /**
@@ -27,47 +25,57 @@ public class PlayerObject extends GameObject {
      */
     public boolean playerMove(int input) {
 
-        int xPos = PlayerHandler.getPlayer().getLocation().getX();
-        int yPos = PlayerHandler.getPlayer().getLocation().getY();
-        Location newLocation = PlayerHandler.getPlayer().getLocation();
+        if(input == -1) return false;
+
+        int xPos = getLocation().getX();
+        int yPos = getLocation().getY();
+
+        Location newLocation = getLocation();
+
+        System.out.println(input);
         switch (input) {
             case InputHandler.DIR_UP -> {
-                if (!LevelHandler.isWall(xPos, yPos + 1)) return false;
-                newLocation.setX(xPos);
-                newLocation.setY((yPos + 1));
-            }
-            case InputHandler.DIR_DOWN -> {
-                if (!LevelHandler.isWall(xPos, yPos - 1)) return false;
+                if (LevelHandler.isWall(xPos, yPos - 1)) {
+                    return false;
+                }
                 newLocation.setX(xPos);
                 newLocation.setY((yPos - 1));
             }
+            case InputHandler.DIR_DOWN -> {
+                if (LevelHandler.isWall(xPos, yPos + 1)) {
+                    System.out.println(xPos + " " + yPos + 1);
+                    return false;
+                }
+                newLocation.setX(xPos);
+                newLocation.setY((yPos + 1));
+            }
             case InputHandler.DIR_LEFT -> {
-                if (!LevelHandler.isWall(xPos - 1, yPos)) return false;
+                if (LevelHandler.isWall(xPos - 1, yPos)) {
+                    return false;
+                }
                 newLocation.setX(xPos - 1);
                 newLocation.setY((yPos));
             }
             case InputHandler.DIR_RIGHT -> {
-                if (LevelHandler.isWall(xPos + 1, yPos)) return false;
+                if (LevelHandler.isWall(xPos + 1, yPos)) {
+                    return false;
+                }
                 newLocation.setX(xPos + 1);
                 newLocation.setY((yPos));
             }
         }
-        GameObject tmp = LevelHandler.setObjectAt(newLocation, this);
+        System.out.println("curr loc: " + getLocation());
+        System.out.println("next loc: " + newLocation);
+        GameObject tmp = LevelHandler.moveObjectTo(newLocation, this);
+
         CollisionHandler.collision(this, tmp);
         return true;
     }
 
     //Standard Konstruktor mit Leeren eingabe werten
-    public PlayerObject() {
-        super(new Location(0, 0));
-        startPlayer = new Location(0, 0);
-    }
 
     public PlayerObject(int x, int y) {
-
         super(new Location(x, y));
-        startPlayer = new Location(x, y);
-
     }
 
     public BufferedImage getImage() {

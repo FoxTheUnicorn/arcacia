@@ -22,7 +22,7 @@ public abstract class GameObject {
     //region Getter and Setter
 
     public Location getLocation() {
-        return currentLocation;
+        return new Location(currentLocation);
     }
 
     public void setLocation(Location location) {
