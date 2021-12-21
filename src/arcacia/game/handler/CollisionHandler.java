@@ -45,18 +45,7 @@ public class CollisionHandler {
         else if (collider instanceof DoorObject) {
             if(PlayerHandler.hasKey()) {
                  LevelHandler.setLevel_number(LevelHandler.getLevel_number() + 1);
-                 switch (LevelHandler.getLevel_number()) {
-                     case 2:
-                         //Lade Level 2
-                        break;
-                     case 3:
-                         //Lade Level 3
-                         break;
-                     default:
-                         //Lade Level 1?
-                         break;
-                 }
-                //Lade nächstes Level
+                 FileHandler.loadLevelX(LevelHandler.getLevel_number());
             }
             return null;
         }
