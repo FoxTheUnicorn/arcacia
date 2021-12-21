@@ -37,7 +37,7 @@ public class FileHandler {
     public static final char Epower = '6';
     public static final char Emultiplikator = '7';
 
-    private static final String filePath = "Level-editor/Level";
+    private static final String filePath = "./Level-editor/Level/";
 
     public static final int WithGrid = 24;
     public static final int HeightGrid = 15;
@@ -185,7 +185,19 @@ public class FileHandler {
      * loadLevelX
      * läd ein spezifisches level welches Dann gebaut werden soll
      */
-    public static boolean loadLevelX(int i){
+    public static boolean loadLevelX(int i)  {
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath+"Level_"+i+".txt"));
+            levelBuilder(bufferedReader);
+            bufferedReader.close();
+            return true;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return false;
     }
