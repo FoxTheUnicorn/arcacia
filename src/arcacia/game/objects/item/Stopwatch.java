@@ -36,6 +36,5 @@ public class Stopwatch extends Item{
     public void collect() {
         PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
         GameHandler.setEnemyTimeout(ConstantHandler.itemStopwatchDuration);
-        LevelHandler.removeObjectAt(currentLocation);
     }
 }

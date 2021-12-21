@@ -14,7 +14,7 @@ import java.io.IOException;
  * Die Klasse zum Münzitem, welches den Score um 1 erhöht.
  */
 public class CoinItem extends Item {
-    public static final String path = ConstantHandler.pathImages + "coin.png";
+    public static final String path = ConstantHandler.pathImages + "mediumcoin.png";
 
     /**
      * Der Konstruktor zur Klasse Münze.
@@ -42,6 +42,5 @@ public class CoinItem extends Item {
      */
     public void collect() {
         PlayerHandler.addToScore(ConstantHandler.scoreCoinCollect);
-        LevelHandler.removeObjectAt(currentLocation);
     }
 }

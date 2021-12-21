@@ -1,7 +1,9 @@
 package arcacia.game.handler;
 
 import arcacia.game.objects.GameObject;
+import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.enemy.Enemy;
+import arcacia.game.objects.tile.DoorObject;
 import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
@@ -14,7 +16,7 @@ import java.util.List;
 public class LevelHandler {
     public final static int level_width = 25; //X
     public final static int level_height = 15; //Y
-    public static List<Enemy> enemies = new ArrayList<Enemy>();
+    public static List<Enemy> enemies = new ArrayList<>();
 
     private static GameObject[][] grid = new GameObject[level_width][level_height];
 
@@ -22,12 +24,32 @@ public class LevelHandler {
         return grid[loc.getX()][loc.getY()];
     }
 
+    //region Build that Wall
+
     public static boolean isWall(Location loc) {
-        return (getObjectAt(loc) instanceof WallTile);
+        return isWall(loc, null);
     }
+
+    public static boolean isWall(Location loc, GameObject obj) {
+        if(PlayerHandler.hasKey()) {
+            if(obj instanceof PlayerObject) {
+                if(getObjectAt(loc) instanceof DoorObject) {
+                    return false;
+                }
+            }
+        }
+        return (getObjectAt(loc).isSolid());
+    }
+
     public static boolean isWall(int x, int y) {
-        return (getObjectAt(new Location(x,y)) instanceof WallTile);
+        return isWall(x,y,null);
     }
+
+    public static boolean isWall(int x, int y, GameObject obj) {
+        return isWall(new Location(x, y), obj);
+    }
+
+    //endregion
 
     public static void setLevelGrid(GameObject[][] grid) {
         LevelHandler.grid = grid;
@@ -37,7 +59,6 @@ public class LevelHandler {
         removeObjectAt(obj.getLocation());
 
         GameObject out = grid[loc.getX()][loc.getY()];
-
         grid[loc.getX()][loc.getY()] = obj;
 
         obj.setLocation(loc);
@@ -48,6 +69,16 @@ public class LevelHandler {
         GameObject out = grid[loc.getX()][loc.getY()];
         grid[loc.getX()][loc.getY()] = obj;
         obj.setLocation(loc);
+        return out;
+    }
+
+    public static GameObject moveObjectTo(Location newLocation, GameObject mover, GameObject overlap) {
+        setObjectAt(overlap.getLocation(), overlap);
+
+        GameObject out = grid[newLocation.getX()][newLocation.getY()];
+        grid[newLocation.getX()][newLocation.getY()] = mover;
+        mover.setLocation(newLocation);
+
         return out;
     }
 

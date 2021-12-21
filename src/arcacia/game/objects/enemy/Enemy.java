@@ -28,7 +28,7 @@ public class Enemy extends GameObject {
 
     int countdown;
     // maximale anzahl wie oft der zu letzt gesehene punkt des spielers verfolgt wird
-    private static final int maxFollwo = 10;// static sagt aus das es nur einmal gemacht wird, wenn die maximale zahl der verfolgung für verschiedene erhöht werden soll muss static entfernt werden
+    private static final int maxFollow = 10;// static sagt aus das es nur einmal gemacht wird, wenn die maximale zahl der verfolgung für verschiedene erhöht werden soll muss static entfernt werden
     private static final int maxVisibility = 10;
 
     /**
@@ -95,12 +95,11 @@ public class Enemy extends GameObject {
     public boolean moveX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung
         //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück
         if (x == 1 || x == -1){
-            if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY())) || (LevelHandler.getObjectAt(new Location(this.currentLocation.getX() + x,this.currentLocation.getY())) instanceof DoorObject)){
+            if (LevelHandler.isWall(currentLocation.add(x,0))){
                 return false;
             }else {
-                LevelHandler.moveObjectTo(currentLocation, objectOnPosition);
-                this.currentLocation.setX(currentLocation.getX() + x);
-                objectOnPosition = LevelHandler.moveObjectTo(currentLocation,this);
+                Location tmp = currentLocation.add(x ,0);
+                objectOnPosition = LevelHandler.moveObjectTo(tmp,this, objectOnPosition);
                 CollisionHandler.collision(this, objectOnPosition);
                 return true;
             }
@@ -119,12 +118,11 @@ public class Enemy extends GameObject {
         //alternative schreibweise, falls eingabe parameter eingeschränkt (nur 1 und -1) muss
 
         if (y == 1 || y == -1){
-            if (LevelHandler.isWall(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y)) || (LevelHandler.getObjectAt(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y)) instanceof DoorObject)){
+            if (LevelHandler.isWall(currentLocation.add(0, y))) {
                 return false;
             }else {
-                LevelHandler.moveObjectTo(currentLocation,objectOnPosition);
-                this.currentLocation.setY(currentLocation.getY()+y);
-                objectOnPosition = LevelHandler.moveObjectTo(currentLocation,this);
+                Location tmp = currentLocation.add(0 ,y);
+                objectOnPosition = LevelHandler.moveObjectTo(tmp,this, objectOnPosition);
                 CollisionHandler.collision(this, objectOnPosition);
                 return true;
             }
@@ -253,7 +251,7 @@ public class Enemy extends GameObject {
     public void movement(Location s){ //public? ist die funktion die aufgerufen werden soll um den gegner zu bewegen
         player = s;
         if (seePlayer()) {
-            countdown = maxFollwo;
+            countdown = maxFollow;
             last_seen = player;
         }
         if (countdown > 0) {

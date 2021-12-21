@@ -39,6 +39,5 @@ public class Multiplier extends Item {
     public void collect() {
         PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
         ItemHandler.activateMultiplier();
-        LevelHandler.removeObjectAt(currentLocation);
     }
 }

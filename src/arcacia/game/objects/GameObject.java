@@ -31,5 +31,9 @@ public abstract class GameObject {
 
     public abstract BufferedImage getImage();
 
+    public boolean isSolid() {
+        return false;
+    }
+
     //endregion
 }

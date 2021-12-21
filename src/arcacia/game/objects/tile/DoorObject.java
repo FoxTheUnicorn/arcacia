@@ -34,4 +34,9 @@ public class DoorObject extends GameObject {
     public DoorObject(int x, int y) {
         super(new Location(x, y));
     }
+
+    @Override
+    public boolean isSolid() {
+        return true;
+    }
 }

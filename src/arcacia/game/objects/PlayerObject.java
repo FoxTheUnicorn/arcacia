@@ -35,37 +35,34 @@ public class PlayerObject extends GameObject {
         System.out.println(input);
         switch (input) {
             case InputHandler.DIR_UP -> {
-                if (LevelHandler.isWall(xPos, yPos - 1)) {
+                if (LevelHandler.isWall(xPos, yPos - 1, this)) {
                     return false;
                 }
                 newLocation.setX(xPos);
                 newLocation.setY((yPos - 1));
             }
             case InputHandler.DIR_DOWN -> {
-                if (LevelHandler.isWall(xPos, yPos + 1)) {
-                    System.out.println(xPos + " " + yPos + 1);
+                if (LevelHandler.isWall(xPos, yPos + 1, this)) {
                     return false;
                 }
                 newLocation.setX(xPos);
                 newLocation.setY((yPos + 1));
             }
             case InputHandler.DIR_LEFT -> {
-                if (LevelHandler.isWall(xPos - 1, yPos)) {
+                if (LevelHandler.isWall(xPos - 1, yPos, this)) {
                     return false;
                 }
                 newLocation.setX(xPos - 1);
                 newLocation.setY((yPos));
             }
             case InputHandler.DIR_RIGHT -> {
-                if (LevelHandler.isWall(xPos + 1, yPos)) {
+                if (LevelHandler.isWall(xPos + 1, yPos, this)) {
                     return false;
                 }
                 newLocation.setX(xPos + 1);
                 newLocation.setY((yPos));
             }
         }
-        System.out.println("curr loc: " + getLocation());
-        System.out.println("next loc: " + newLocation);
         GameObject tmp = LevelHandler.moveObjectTo(newLocation, this);
 
         CollisionHandler.collision(this, tmp);

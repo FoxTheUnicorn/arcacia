@@ -47,4 +47,18 @@ public class Location {
         this.y = y;
     }
     //endregion
+
+    public Location add(int x , int y) {
+        return new Location(this.x + x, this.y + y);
+    }
+
+    public Location subtract(int x, int y) {
+        return new Location(this.x - x, this.y - y);
+    }
+
+    public double length() {
+        double lenX = (double) x;
+        double lenY = (double) y;
+        return Math.sqrt((lenX * lenX) + (lenY * lenY));
+    }
 }

@@ -11,12 +11,12 @@ public class ConstantHandler {
     //endregion
 
     //region Items
-    public static final int itemPowerPillDuration = 10;
-    public static final int itemMultiplierDuration = 10;
+    public static final int itemPowerPillDuration = 20;
+    public static final int itemMultiplierDuration = 30;
     public static final int itemMultiplierBuff = 2;
-    public static final int itemSpeedBootsDuration = 10;
+    public static final int itemSpeedBootsDuration = 20;
     public static final int itemSpeedBootsBuff = 2;
-    public static final int itemStopwatchDuration = 5;
+    public static final int itemStopwatchDuration = 20;
     //endregion
 
     //region Game

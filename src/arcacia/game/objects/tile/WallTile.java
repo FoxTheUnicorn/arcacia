@@ -27,4 +27,9 @@ public class WallTile extends GameObject {
     public WallTile(int x, int y) {
         super(new Location(x, y));
     }
+
+    @Override
+    public boolean isSolid() {
+        return true;
+    }
 }

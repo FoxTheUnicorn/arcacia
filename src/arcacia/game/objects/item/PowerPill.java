@@ -39,7 +39,6 @@ public class PowerPill extends Item{
     public void collect(){
         PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
         ItemHandler.activatePowerPill();
-        LevelHandler.removeObjectAt(currentLocation);
     }
 }
 
