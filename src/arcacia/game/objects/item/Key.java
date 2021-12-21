@@ -10,12 +10,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Dies ist der Schlüssel, der wenn er aufgesammelt wurde benötigt wird um ins nächste Level zu kommen.
+ */
 public class Key extends Item{
     public static final String path = ConstantHandler.pathImages + "key.png";
     public Key(Location currentLocation) {
         super(currentLocation);
     }
 
+    /**
+     * Eine Methode um das Bild zur Klasse zu bekommen.
+     * @return Das Bild aus dem Filepath.
+     */
     public BufferedImage getImage() {
         try {
             return ImageIO.read(new File(path));
@@ -25,6 +32,9 @@ public class Key extends Item{
         return null;
     }
 
+    /**
+     * Diese Methode implementiert, was passiert, wenn die Münze eingesammelt wird und entfernt das Item danach.
+     */
     public void collect() {
         PlayerHandler.addToScore(ConstantHandler.scoreKeyPickup);
         PlayerHandler.setHasKey(true);
