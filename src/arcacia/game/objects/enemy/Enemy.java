@@ -4,6 +4,7 @@ import arcacia.game.handler.CollisionHandler;
 import arcacia.game.handler.ConstantHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.objects.GameObject;
+import arcacia.game.objects.tile.DoorObject;
 import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.util.Location;
 
@@ -90,7 +91,7 @@ public class Enemy extends GameObject {
     public boolean moveX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung
         //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück
         if (x == 1 || x == -1){
-            if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY()))){
+            if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY())) || (LevelHandler.getObjectAt(new Location(this.currentLocation.getX() + x,this.currentLocation.getY())) instanceof DoorObject)){
                 return false;
             }else {
                 LevelHandler.setObjectAt(currentLocation, objectOnPosition);
@@ -114,7 +115,7 @@ public class Enemy extends GameObject {
         //alternative schreibweise, falls eingabe parameter eingeschränkt (nur 1 und -1) muss
 
         if (y == 1 || y == -1){
-            if (LevelHandler.isWall(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y))){
+            if (LevelHandler.isWall(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y)) || (LevelHandler.getObjectAt(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y)) instanceof DoorObject)){
                 return false;
             }else {
                 LevelHandler.setObjectAt(currentLocation,objectOnPosition);

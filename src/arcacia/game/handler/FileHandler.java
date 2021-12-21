@@ -51,7 +51,7 @@ public class FileHandler {
      * @throws FileNotFoundException schmeißt eine FileNotFound Exception, wenn zu öffnende Datei nicht geöffnet werden konnte
      */
     public static void saveGame() throws FileNotFoundException {
-        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath));
+        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath+"savegame.txt"));
         StringBuilder line = new StringBuilder();
         //schreibt den Aktuellen zustand des Spielfelds in die Datei
         for (int y = 0; y < HeightGrid; y++) {
@@ -110,6 +110,8 @@ public class FileHandler {
         }
         //schreibt die Restlichen zu merkenden Variablen in die Datei in einer Bestimten Reihenfolge
 
+        //LevelNumber
+        pWriter.println(LevelHandler.getLevel_number());
         //PlayerHandler
         pWriter.println(PlayerHandler.hasKey());
         pWriter.println(PlayerHandler.getLives());
@@ -212,7 +214,7 @@ public class FileHandler {
      */
     public static void loadGame() throws FileNotFoundException {
        // GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
-        BufferedReader bReader = new BufferedReader(new FileReader(filePath));
+        BufferedReader bReader = new BufferedReader(new FileReader(filePath+"savegame.txt"));
         levelBuilder(bReader);
 
 
@@ -263,6 +265,9 @@ public class FileHandler {
         String line = "";
         //werte rest der enthaltenen Daten aus
         try {
+            //LevelNumber
+            line = bReader.readLine();
+            LevelHandler.setLevel_number(Integer.parseInt(line));
             //PlayerHandler
             //hasKey
             line = bReader.readLine();
@@ -331,6 +336,7 @@ public class FileHandler {
         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new PowerPill(new Location(n,5))));n++;
         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Multiplier(new Location(n,5))));
 
+        LevelHandler.setLevel_number(3);
 
         PlayerHandler.setHasKey(true);
         PlayerHandler.setLives(5);
@@ -364,6 +370,8 @@ public class FileHandler {
             System.out.println("File nicht gefunden in loadGame");
             e.printStackTrace();
         }
+
+        System.out.println("LevleNumber: "+LevelHandler.getLevel_number()+ " Erwartet: 3");
 
         System.out.println("hasKey: "+ PlayerHandler.hasKey()+  " Erwartet: true");
         System.out.println("lives: "+ PlayerHandler.getLives()+  " Erwartet: 5");
