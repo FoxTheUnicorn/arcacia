@@ -16,7 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Enemy extends GameObject {
 
-    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
+    public static final String path = ConstantHandler.pathImages + "scorpion.png";
 
     Location start;
     
