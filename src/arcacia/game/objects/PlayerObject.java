@@ -12,7 +12,7 @@ import java.util.logging.Level;
 
 
 public class PlayerObject extends GameObject {
-    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
+    public static final String path = ConstantHandler.pathImages + "James.png";
     private final Location startPlayer;
 
     public PlayerObject(Location currentLocation) {

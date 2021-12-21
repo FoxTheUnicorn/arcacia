@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class DoorObject extends GameObject {
-    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
+    public static final String path = ConstantHandler.pathImages + "DoorTile.png";
     public DoorObject(Location currentLocation) {
         super(currentLocation);
     }

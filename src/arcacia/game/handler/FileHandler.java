@@ -18,7 +18,7 @@ public class FileHandler {
     public static final char door = 'D';
     public static final char player = 'P';
     public static final char key = 'K';
-    public static final char enemy = 'X';//speziell Gegner der auf EmptyTile steht
+    public static final char enemy = 'E';//speziell Gegner der auf EmptyTile steht
     public static final char coin = '.';
     public static final char empty = 'L';
     //Items
@@ -39,11 +39,9 @@ public class FileHandler {
 
     private static final String filePath = "./Level-editor/Level/";
 
-    public static final int WithGrid = 24;
-    public static final int HeightGrid = 15;
 
     /**
-     * Nimmt für die Spielfeldgröße die werte in WithGrid und HeightGrid in dieser Klasse
+     * Nimmt für die Spielfeldgröße die werte in LevelHandler.level_width und LevelHandler.level_height in dieser Klasse
      * öffnet die unter filePath liegende Datei,
      * schreibt den Aktuellen zustand des Level Grids in dei Datei
      * und schreibt darunter die Daten aus den Variablen des PlayerHandlers, ItemHandlers und GameHandlers.
@@ -54,8 +52,8 @@ public class FileHandler {
         PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath+"savegame.txt"));
         StringBuilder line = new StringBuilder();
         //schreibt den Aktuellen zustand des Spielfelds in die Datei
-        for (int y = 0; y < HeightGrid; y++) {
-            for (int x = 0; x < WithGrid; x++) {
+        for (int y = 0; y < LevelHandler.level_height; y++) {
+            for (int x = 0; x < LevelHandler.level_width; x++) {
                 GameObject temp = LevelHandler.getObjectAt(new Location(x, y));
                 if (temp instanceof WallTile) {
                     line.append(wall);
@@ -135,11 +133,11 @@ public class FileHandler {
      *
      */
     public static void levelBuilder(BufferedReader bReader){
-        GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
+        GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
 
         String line = "";
 
-        for (int y = 0; y < HeightGrid; y++) {
+        for (int y = 0; y < LevelHandler.level_height; y++) {
 
             try {
                 line = bReader.readLine();
@@ -149,7 +147,10 @@ public class FileHandler {
             }
 
             char now;
-            for (int x = 0; x < WithGrid; x++) {
+            for (int x = 0; x < LevelHandler.level_width; x++) {
+                if(x == 1 && y == 1) {
+                    int tmp = 0;
+                }
 
                 now = line.charAt(x);
                 Location loc = new Location(x, y);
@@ -205,7 +206,7 @@ public class FileHandler {
     }
 
     /**
-     * Nimmt für die Spielfeldgröße die werte in WithGrid und HeightGrid in dieser Klasse
+     * Nimmt für die Spielfeldgröße die werte in LevelHandler.level_width und LevelHandler.level_height in dieser Klasse
      * öffnet Datei die unter filePath liegt,
      * liest das dort liegende Spielfeld aus und legt es in den Grid vom LevelHandler
      * zusätzlich werden die Darunter stehenden Daten in die Variablen des PlayerHandlers, ItemHandlers und GameHandlers gesetzt.
@@ -213,14 +214,14 @@ public class FileHandler {
      * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte
      */
     public static void loadGame() throws FileNotFoundException {
-       // GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
+       // GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
         BufferedReader bReader = new BufferedReader(new FileReader(filePath+"savegame.txt"));
         levelBuilder(bReader);
 
 
 //        String line = "";
 //
-//        for (int y = 0; y < HeightGrid; y++) {
+//        for (int y = 0; y < LevelHandler.level_height; y++) {
 //
 //            try {
 //                line = bReader.readLine();
@@ -230,7 +231,7 @@ public class FileHandler {
 //            }
 //
 //            char now;
-//            for (int x = 0; x < WithGrid; x++) {
+//            for (int x = 0; x < LevelHandler.level_width; x++) {
 //
 //                now = line.charAt(x);
 //                Location loc = new Location(x, y);
@@ -385,7 +386,7 @@ public class FileHandler {
         System.out.println("PlayerTurn: "+ GameHandler.getPlayerTurn() +  " Erwartet: 4");
 
         //gibt Reihe mit y=5 aus inder sollten alle Objekte einmal liegen
-        for (int x = 0; x < WithGrid;x++){
+        for (int x = 0; x < LevelHandler.level_width;x++){
             GameObject temp = LevelHandler.getObjectAt(new Location(x, 5));
             if (temp instanceof WallTile) {
                 System.out.print(wall);

@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class WallTile extends GameObject {
-    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
+    public static final String path = ConstantHandler.pathImages + "WalLTile.png";
     public WallTile(Location currentLocation) {
         super(currentLocation);
     }

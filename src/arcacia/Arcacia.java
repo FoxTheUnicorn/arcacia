@@ -14,6 +14,6 @@ public class Arcacia {
       //  LevelHandler.debugInitGrid(ExtraLife.class);
         SceneHandler.initialise();
         SceneHandler.showMainMenu();
-        FileHandler.loadLevelX(4);
+        FileHandler.loadLevelX(1);
     }
 }

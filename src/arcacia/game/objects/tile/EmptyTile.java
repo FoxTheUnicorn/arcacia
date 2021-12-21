@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class EmptyTile extends GameObject {
-    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
+    public static final String path = ConstantHandler.pathImages + "EmptyTile.png";
     public EmptyTile(Location currentLocation) {
         super(currentLocation);
     }

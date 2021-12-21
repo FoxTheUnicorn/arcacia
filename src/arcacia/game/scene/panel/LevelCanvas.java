@@ -6,6 +6,7 @@ import arcacia.game.util.Location;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 public class LevelCanvas extends Canvas{
 
@@ -22,7 +23,10 @@ public class LevelCanvas extends Canvas{
             for(int x = 0; x < LevelHandler.level_width; x++) {
                 for(int y = 0; y < LevelHandler.level_height; y++) {
                     GameObject obj = LevelHandler.getObjectAt(new Location(x,y));
-                    draw(obj.getImage(),x*32, y*32);
+                    if(obj == null) continue;
+                    BufferedImage img = obj.getImage();
+                    if(img == null) continue;
+                    draw(img,x*32, y*32);
                 }
             }
         }
