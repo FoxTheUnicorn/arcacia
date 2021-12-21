@@ -37,7 +37,8 @@ public class FileHandler {
     public static final char Epower = '6';
     public static final char Emultiplikator = '7';
 
-    private static final String filePath = "./Level-editor/Level/";
+    private static final String filePathLevel = "./Level-editor/Level/";
+    private static final String filePathSaveGame = "./Level-editor/SaveGames/";
 
 
     /**
@@ -49,7 +50,7 @@ public class FileHandler {
      * @throws FileNotFoundException schmeißt eine FileNotFound Exception, wenn zu öffnende Datei nicht geöffnet werden konnte
      */
     public static void saveGame() throws FileNotFoundException {
-        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath+"savegame.txt"));
+        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePathSaveGame +"savegame.txt"));
         StringBuilder line = new StringBuilder();
         //schreibt den Aktuellen zustand des Spielfelds in die Datei
         for (int y = 0; y < LevelHandler.level_height; y++) {
@@ -191,7 +192,7 @@ public class FileHandler {
     public static boolean loadLevelX(int i)  {
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath+"Level_"+i+".txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathLevel +"Level_"+i+".txt"));
             levelBuilder(bufferedReader);
             bufferedReader.close();
             return true;
@@ -214,14 +215,14 @@ public class FileHandler {
      * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte
      */
     public static void loadGame() throws FileNotFoundException {
-       // GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
-        BufferedReader bReader = new BufferedReader(new FileReader(filePath+"savegame.txt"));
+        //GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
+        BufferedReader bReader = new BufferedReader(new FileReader(filePathSaveGame +"savegame.txt"));
         levelBuilder(bReader);
 
 
 //        String line = "";
 //
-//        for (int y = 0; y < LevelHandler.level_height; y++) {
+//        for (int y = 0; y < HeightGrid; y++) {
 //
 //            try {
 //                line = bReader.readLine();
@@ -231,7 +232,7 @@ public class FileHandler {
 //            }
 //
 //            char now;
-//            for (int x = 0; x < LevelHandler.level_width; x++) {
+//            for (int x = 0; x < WithGrid; x++) {
 //
 //                now = line.charAt(x);
 //                Location loc = new Location(x, y);
@@ -312,7 +313,7 @@ public class FileHandler {
      * führt dan die saveGame() methode aus
      */
     public static void debugTestSaveGame(){
-        //LevelHandler.debugInitGrid();
+        LevelHandler.debugInitGrid(WallTile.class);
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
         //Geometry
