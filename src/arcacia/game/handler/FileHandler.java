@@ -37,7 +37,7 @@ public class FileHandler {
     public static final char Epower = '6';
     public static final char Emultiplikator = '7';
 
-    private static final String filePath = "./spielstand/spielstand1.txt";
+    private static final String filePath = "Level-editor/Level";
 
     public static final int WithGrid = 24;
     public static final int HeightGrid = 15;
@@ -125,17 +125,16 @@ public class FileHandler {
         pWriter.close();
     }
 
+
     /**
-     * Nimmt für die Spielfeldgröße die werte in WithGrid und HeightGrid in dieser Klasse
-     * öffnet Datei die unter filePath liegt,
-     * liest das dort liegende Spielfeld aus und legt es in den Grid vom LevelHandler
-     * zusätzlich werden die Darunter stehenden Daten in die Variablen des PlayerHandlers, ItemHandlers und GameHandlers gesetzt.
+     * LevelBuilder
+     * lies level aus datei aus
+     * Baue Level Grid basierend auf datei
      *
-     * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte
      */
-    public static void loadGame() throws FileNotFoundException {
+    public static void levelBuilder(BufferedReader bReader){
         GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
-        BufferedReader bReader = new BufferedReader(new FileReader(filePath));
+
         String line = "";
 
         for (int y = 0; y < HeightGrid; y++) {
@@ -180,6 +179,76 @@ public class FileHandler {
         }
         LevelHandler.setLevelGrid(new_grid);
 
+    }
+
+    /**
+     * loadLevelX
+     * läd ein spezifisches level welches Dann gebaut werden soll
+     */
+    public static boolean loadLevelX(int i){
+
+        return false;
+    }
+
+    /**
+     * Nimmt für die Spielfeldgröße die werte in WithGrid und HeightGrid in dieser Klasse
+     * öffnet Datei die unter filePath liegt,
+     * liest das dort liegende Spielfeld aus und legt es in den Grid vom LevelHandler
+     * zusätzlich werden die Darunter stehenden Daten in die Variablen des PlayerHandlers, ItemHandlers und GameHandlers gesetzt.
+     *
+     * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte
+     */
+    public static void loadGame() throws FileNotFoundException {
+       // GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];
+        BufferedReader bReader = new BufferedReader(new FileReader(filePath));
+        levelBuilder(bReader);
+
+
+//        String line = "";
+//
+//        for (int y = 0; y < HeightGrid; y++) {
+//
+//            try {
+//                line = bReader.readLine();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                break;
+//            }
+//
+//            char now;
+//            for (int x = 0; x < WithGrid; x++) {
+//
+//                now = line.charAt(x);
+//                Location loc = new Location(x, y);
+//
+//                //vergleich welches objekt von dem Character dargestellt wird (19 mal)
+//                switch (now) {
+//                    case (wall) -> new_grid[x][y] = new WallTile(loc);
+//                    case (empty) -> new_grid[x][y] = new EmptyTile(loc);
+//                    case (player) -> new_grid[x][y] = new PlayerObject(loc);
+//                    case (key) -> new_grid[x][y] = new Key(loc);
+//                    case (coin) -> new_grid[x][y] = new CoinItem(loc);
+//                    case (door) -> new_grid[x][y] = new DoorObject(loc);
+//                    case (speed) -> new_grid[x][y] = new SpeedBoots(loc);
+//                    case (healtUp) -> new_grid[x][y] = new ExtraLife(loc);
+//                    case (stopwatch) -> new_grid[x][y] = new Stopwatch(loc);
+//                    case (power) -> new_grid[x][y] = new PowerPill(loc);
+//                    case (multiplikator) -> new_grid[x][y] = new Multiplier(loc);
+//                    case (enemy) -> new_grid[x][y] = new Enemy(loc);
+//
+//                    case (Ecoin) -> new_grid[x][y] = new Enemy(loc, new CoinItem(loc));
+//                    case (Ekey) -> new_grid[x][y] = new Enemy(loc, new Key(loc));
+//                    case (Emultiplikator) -> new_grid[x][y] = new Enemy(loc, new Multiplier(loc));
+//                    case (Epower) -> new_grid[x][y] = new Enemy(loc, new PowerPill(loc));
+//                    case (Espeed) -> new_grid[x][y] = new Enemy(loc, new SpeedBoots(loc));
+//                    case (EhealtUp) -> new_grid[x][y] = new Enemy(loc, new ExtraLife(loc));
+//                    case (Estopwatch) -> new_grid[x][y] = new Enemy(loc, new Stopwatch(loc));
+//                }
+//            }
+//        }
+//        LevelHandler.setLevelGrid(new_grid);
+
+        String line = "";
         //werte rest der enthaltenen Daten aus
         try {
             //PlayerHandler
