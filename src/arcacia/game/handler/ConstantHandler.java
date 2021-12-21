@@ -16,7 +16,7 @@ public class ConstantHandler {
     public static final int itemMultiplierBuff = 2;
     public static final int itemSpeedBootsDuration = 10;
     public static final int itemSpeedBootsBuff = 2;
-    public static final int itemStopwatchDuration = 1;
+    public static final int itemStopwatchDuration = 5;
     //endregion
 
     //region Game

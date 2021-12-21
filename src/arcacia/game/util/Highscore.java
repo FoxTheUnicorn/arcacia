@@ -40,14 +40,12 @@ public class Highscore implements Serializable {
     /**
      * fügt score zur scoreListe:List hinzu, wenn sie höher als die niedrigste Score ist
      * @param score übergibt Score Object (neue erreichte Score von Spieler) die in scoreList hinzugefügt wird
-     * @return true wenn score Highscore ist
      */
-    public boolean addScore(Score score) {
+    public void addScore(Score score) {
         if (scoreList.size() < numberOfEntries) {
             scoreList.add(score);
             sort();
             save();
-            return true;
         }
 
         Score lowestScore = scoreList.get(0);
@@ -56,9 +54,7 @@ public class Highscore implements Serializable {
             scoreList.add(score);
             sort();
             save();
-            return true;
         }
-        return false;
     }
     /**
      * Objekt ins directory schreiben bzw. speichern
@@ -66,11 +62,10 @@ public class Highscore implements Serializable {
     public void save() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dirName))) {
             oos.writeObject(this);
-            //     System.out.println("write : " + this);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Serialized data is saved in " + dirName);
     }
     /**
      * Objekt aus directory lesen bzw. laden
@@ -78,17 +73,16 @@ public class Highscore implements Serializable {
     public void load(){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dirName))){
             Highscore loadedGame = (Highscore) ois.readObject();
-            System.out.println("\nRead : \n" + loadedGame);
-            ois.close();
             this.scoreList = loadedGame.scoreList;
+            ois.close();
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
-        System.out.println("DeSerialized data from " + dirName);
     }
     /**
      * Methode der Klasse Highscore, der die Klassenattributen description:String
-     * und scoreList:List (und auch deren Inhalt) nach String umwandeln
+     * und scoreList:List (und auch deren Inhalt) nach String umwandeln.
+     * die Ausgabe wird aus ästhetischen Gründen in reverse ausgegeben.
      * diese Methode überschrieb den Methode toString() von Klasse Objekt
      * @return output , die StringBuilder als String
      */

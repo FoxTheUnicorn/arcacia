@@ -5,16 +5,29 @@ import arcacia.game.handler.LevelHandler;
 import arcacia.game.handler.PlayerHandler;
 import arcacia.game.util.Location;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class ExtraLife extends Item{
     public static final String path = ConstantHandler.pathImages + "HPup.png";
     public ExtraLife(Location currentLocation) {
         super(currentLocation);
     }
 
+    public BufferedImage getImage() {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void collect() {
-        //setVisible(false);
         PlayerHandler.addToScore(ConstantHandler.scoreItemPickup);
-        PlayerHandler.setLives(PlayerHandler.getLives()+1);
+        PlayerHandler.incrementLives();
         LevelHandler.removeObjectAt(currentLocation);
     }
 }

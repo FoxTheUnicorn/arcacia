@@ -13,6 +13,7 @@ public class SceneHandler {
     private static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
     private static final GameOverPanel gameOverPanel = new GameOverPanel();
     private static final HighscorePanel highScorePanel = new HighscorePanel();
+    private static final LevelPanel levelPanel = new LevelPanel();
 
 
 
@@ -48,7 +49,12 @@ public class SceneHandler {
     }
 
     public static void showLevel() {
+        frame.setContentPane(levelPanel);
+        frame.update();
+    }
 
+    public static void drawGrid() {
+        levelPanel.drawGrid();
     }
 
     public static void showTutorial() {

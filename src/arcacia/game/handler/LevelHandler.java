@@ -5,9 +5,12 @@ import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 public class LevelHandler {
-    private final static int level_width = 24; //X //KAFANIZA GÖRE MI YAZDINIZ
-    private final static int level_height = 15; //Y //KAFANIZA GÖRE MI YAZDINIZ
+    public final static int level_width = 24; //X //KAFANIZA GÖRE MI YAZDINIZ
+    public final static int level_height = 15; //Y //KAFANIZA GÖRE MI YAZDINIZ
     private static GameObject[][] grid = new GameObject[level_width][level_height];
 
     public static GameObject getObjectAt(Location loc) {
@@ -31,10 +34,23 @@ public class LevelHandler {
         return out;
     }
 
-    public static void debugInitGrid() {
+    public static void debugInitGrid(Class<? extends GameObject> clazz) {
+        Constructor<? extends GameObject> constr = null;
+        try {
+             constr = clazz.getConstructor(Location.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        if(constr == null) return;
+
         for(int x = 0; x < level_width; x++) {
             for(int y = 0; y < level_height; y++) {
-                grid[x][y] = new WallTile(x, y);
+                try {
+                    grid[x][y] = constr.newInstance(new Location(x,y));
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

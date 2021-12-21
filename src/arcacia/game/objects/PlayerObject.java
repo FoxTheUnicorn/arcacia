@@ -1,37 +1,23 @@
 package arcacia.game.objects;
 
-import arcacia.game.handler.CollisionHandler;
-import arcacia.game.handler.InputHandler;
-import arcacia.game.handler.LevelHandler;
-import arcacia.game.handler.PlayerHandler;
+import arcacia.game.handler.*;
 import arcacia.game.util.Location;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 
 
 public class PlayerObject extends GameObject {
-
-    //protected static int speed = 4;
+    public static final String path = ConstantHandler.pathImages + ""; //TODO Graphics
     private final Location startPlayer;
-
-
-//    public void setLocation(int x,int y){
-//        startPlayer.setY(y);
-//        startPlayer.setX(x);
-//    }
-//
-//    public Location getLocation(){
-//        return startPlayer;
-//    }
-
 
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
         startPlayer = new Location(currentLocation.getX(), currentLocation.getY());
-
-
-        // update();
     }
 
     /**
@@ -84,13 +70,12 @@ public class PlayerObject extends GameObject {
 
     }
 
-
-    public void draw(Graphics2D g2) {
-        int tileX = 24;
-        int tileY = 24;
-        g2.setColor(Color.white);
-        g2.fillRect(getLocation().getX(), getLocation().getY(), tileX, tileY);
+    public BufferedImage getImage() {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-
-
 }

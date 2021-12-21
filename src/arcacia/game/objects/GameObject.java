@@ -1,10 +1,14 @@
 package arcacia.game.objects;
 
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import arcacia.game.handler.InputHandler;
 import arcacia.game.util.Location;
+
+import javax.imageio.ImageIO;
 
 public abstract class GameObject {
     protected Location currentLocation;
@@ -15,8 +19,6 @@ public abstract class GameObject {
 
     protected GameObject() {
     }
-
-
     //region Getter and Setter
 
     public Location getLocation() {
@@ -26,6 +28,8 @@ public abstract class GameObject {
     public void setLocation(Location location) {
         this.currentLocation = location;
     }
+
+    public abstract BufferedImage getImage();
 
     //endregion
 }
