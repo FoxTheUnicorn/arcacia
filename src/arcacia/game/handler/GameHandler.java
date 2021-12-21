@@ -1,5 +1,8 @@
 package arcacia.game.handler;
 
+import arcacia.game.objects.enemy.Enemy;
+import arcacia.game.scene.SceneHandler;
+
 public class GameHandler {
 
     private static boolean running = false;
@@ -8,25 +11,35 @@ public class GameHandler {
     private static int enemyTimeout = 0;
     private static int enemyTurn = 1;
 
-    public void loop() throws InterruptedException {
+    public void loop(Enemy[] enemies) throws InterruptedException {
+        this.running = true;
         Thread.sleep(1000);
 
         for (int i = 0; i < playerTurn; i++) {
             if(playerTimeout > 0) {
                 playerTimeout--;
             } else {
-                //Player Moves
+                int temp = -1;
+                while(temp == -1) {
+                    temp = InputHandler.getPressedButton();
+                    PlayerHandler.getPlayer().playerMove(temp);
+                }
+                SceneHandler.drawGrid();
             }
         }
 
-        Thread.sleep(100);
         for (int i = 0; i < enemyTurn; i++) {
             if(enemyTimeout > 0) {
                 enemyTimeout--;
             } else {
-                //Enemy Moves
+                Thread.sleep(100);
+                for (Enemy e: enemies) {
+                    e.movement(PlayerHandler.getPlayer().getLocation());
+                    SceneHandler.drawGrid();
+                }
             }
         }
+
         ItemHandler.tick();
     }
 

@@ -26,7 +26,7 @@ public class TutorialPanel extends JPanel {
         JLabel game = new JLabel("Spielbeschreibung");
         JTextArea gameDescription = new JTextArea("""
                 Allgemein geht es in dem Spiel darum in einem Labyrinth mit Gegnern zu überleben und alle drei Level zu schaffen.
-                Der Spieler muss einen Schlüssel einsammeln und damit zum Ausgang gehen um von ins nächste Level zu kommen.
+                Der Spieler muss einen Schlüssel einsammeln und damit zum Ausgang gehen um ins nächste Level zu kommen.
                 Die Level werden dabei immer schwieriger, aber der Spieler kann Items einsammeln, die ihm helfen.
                 Wenn der Spieler alle Leben verliert oder in dem dritten Level durch den Ausgang geht ist das Spiel vorbei.
                 Wenn der Spieler alle Level beendet hat kann er seine Punktanzahl in eine Highscore Liste eintragen.""");

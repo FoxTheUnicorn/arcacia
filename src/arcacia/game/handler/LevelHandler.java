@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 public class LevelHandler {
     public final static int level_width = 24; //X //KAFANIZA GÖRE MI YAZDINIZ
     public final static int level_height = 15; //Y //KAFANIZA GÖRE MI YAZDINIZ
+    public static int level_number = 1;
     private static GameObject[][] grid = new GameObject[level_width][level_height];
 
     public static GameObject getObjectAt(Location loc) {
@@ -57,5 +58,13 @@ public class LevelHandler {
 
     public static void removeObjectAt(Location loc) {
         grid[loc.getX()][loc.getY()] = new EmptyTile(loc);
+    }
+
+    public static int getLevel_number() {
+        return level_number;
+    }
+
+    public static void setLevel_number(int level_number) {
+        LevelHandler.level_number = level_number;
     }
 }
