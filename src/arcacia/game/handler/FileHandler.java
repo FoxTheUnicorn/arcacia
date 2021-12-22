@@ -195,7 +195,7 @@ public class FileHandler {
      * loadLevelX
      * läd ein spezifisches level welches Dann gebaut werden soll
      */
-    public static boolean loadLevelX(int i) throws FileNotFoundException {
+    public static boolean loadLevelX(int i) {
         //Scanner scan = new Scanner(new FileReader(filePathLevel +"Level_"+i+".txt"));
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathLevel +"Level_"+i+".txt"));

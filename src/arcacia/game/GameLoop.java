@@ -24,8 +24,8 @@ public class GameLoop implements Runnable {
                 }
                 if(GameHandler.isLevelComplete()) return;
                 SceneHandler.drawGrid();
+                Thread.sleep(100);
             }
-            Thread.sleep(100);
         }
 
         for (int i = 0; i < GameHandler.getEnemyTurn(); i++) {
