@@ -1,0 +1,446 @@
+Index: src/arcacia/game/scene/panel/TutorialPanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.scene.panel;\r\n\r\nimport arcacia.game.objects.item.*;\r\nimport arcacia.game.scene.other.HomeButton;\r\nimport arcacia.game.scene.other.IconLabel;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class TutorialPanel extends JPanel {\r\n    public TutorialPanel()\r\n    {\r\n        setLayout(null);\r\n        initControls();\r\n        initItemGuide();\r\n        initGameDescription();\r\n        setPreferredSize(new Dimension(1000,500));\r\n\r\n        HomeButton homeButton = new HomeButton();\r\n        homeButton.setLocation(0,0);\r\n        add(homeButton);\r\n    }\r\n\r\n    private void initGameDescription() {\r\n        JLabel game = new JLabel(\"Spielbeschreibung\");\r\n        JTextArea gameDescription = new JTextArea(\"\"\"\r\n                Allgemein geht es in dem Spiel darum in einem Labyrinth mit Gegnern zu überleben und alle drei Level zu schaffen.\r\n                Der Spieler muss einen Schlüssel einsammeln und damit zum Ausgang gehen um von ins nächste Level zu kommen.\r\n                Die Level werden dabei immer schwieriger, aber der Spieler kann Items einsammeln, die ihm helfen.\r\n                Wenn der Spieler alle Leben verliert oder in dem dritten Level durch den Ausgang geht ist das Spiel vorbei.\r\n                Wenn der Spieler alle Level beendet hat kann er seine Punktanzahl in eine Highscore Liste eintragen.\"\"\");\r\n\r\n        game.setBounds(400,380,200,30);\r\n        gameDescription.setBounds(100,410,750,90);\r\n        add(game);\r\n        add(gameDescription);\r\n    }\r\n\r\n    private void initControls() {\r\n        JLabel inputLabel = new JLabel(\"Tastenbelegung:\");\r\n        inputLabel.setBounds(400,0,200,30);\r\n\r\n        //region Control List\r\n        DefaultListModel<String> l1 = new DefaultListModel<>();\r\n        l1.addElement(\"W/Pfeil oben:     Spieler bewegt sich nach oben\");\r\n        l1.addElement(\"A/Pfeil links:    Spieler bewegt sich nach links\");\r\n        l1.addElement(\"S/Pfeil unten:    Spieler bewegt sich nach unten\");\r\n        l1.addElement(\"D/Pfeil rechts:   Spieler bewegt sich nach rechts\");\r\n        JList<String> list = new JList<>(l1);\r\n        list.setBounds(300,30,300,80);\r\n        //endregion\r\n\r\n        add(inputLabel);\r\n        add(list);\r\n    }\r\n\r\n    private void initItemGuide() {\r\n        ArrayList<IconLabel> itemList = new ArrayList<>();\r\n\r\n        //region Definition of Labels\r\n        JLabel itemLabel = new JLabel(\"Items:\"); itemLabel.setBounds(400,120,200,30);\r\n\r\n        itemList.add(new IconLabel(\"Beim aufsammeln erhöht dies die Punkte des Spielers um 1.\", CoinItem.path));\r\n        itemList.add(new IconLabel(\"Wenn der Spieler diesen Schlüssel aufsammelt, kann er zum Ausgang gehen um ins nächste Level zu kommen.\", Key.path));\r\n        itemList.add(new IconLabel(\"Der Spieler kann zwei Züge machen bevor die Gegner wieder ziehen können.\", SpeedBoots.path));\r\n        itemList.add(new IconLabel(\"Die Gegner bleiben für 10 Runden stehen.\", Stopwatch.path));\r\n        itemList.add(new IconLabel(\"Wenn der Spieler dieses Item aufgesammelt hat, kann er für 10 Runden lang die Gegner berühren und sie somit zurück zu ihrem Startpunkt befördern.\", PowerPill.path));\r\n        itemList.add(new IconLabel(\"Wenn der Spieler nach dem Aufsammeln dieses Items Punkte bekommt, werden diese verdoppelt.\", Multiplier.path));\r\n        itemList.add(new IconLabel(\"Der Spieler bekommt ein extra Leben.\",ExtraLife.path));\r\n        //endregion\r\n\r\n        int i = 150;\r\n        for(JLabel jlabel : itemList)\r\n        {\r\n            jlabel.setBounds(80, i, 1000, 30);\r\n            i = i+32;\r\n            this.add(jlabel);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/scene/panel/TutorialPanel.java b/src/arcacia/game/scene/panel/TutorialPanel.java
+--- a/src/arcacia/game/scene/panel/TutorialPanel.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/scene/panel/TutorialPanel.java	(date 1640011689293)
+@@ -61,7 +61,7 @@
+         //region Definition of Labels
+         JLabel itemLabel = new JLabel("Items:"); itemLabel.setBounds(400,120,200,30);
+ 
+-        itemList.add(new IconLabel("Beim aufsammeln erhöht dies die Punkte des Spielers um 1.", CoinItem.path));
++        itemList.add(new IconLabel("Beim aufsammeln erhöht dies die Punkte des Spielers um 1.", Coin.path));
+         itemList.add(new IconLabel("Wenn der Spieler diesen Schlüssel aufsammelt, kann er zum Ausgang gehen um ins nächste Level zu kommen.", Key.path));
+         itemList.add(new IconLabel("Der Spieler kann zwei Züge machen bevor die Gegner wieder ziehen können.", SpeedBoots.path));
+         itemList.add(new IconLabel("Die Gegner bleiben für 10 Runden stehen.", Stopwatch.path));
+Index: src/arcacia/game/handler/GameHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\npublic class GameHandler {\r\n\r\n    private static boolean running = false;\r\n    private static int playerTimeout = 0;\r\n    private static int playerTurn = 1;\r\n    private static int enemyTimeout = 0;\r\n    private static int enemyTurn = 1;\r\n\r\n    public void loop() throws InterruptedException {\r\n        Thread.sleep(1000);\r\n\r\n        for (int i = 0; i < playerTurn; i++) {\r\n            if(playerTimeout > 0) {\r\n                playerTimeout--;\r\n            } else {\r\n                //Player Moves\r\n            }\r\n        }\r\n\r\n        Thread.sleep(100);\r\n        for (int i = 0; i < enemyTurn; i++) {\r\n            if(enemyTimeout > 0) {\r\n                enemyTimeout--;\r\n            } else {\r\n                //Enemy Moves\r\n            }\r\n        }\r\n        ItemHandler.tick();\r\n    }\r\n\r\n    //region Getter/Setter\r\n    public static void setEnemyTimeout(int enemyTimeout){\r\n        GameHandler.enemyTimeout = enemyTimeout;\r\n    }\r\n    public static int getEnemyTimeout(){\r\n        return enemyTimeout;\r\n    }\r\n\r\n    public static void setPlayerTimeout(int playerTimeout){\r\n        GameHandler.playerTimeout = playerTimeout;\r\n    }\r\n    public static int getPlayerTimeout(){\r\n        return playerTimeout;\r\n    }\r\n\r\n    public static void setPlayerTurn(int playerTurn){\r\n        GameHandler.playerTurn = playerTurn;\r\n    }\r\n    public static int getPlayerTurn(){\r\n        return playerTurn;\r\n    }\r\n\r\n    public static int getEnemyTurn() {\r\n        return enemyTurn;\r\n    }\r\n    public static void setEnemyTurn(int enemyTurn) {\r\n        GameHandler.enemyTurn = enemyTurn;\r\n    }\r\n\r\n    public static void setRunning(boolean running) {\r\n        GameHandler.running = running;\r\n    }\r\n    public static boolean isRunning() { return running; }\r\n    //endregion\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/GameHandler.java b/src/arcacia/game/handler/GameHandler.java
+--- a/src/arcacia/game/handler/GameHandler.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/handler/GameHandler.java	(date 1640011689258)
+@@ -1,36 +1,20 @@
+ package arcacia.game.handler;
+ 
++import arcacia.game.objects.GameObject;
++import arcacia.game.objects.PlayerObject;
++import arcacia.game.objects.enemy.Enemy;
++import arcacia.game.util.Location;
++
+ public class GameHandler {
+ 
+-    private static boolean running = false;
+-    private static int playerTimeout = 0;
+-    private static int playerTurn = 1;
+-    private static int enemyTimeout = 0;
+-    private static int enemyTurn = 1;
++    public static boolean isRunning;
++    public static int playerTimeout = 0;
++    public static volatile int playerTurn = 1;
++    public static int enemyTimeout = 0;
+ 
+-    public void loop() throws InterruptedException {
+-        Thread.sleep(1000);
+ 
+-        for (int i = 0; i < playerTurn; i++) {
+-            if(playerTimeout > 0) {
+-                playerTimeout--;
+-            } else {
+-                //Player Moves
+-            }
+-        }
++    //Setter/Getter
+ 
+-        Thread.sleep(100);
+-        for (int i = 0; i < enemyTurn; i++) {
+-            if(enemyTimeout > 0) {
+-                enemyTimeout--;
+-            } else {
+-                //Enemy Moves
+-            }
+-        }
+-        ItemHandler.tick();
+-    }
+-
+-    //region Getter/Setter
+     public static void setEnemyTimeout(int enemyTimeout){
+         GameHandler.enemyTimeout = enemyTimeout;
+     }
+@@ -38,32 +22,66 @@
+         return enemyTimeout;
+     }
+ 
+-    public static void setPlayerTimeout(int playerTimeout){
++    public void setPlayerTimeout(int playerTimeout){
+         GameHandler.playerTimeout = playerTimeout;
+     }
++
+     public static int getPlayerTimeout(){
+         return playerTimeout;
+     }
+ 
+     public static void setPlayerTurn(int playerTurn){
+         GameHandler.playerTurn = playerTurn;
++
+     }
++
+     public static int getPlayerTurn(){
+         return playerTurn;
+     }
+ 
+-    public static int getEnemyTurn() {
+-        return enemyTurn;
+-    }
+-    public static void setEnemyTurn(int enemyTurn) {
+-        GameHandler.enemyTurn = enemyTurn;
+-    }
++
++    public void Gameloop() throws InterruptedException {
++
++
++        while (playerTurn != 0 && isRunning) {
++
++
++            playerTurn++;
++            /*
++                Delay, nach Turn eines Spielers
++             */
++            Thread.sleep(2000); //
++
++            if(enemyTimeout == 0){
++
++                /*
++                    Gegnern Begewen sich
++                 */
++                enemyTimeout++;
++
++                //
++            }
++            else{
++
++                /*
++                    Gegner wird pausiert und dekrementiert
++                 */
++                //Gegner hier wird pausiert( später)
++
++                enemyTimeout--;
++                Enemy.setStopwatchOn(true);
++                Thread.sleep(2000);
++
++            }
++            Enemy.setStopwatchOn(false);
++           // isRunning = true;
++            Thread.sleep(2000);
+ 
+-    public static void setRunning(boolean running) {
+-        GameHandler.running = running;
++        }
++
+     }
+-    public static boolean isRunning() { return running; }
+-    //endregion
++
++
+ }
+ 
+ 
+Index: src/arcacia/game/scene/panel/HighscorePanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.scene.panel;\r\n\r\nimport arcacia.game.handler.ConstantHandler;\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.item.CoinItem;\r\nimport arcacia.game.objects.tile.WallTile;\r\nimport arcacia.game.scene.other.HomeButton;\r\nimport arcacia.game.util.Highscore;\r\nimport arcacia.game.util.Location;\r\nimport arcacia.game.util.Score;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n\r\npublic class HighscorePanel extends AbstractMenu {\r\n    public HighscorePanel() {\r\n        HomeButton hb = new HomeButton();\r\n        hb.setAlignmentX(Component.LEFT_ALIGNMENT);\r\n        add(hb);\r\n        initTable();\r\n    }\r\n\r\n\r\n    private void initTable() {\r\n        JLabel highScoreLabel = new JLabel();\r\n        ImageIcon highScoreIcon = new ImageIcon(ConstantHandler.pathImages + \"highscore_small.png\");\r\n        highScoreLabel.setSize(250,100);\r\n        highScoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);\r\n        highScoreLabel.setAlignmentY(Component.TOP_ALIGNMENT);\r\n        highScoreLabel.setIcon(highScoreIcon);\r\n        add(highScoreLabel);\r\n\r\n        //ab hier Lucas\r\n        Highscore highscore = new Highscore(\"highScoreListe\");\r\n        List<Score> highscoreList = highscore.getScoreList();\r\n\r\n        String[][] rec = new String[10][3];\r\n        for (int i = 0; i<highscoreList.size();i++){\r\n            rec[i][0] = String.valueOf(i+1);\r\n            rec[i][1] = highscoreList.get(i).getName();\r\n            rec[i][2] = String.valueOf(highscoreList.get(i).getPoints());\r\n        }\r\n\r\n        //ende Lucas\r\n\r\n        //TODO Change to use Highscore.class\r\n        String[] header = { \"Rank\", \"Player\", \"Score\"};\r\n        JTable table = new JTable(rec, header);\r\n        table.setRowHeight(20);\r\n        table.setPreferredSize(new Dimension(500, 200));\r\n        table.setDefaultEditor(Object.class, null);\r\n        add(table);\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/scene/panel/HighscorePanel.java b/src/arcacia/game/scene/panel/HighscorePanel.java
+--- a/src/arcacia/game/scene/panel/HighscorePanel.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/scene/panel/HighscorePanel.java	(date 1640011689375)
+@@ -1,12 +1,8 @@
+ package arcacia.game.scene.panel;
+ 
+ import arcacia.game.handler.ConstantHandler;
+-import arcacia.game.objects.GameObject;
+-import arcacia.game.objects.item.CoinItem;
+-import arcacia.game.objects.tile.WallTile;
+ import arcacia.game.scene.other.HomeButton;
+ import arcacia.game.util.Highscore;
+-import arcacia.game.util.Location;
+ import arcacia.game.util.Score;
+ 
+ import javax.swing.*;
+Index: src/arcacia/game/handler/CollisionHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.PlayerObject;\r\nimport arcacia.game.objects.enemy.Enemy;\r\nimport arcacia.game.objects.item.CoinItem;\r\nimport arcacia.game.objects.item.Item;\r\nimport arcacia.game.objects.tile.DoorObject;\r\nimport arcacia.game.objects.tile.WallTile;\r\n\r\npublic class CollisionHandler {\r\n\r\n    public static GameObject collision(GameObject initiator, GameObject collider) {\r\n        if (collider == null) return null;\r\n\r\n        if(initiator instanceof PlayerObject) {\r\n            return playerCollision((PlayerObject) initiator, collider);\r\n        }\r\n        else if (initiator instanceof Enemy) {\r\n            return enemyCollision((Enemy) initiator, collider);\r\n        }\r\n\r\n        return null;\r\n    }\r\n\r\n    private static GameObject playerCollision(PlayerObject player, GameObject collider) {\r\n        if (collider instanceof CoinItem coin){\r\n            coin.collect();\r\n            return null;\r\n        }\r\n        else if (collider instanceof Item item) {\r\n            item.collect();\r\n            return null;\r\n        }\r\n        else if (collider instanceof Enemy enemy) {\r\n            if(ItemHandler.isPowerPillActive()) {\r\n                enemy.reset();\r\n                PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);\r\n            } else {\r\n                PlayerHandler.decrementLives();\r\n                //Restart Game\r\n            }\r\n            return null;\r\n        }\r\n        else if (collider instanceof DoorObject) {\r\n            if(PlayerHandler.hasKey()) {\r\n                //Lade nächstes Level\r\n            }\r\n            return null;\r\n        }\r\n        else if (collider instanceof WallTile) {\r\n            System.out.println(\"Kritischer Fehler\");\r\n        }\r\n\r\n        return null;\r\n    }\r\n\r\n    private static GameObject enemyCollision(Enemy enemy, GameObject collider) {\r\n        if (collider instanceof PlayerObject) {\r\n            if(ItemHandler.isPowerPillActive()) {\r\n                enemy.reset();\r\n                PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);\r\n            } else {\r\n                PlayerHandler.decrementLives();\r\n                //Restart Game\r\n            }\r\n            return null;\r\n\r\n        }\r\n        else if (collider instanceof WallTile) {\r\n            System.out.println(\"Kritischer Fehler\");\r\n        }\r\n        return collider;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/CollisionHandler.java b/src/arcacia/game/handler/CollisionHandler.java
+--- a/src/arcacia/game/handler/CollisionHandler.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/handler/CollisionHandler.java	(date 1640011689249)
+@@ -3,7 +3,7 @@
+ import arcacia.game.objects.GameObject;
+ import arcacia.game.objects.PlayerObject;
+ import arcacia.game.objects.enemy.Enemy;
+-import arcacia.game.objects.item.CoinItem;
++import arcacia.game.objects.item.Coin;
+ import arcacia.game.objects.item.Item;
+ import arcacia.game.objects.tile.DoorObject;
+ import arcacia.game.objects.tile.WallTile;
+@@ -24,7 +24,7 @@
+     }
+ 
+     private static GameObject playerCollision(PlayerObject player, GameObject collider) {
+-        if (collider instanceof CoinItem coin){
++        if (collider instanceof Coin coin){
+             coin.collect();
+             return null;
+         }
+Index: src/arcacia/game/scene/other/IconLabel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.scene.other;\r\n\r\nimport arcacia.game.objects.item.CoinItem;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class IconLabel extends JLabel {\r\n\r\n    public IconLabel(String text, String iconPath) {\r\n        setText(text);\r\n        setIcon(new ImageIcon(iconPath));\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/scene/other/IconLabel.java b/src/arcacia/game/scene/other/IconLabel.java
+--- a/src/arcacia/game/scene/other/IconLabel.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/scene/other/IconLabel.java	(date 1640011689280)
+@@ -1,7 +1,5 @@
+ package arcacia.game.scene.other;
+ 
+-import arcacia.game.objects.item.CoinItem;
+-
+ import javax.swing.*;
+ 
+ public class IconLabel extends JLabel {
+Index: src/arcacia/game/handler/PlayerHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.objects.PlayerObject;\r\n\r\npublic class PlayerHandler extends PlayerObject{\r\n    private static boolean hasKey = false;\r\n    private static int lives = 3;\r\n    private static int score = 0;\r\n    private static int multiplier = ConstantHandler.scoreDefaultMultiplier;\r\n    private static PlayerObject player;\r\n\r\n\r\n    public static void incrementLives() {\r\n        lives++;\r\n    }\r\n    public static void decrementLives() {\r\n        lives--;\r\n    }\r\n\r\n    public static void addToScore(int x)\r\n    {\r\n        score += x * multiplier;\r\n    }\r\n\r\n    //region Getter/Setter\r\n    public static boolean hasKey() {\r\n        return hasKey;\r\n    }\r\n\r\n    public static void setHasKey(boolean hasKey) {\r\n        PlayerHandler.hasKey = hasKey;\r\n    }\r\n    public static int getLives() {\r\n        return lives;\r\n    }\r\n    public static void setLives(int lives) {\r\n        PlayerHandler.lives = lives;\r\n    }\r\n    public static int getScore() {\r\n        return score;\r\n    }\r\n    public static void setScore(int score) {\r\n        PlayerHandler.score = score;\r\n    }\r\n    public static PlayerObject getPlayer() {\r\n        return player;\r\n    }\r\n    public static void setPlayer(PlayerObject player) {\r\n        PlayerHandler.player = player;\r\n    }\r\n    public static int getMultiplier() {\r\n        return multiplier;\r\n    }\r\n    public static void setMultiplier(int multiplier) {\r\n        PlayerHandler.multiplier = multiplier;\r\n    }\r\n    //endregion\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/PlayerHandler.java b/src/arcacia/game/handler/PlayerHandler.java
+--- a/src/arcacia/game/handler/PlayerHandler.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/handler/PlayerHandler.java	(date 1640011689287)
+@@ -6,7 +6,7 @@
+     private static boolean hasKey = false;
+     private static int lives = 3;
+     private static int score = 0;
+-    private static int multiplier = ConstantHandler.scoreDefaultMultiplier;
++    private static int multiplier = 1;
+     private static PlayerObject player;
+ 
+ 
+@@ -17,12 +17,17 @@
+         lives--;
+     }
+ 
+-    public static void addToScore(int x)
+-    {
+-        score += x * multiplier;
++    public int addScore(int score) {
++        PlayerHandler.score += /*ItemHandler.getMultiplier() * */ score;
++        return PlayerHandler.score;
+     }
++
+ 
+     //region Getter/Setter
++    public static void setSpeed(int speed){PlayerObject.speed = speed;}
++    
++    public static int getSpeed(){return speed;};
++
+     public static boolean hasKey() {
+         return hasKey;
+     }
+@@ -30,27 +35,40 @@
+     public static void setHasKey(boolean hasKey) {
+         PlayerHandler.hasKey = hasKey;
+     }
++
+     public static int getLives() {
+         return lives;
+     }
++
+     public static void setLives(int lives) {
+         PlayerHandler.lives = lives;
+     }
++
+     public static int getScore() {
+         return score;
+     }
++
+     public static void setScore(int score) {
+         PlayerHandler.score = score;
+     }
++
++    public static void addToScore(int score)
++    {
++        setScore(getScore() + score * multiplier);
++    }
++
+     public static PlayerObject getPlayer() {
+         return player;
+     }
++
+     public static void setPlayer(PlayerObject player) {
+         PlayerHandler.player = player;
+     }
++
+     public static int getMultiplier() {
+         return multiplier;
+     }
++
+     public static void setMultiplier(int multiplier) {
+         PlayerHandler.multiplier = multiplier;
+     }
+Index: src/arcacia/Editor/Editor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/Editor/Editor.java b/src/arcacia/Editor/Editor.java
+new file mode 100644
+--- /dev/null	(date 1640011689413)
++++ b/src/arcacia/Editor/Editor.java	(date 1640011689413)
+@@ -0,0 +1,9 @@
++package arcacia.Editor;
++
++public class Editor {
++
++    /**TODO: .txt einlesen
++     * TODO: .txt in ein Array speichern
++     * TODO: Eingelesenes Array nach Symbolen um interpretieren in ein Level entsprechend der symbole des Arrays also einlese Array -> Levle Grid
++     */
++}
+Index: src/arcacia/game/objects/enemy/Enemy.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.objects.enemy;\r\n\r\nimport arcacia.game.handler.CollisionHandler;\r\nimport arcacia.game.handler.LevelHandler;\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.tile.EmptyTile;\r\nimport arcacia.game.util.Location;\r\n\r\nimport java.util.concurrent.ThreadLocalRandom;\r\n\r\npublic class Enemy extends GameObject {\r\n\r\n    Location start;\r\n    \r\n    Location player;\r\n    Location last_seen;\r\n    GameObject objectOnPosition;\r\n\r\n    int countdown;\r\n    // maximale anzahl wie oft der zu letzt gesehene punkt des spielers verfolgt wird\r\n    private static final int maxFollwo = 10;// static sagt aus das es nur einmal gemacht wird, wenn die maximale zahl der verfolgung für verschiedene erhöht werden soll muss static entfernt werden\r\n    private static final int maxVisibility = 10;\r\n\r\n    /**\r\n     * Konstruktor mit Location Objekt\r\n     * @param currentLocation übergibt location Object welches die start position des Gegners markiert\r\n     */\r\n\tpublic Enemy(Location currentLocation){\r\n\t\tsuper(currentLocation);\r\n        start = new Location(currentLocation.getX(),currentLocation.getY());\r\n        countdown = -1;\r\n        objectOnPosition = new EmptyTile(start);\r\n\t}\r\n\r\n    /**\r\n     * Konstruktor mit Location Objekt und Objekt welchem an der selben position Liegt\r\n     * @param currentLocation bergibt location Object welches die start position des Gegners markiert\r\n     * @param object Übergebe das Object auf dem Der Gegner stehen soll und welches damit am selben ort liegt\r\n     */\r\n    public Enemy(Location currentLocation,GameObject object){\r\n        super(currentLocation);\r\n        start = new Location(currentLocation.getX(),currentLocation.getY());\r\n        countdown = -1;\r\n        objectOnPosition = object;\r\n    }\r\n\r\n    /**\r\n     * Konstruktor mit Location Objekt\r\n     * @param x Wert der den start X-wert des gegners markiert\r\n     * @param y Wert der den start Y-wert des gegners markiert\r\n     */\r\n\tpublic Enemy(int x , int y){\r\n\t\tsuper(new Location(x,y));\r\n        start = new Location(x,y);\r\n        countdown = -1;\r\n        objectOnPosition = new EmptyTile(start);\r\n\t}\r\n\r\n    /**\r\n     *\r\n     * @return GameObject welches in objectOnPosition gespeichert ist\r\n     */\r\n    public GameObject getObjectOnPosition(){\r\n        return objectOnPosition;\r\n    }\r\n\r\n    /**\r\n     * Lässt den Gegner einen Schritt in X-Richtung laufen,\r\n     * sowohl in die positive als auch negative Richtung\r\n     * @param x 1 lässt in Positiv gehen, -1 in Negativ\r\n     * @return true wenn erfolgreich, false wenn eine wand im weg ist\r\n     */\r\n    public boolean moveX(int x){ //nimmt 1 oder -1 an, und bewegt in die richtung\r\n        //fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück\r\n        if (x == 1 || x == -1){\r\n            if (LevelHandler.isWall(new Location(this.currentLocation.getX() + x,this.currentLocation.getY()))){\r\n                return false;\r\n            }else {\r\n                LevelHandler.setObjectAt(currentLocation, objectOnPosition);\r\n                this.currentLocation.setX(currentLocation.getX() + x);\r\n                objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);\r\n                CollisionHandler.collision(this, objectOnPosition);\r\n                return true;\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    /**\r\n     *  Lässt den Gegner einen Schritt in X-Richtung laufen,\r\n     *      * sowohl in die positive als auch negative Richtung\r\n     * @param y 1 lässt in Positiv gehen, -1 in Negativ\r\n     * @return true wenn erfolgreich, false wenn eine wand im weg ist\r\n     */\r\n    public boolean moveY(int y){ //nimmt 1 oder -1 an, und bewegt in diese richtung\r\n        // fragt ob in die gewünschte richtung genug platz zum bewegen ist, wenn ja führe diesen schritt aus, wenn nein geben False zurück\r\n        //alternative schreibweise, falls eingabe parameter eingeschränkt (nur 1 und -1) muss\r\n\r\n        if (y == 1 || y == -1){\r\n            if (LevelHandler.isWall(new Location(this.currentLocation.getX(),this.currentLocation.getY() + y))){\r\n                return false;\r\n            }else {\r\n                LevelHandler.setObjectAt(currentLocation,objectOnPosition);\r\n                this.currentLocation.setY(currentLocation.getY()+y);\r\n                objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);\r\n                CollisionHandler.collision(this, objectOnPosition);\r\n                return true;\r\n            }\r\n        }\r\n          return false;\r\n    }\r\n\r\n    /**\r\n     * überprüft ob spieler in einer der Richtungen (oben, unten, links, rechts ) ist, wenn eine wand da zwischen ist wird der spieler nicht gesehen\r\n     * @return true wenn spieler gesehen wurde, false wenn spieler nicht gesehen wurde\r\n     */\r\n    public boolean seePlayer(){\r\n\t    //playerpos-enemypos == abstand <= 10 blöcke ist soll er ihn verfolgen.\r\n\t    //unter der bedingung das zwischen den beiden positionen keine Wand ist\r\n\r\n        if(this.player.getX() - this.currentLocation.getX() == 0 || this.player.getY() - this.currentLocation.getY() == 0){// prüft ob beide auf einer achse sind\r\n            if (Math.abs(this.player.getX() - this.currentLocation.getX()) <= maxVisibility || Math.abs(this.player.getY() - this.currentLocation.getY()) <= maxVisibility){ // prüft ob beide weniger als maxVisibility vo einander entfernt sind\r\n                int difX = this.player.getX() - this.currentLocation.getX();\r\n                if (difX > 0){\r\n                    //spieler ist richtung x Pos vom gegner\r\n\r\n                    for (int i = 1; i <= maxVisibility; i++)\r\n                    {\r\n                        //x positiv richtung\r\n                        Location cu = new Location(this.currentLocation.getX()+i,this.currentLocation.getY());\r\n                        if (LevelHandler.isWall(cu)) {\r\n                            return false;\r\n                        }\r\n                        if (Location.isSame(cu,this.player)) {\r\n                            return true;\r\n                        }\r\n                    }\r\n\r\n                }else if (difX < 0){\r\n                    //spieler ist richtung X Neg vom gegner\r\n\r\n                    for (int i = -1; i >= -maxVisibility; i--)\r\n                    {\r\n                        //x negativ richtung\r\n                        Location cu = new Location(this.currentLocation.getX()+i,this.currentLocation.getY());\r\n                        if (LevelHandler.isWall(cu)) {\r\n                            return false;\r\n                        }\r\n                        if (Location.isSame(cu,this.player)) {\r\n                            return true;\r\n                        }\r\n                    }\r\n\r\n                }else {\r\n                    //spieler ist auf der selben X höhe wie gegner -> prüfe Y richtung\r\n                    int difY = this.player.getY() - this.currentLocation.getY();\r\n                    if (difY > 0){\r\n                        //spieler ist richtung Y Pos vom gegner\r\n\r\n                        for (int i = 1; i <= maxVisibility; i++)\r\n                        {\r\n                            //y positiv richtung\r\n                            Location cu = new Location(this.currentLocation.getX(),this.currentLocation.getY()+i);\r\n                            if (LevelHandler.isWall(cu)) {\r\n                                return false;\r\n                            }\r\n                            if (Location.isSame(cu,this.player)) {\r\n                                return true;\r\n                            }\r\n                        }\r\n\r\n                    }else if (difY < 0){\r\n                        //spieler ist richtung Y neg vom gegner\r\n\r\n                        for (int i = -1; i >= -maxVisibility; i--)\r\n                        {\r\n                            //y negativ richtung\r\n                            Location cu = new Location(this.currentLocation.getX(),this.currentLocation.getY()+i);\r\n                            if (LevelHandler.isWall(cu)) {\r\n                                return false;\r\n                            }\r\n                            if (Location.isSame(cu,this.player)) {\r\n                                return true;\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n\r\n    /**\r\n     * lässt den gegner in eine der vier richtungen (rechts, oben, links, unten) gehen\r\n     * entscheidet random in welche\r\n     */\r\n    void moveRandom(){\r\n        //aus allen validen Richtungen bestimmt der genera eine und geht einen schritt in diese Richtung\r\n        int richtung = ThreadLocalRandom.current().nextInt(1,5);//generiert eine zahl aus {1,2,3,4}\r\n\r\n        switch (richtung) {\r\n            case 1:\r\n                if (moveY(1)){ break;}\r\n            case 2:\r\n                if (moveX(1)){break;}\r\n            case 3:\r\n                if (moveY(-1)){break;}\r\n            case 4:\r\n                if (moveX(-1)){break;}\r\n            default:\r\n                //wenn in der ersten runde kein erfolgreicher gegangen werden konnte weil z.b. richtung  = 3 war und sowol 3 und 4 nicht ausgeführt werden konnte\r\n                // dann ist hier die möglichkeit gegeben das 1 oder 2 erfolgreich werden kann\r\n                //case 4: ist deshalb nicht ein zwietes mal angegeben da er im ersten fall immer ausgelöst werden würde\r\n                switch (richtung){\r\n                    case 1:\r\n                        if (moveY(1)){ break;}\r\n                    case 2:\r\n                        if (moveX(1)){break;}\r\n                    case 3:\r\n                        if (moveY(-1)){break;}\r\n                }\r\n        }\r\n    }\r\n\r\n    /**\r\n     * generelle bewegung von Gegner,\r\n     * wenn spieler gesehen wurde geht in richtung der zu letzt gesehenen position\r\n     * sonst gehe einen random schritt\r\n     * @param s aktuelle Location des Spielers\r\n     */\r\n    public void movement(Location s){ //public? ist die funktion die aufgerufen werden soll um den gegner zu bewegen\r\n        player = s;\r\n        if (seePlayer()) {\r\n            countdown = maxFollwo;\r\n            last_seen = player;\r\n        }\r\n        if (countdown > 0) {\r\n            move_to_Position(last_seen);\r\n            countdown--;\r\n        } else {\r\n            moveRandom();\r\n        }\r\n    }\r\n\r\n    /**\r\n     * setzt die position auf die initalen werte zurück,\r\n     * setzt Countdown auf -1, da der spieler nun nicht mehr gesehen wird\r\n     */\r\n    public void reset(){\r\n        //setzt die Position des Gegners auf die StartPosition zurück\r\n        LevelHandler.setObjectAt(currentLocation,objectOnPosition);\r\n        this.currentLocation = start;\r\n        countdown = -1;\r\n        objectOnPosition = LevelHandler.setObjectAt(currentLocation,this);\r\n    }\r\n\r\n\r\n    public boolean spieler_collision() {return (Location.isSame(this.currentLocation, this.player)) ;}\r\n\r\n\r\n    /**\r\n     * bewegt sich in die richtung der Location die der funktion übergebenen wird\r\n     * Location ist immer in eine der 4 geraden richtungen ( nie schräg)\r\n     * @param location übergibt ein Location Object, gegner geht in diese richtung wenn möglich\r\n     */\r\n    void move_to_Position(Location location) {\r\n        //bewegt sich in Richtung der zuletzt gesehen Position des Spieler\r\n        //wenn der gegner auf der location ist und den spieler nicht mehr sieht soll er nicht hängen bleiben\r\n\r\n        if (location.getX() - this.currentLocation.getX() == 0 || location.getY() - this.currentLocation.getY() == 0) {//prüft das die beiden locations auf einer achse liegen\r\n            int difX = location.getX() - this.currentLocation.getX(); // prüft auf welcher achse\r\n            if (difX > 0) {\r\n                //spieler ist richtung x Pos vom gegner\r\n                if (!moveX(1)) {\r\n                    moveRandom();\r\n                } // wenn der gewünschte schritt nicht gegangen werden kann führt moveRandom() aus damitt ein schritt gegangen wird\r\n\r\n            } else if (difX < 0) {\r\n                //spieler ist richtung X Neg vom gegner\r\n                if (!moveX(-1)) {\r\n                    moveRandom();\r\n                }\r\n\r\n            } else {\r\n                //spieler ist auf der selben X höhe wie gegner -> prüfe Y richtung\r\n                int difY = location.getY() - this.currentLocation.getY();\r\n                if (difY > 0) {\r\n                    //spieler ist richtung Y Pos vom gegner\r\n                    if (!moveY(1)) {\r\n                        moveRandom();\r\n                    }\r\n\r\n                } else if (difY < 0) {\r\n                    //spieler ist richtung Y neg vom gegner\r\n                    if (!moveY(-1)) {\r\n                        moveRandom();\r\n                    }\r\n\r\n                } else {// rand fall wo die übergebene position die ist auf der der gegner bereits steht\r\n                    // soll der gegner sich dann überhaupt bewegen oder sollte er dann still stehen?\r\n                    moveRandom();\r\n                }\r\n            }\r\n\r\n        } else { // in dem fall das die übergebenen Location nicht in eine der 4 geraden richtungen liegt, bewegt sich daher random\r\n            //soll der gegner sich dann nicht gerade auf die psoition bewegen? haben keinen fall wo dies benötigt wir\r\n            moveRandom();\r\n        }\r\n\r\n    }\r\n\r\n}\r\n\r\n\r\n\r\n      /*  if (!Location.isSame(this.currentLocation, location))\r\n        {\r\n            if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() <= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(1)) {\r\n                            bewegeY(1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(1)) {\r\n                            bewegeX(1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n            if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() <= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(1)) {\r\n                            bewegeY(1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(-1)) {\r\n                            bewegeX(-1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n            if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() >= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(-1)) {\r\n                            bewegeY(-1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(1)) {\r\n                            bewegeX(1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n            if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() >= location.getY()) {\r\n                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}\r\n\r\n                switch (richtung) {\r\n                    case 1:\r\n                        if (bewegeY(-1)) {\r\n                            bewegeY(-1);\r\n                            break;\r\n                        }\r\n                    case 2:\r\n                        if (bewegeX(-1)) {\r\n                            bewegeX(-1);\r\n                            break;\r\n                        }\r\n                }\r\n            }\r\n        }\r\n\r\n       */\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/enemy/Enemy.java b/src/arcacia/game/objects/enemy/Enemy.java
+--- a/src/arcacia/game/objects/enemy/Enemy.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/objects/enemy/Enemy.java	(date 1640011689300)
+@@ -56,6 +56,8 @@
+         objectOnPosition = new EmptyTile(start);
+ 	}
+ 
++
++
+     /**
+      *
+      * @return GameObject welches in objectOnPosition gespeichert ist
+Index: src/arcacia/game/handler/FileHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arcacia.game.handler;\r\n\r\nimport arcacia.game.objects.GameObject;\r\nimport arcacia.game.objects.PlayerObject;\r\nimport arcacia.game.objects.enemy.Enemy;\r\nimport arcacia.game.objects.item.*;\r\nimport arcacia.game.objects.tile.DoorObject;\r\nimport arcacia.game.objects.tile.EmptyTile;\r\nimport arcacia.game.objects.tile.WallTile;\r\nimport arcacia.game.util.Location;\r\n\r\nimport java.io.*;\r\n\r\npublic class FileHandler {\r\n\r\n    //Geometry\r\n    public static final char wall = 'W';\r\n    public static final char door = 'D';\r\n    public static final char player = 'P';\r\n    public static final char key = 'K';\r\n    public static final char enemy = 'X';//speziell Gegner der auf EmptyTile steht\r\n    public static final char coin = '.';\r\n    public static final char empty = 'L';\r\n    //Items\r\n    public static final char speed = 'S';\r\n    public static final char healtUp = 'H';\r\n    public static final char stopwatch = 'Y';\r\n    public static final char power = 'O';\r\n    public static final char multiplikator = 'C';\r\n\r\n    //Gegner der auf Item Steht\r\n    public static final char Ekey = '1';\r\n    public static final char Ecoin = '2';\r\n    public static final char Espeed = '3';\r\n    public static final char EhealtUp = '4';\r\n    public static final char Estopwatch = '5';\r\n    public static final char Epower = '6';\r\n    public static final char Emultiplikator = '7';\r\n\r\n    private static final String filePath = \"./spielstand/spielstand1.txt\";\r\n\r\n    public static final int WithGrid = 24;\r\n    public static final int HeightGrid = 15;\r\n\r\n    /**\r\n     * Nimmt für die Spielfeldgröße die werte in WithGrid und HeightGrid in dieser Klasse\r\n     * öffnet die unter filePath liegende Datei,\r\n     * schreibt den Aktuellen zustand des Level Grids in dei Datei\r\n     * und schreibt darunter die Daten aus den Variablen des PlayerHandlers, ItemHandlers und GameHandlers.\r\n     *\r\n     * @throws FileNotFoundException schmeißt eine FileNotFound Exception, wenn zu öffnende Datei nicht geöffnet werden konnte\r\n     */\r\n    public static void saveGame() throws FileNotFoundException {\r\n        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePath));\r\n        StringBuilder line = new StringBuilder();\r\n        //schreibt den Aktuellen zustand des Spielfelds in die Datei\r\n        for (int y = 0; y < HeightGrid; y++) {\r\n            for (int x = 0; x < WithGrid; x++) {\r\n                GameObject temp = LevelHandler.getObjectAt(new Location(x, y));\r\n                if (temp instanceof WallTile) {\r\n                    line.append(wall);\r\n                } else if (temp instanceof EmptyTile) {\r\n                    line.append(empty);\r\n                } else if (temp instanceof DoorObject) {\r\n                    line.append(door);\r\n                } else if (temp instanceof PlayerObject) {\r\n                    line.append(player);\r\n\r\n                } else if (temp instanceof Enemy) {// hier ist bestimmt das auf der postiton ein gegner steht nun wird bestimmt ob der gegner auf einem Item steht und auf welchem\r\n\r\n                    if (((Enemy) temp).getObjectOnPosition() instanceof EmptyTile) {\r\n                        line.append(enemy);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof CoinItem) {\r\n                        line.append(Ecoin);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof ExtraLife) {\r\n                        line.append(EhealtUp);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof Key) {\r\n                        line.append(Ekey);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof Multiplier) {\r\n                        line.append(Emultiplikator);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof PowerPill) {\r\n                        line.append(Epower);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof SpeedBoots) {\r\n                        line.append(Espeed);\r\n                    } else if (((Enemy) temp).getObjectOnPosition() instanceof Stopwatch) {\r\n                        line.append(Estopwatch);\r\n                    }\r\n                } else if (temp instanceof Item) { //hier wurde bestimmt das ein Item auf der Position Liegt, nun wird bestimmt welches\r\n                    if (temp instanceof CoinItem) {\r\n                        line.append(coin);\r\n                    } else if (temp instanceof ExtraLife) {\r\n                        line.append(healtUp);\r\n                    } else if (temp instanceof Key) {\r\n                        line.append(key);\r\n                    } else if (temp instanceof Multiplier) {\r\n                        line.append(multiplikator);\r\n                    } else if (temp instanceof PowerPill) {\r\n                        line.append(power);\r\n                    } else if (temp instanceof SpeedBoots) {\r\n                        line.append(speed);\r\n                    } else if (temp instanceof Stopwatch) {\r\n                        line.append(stopwatch);\r\n                    }\r\n\r\n                }\r\n            }\r\n\r\n            pWriter.println(line);\r\n            line = new StringBuilder();\r\n        }\r\n        //schreibt die Restlichen zu merkenden Variablen in die Datei in einer Bestimten Reihenfolge\r\n\r\n        //PlayerHandler\r\n        pWriter.println(PlayerHandler.hasKey());\r\n        pWriter.println(PlayerHandler.getLives());\r\n        pWriter.println(PlayerHandler.getScore());\r\n        //ItemHandler\r\n        pWriter.println(ItemHandler.getPowerPillDuration());\r\n        pWriter.println(ItemHandler.getMultiplierDuration());\r\n        pWriter.println(ItemHandler.getSpeedBootsDuration());\r\n        //GameHandler\r\n        pWriter.println(GameHandler.getEnemyTimeout());\r\n        pWriter.println(GameHandler.getPlayerTurn());\r\n\r\n        pWriter.close();\r\n    }\r\n\r\n    /**\r\n     * Nimmt für die Spielfeldgröße die werte in WithGrid und HeightGrid in dieser Klasse\r\n     * öffnet Datei die unter filePath liegt,\r\n     * liest das dort liegende Spielfeld aus und legt es in den Grid vom LevelHandler\r\n     * zusätzlich werden die Darunter stehenden Daten in die Variablen des PlayerHandlers, ItemHandlers und GameHandlers gesetzt.\r\n     *\r\n     * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte\r\n     */\r\n    public static void loadGame() throws FileNotFoundException {\r\n        GameObject[][] new_grid = new GameObject[WithGrid][HeightGrid];\r\n        BufferedReader bReader = new BufferedReader(new FileReader(filePath));\r\n        String line = \"\";\r\n\r\n        for (int y = 0; y < HeightGrid; y++) {\r\n\r\n            try {\r\n                line = bReader.readLine();\r\n            } catch (IOException e) {\r\n                e.printStackTrace();\r\n                break;\r\n            }\r\n\r\n            char now;\r\n            for (int x = 0; x < WithGrid; x++) {\r\n\r\n                now = line.charAt(x);\r\n                Location loc = new Location(x, y);\r\n\r\n                //vergleich welches objekt von dem Character dargestellt wird (19 mal)\r\n                switch (now) {\r\n                    case (wall) -> new_grid[x][y] = new WallTile(loc);\r\n                    case (empty) -> new_grid[x][y] = new EmptyTile(loc);\r\n                    case (player) -> new_grid[x][y] = new PlayerObject(loc);\r\n                    case (key) -> new_grid[x][y] = new Key(loc);\r\n                    case (coin) -> new_grid[x][y] = new CoinItem(loc);\r\n                    case (door) -> new_grid[x][y] = new DoorObject(loc);\r\n                    case (speed) -> new_grid[x][y] = new SpeedBoots(loc);\r\n                    case (healtUp) -> new_grid[x][y] = new ExtraLife(loc);\r\n                    case (stopwatch) -> new_grid[x][y] = new Stopwatch(loc);\r\n                    case (power) -> new_grid[x][y] = new PowerPill(loc);\r\n                    case (multiplikator) -> new_grid[x][y] = new Multiplier(loc);\r\n                    case (enemy) -> new_grid[x][y] = new Enemy(loc);\r\n\r\n                    case (Ecoin) -> new_grid[x][y] = new Enemy(loc, new CoinItem(loc));\r\n                    case (Ekey) -> new_grid[x][y] = new Enemy(loc, new Key(loc));\r\n                    case (Emultiplikator) -> new_grid[x][y] = new Enemy(loc, new Multiplier(loc));\r\n                    case (Epower) -> new_grid[x][y] = new Enemy(loc, new PowerPill(loc));\r\n                    case (Espeed) -> new_grid[x][y] = new Enemy(loc, new SpeedBoots(loc));\r\n                    case (EhealtUp) -> new_grid[x][y] = new Enemy(loc, new ExtraLife(loc));\r\n                    case (Estopwatch) -> new_grid[x][y] = new Enemy(loc, new Stopwatch(loc));\r\n                }\r\n            }\r\n        }\r\n        LevelHandler.setLevelGrid(new_grid);\r\n\r\n        //werte rest der enthaltenen Daten aus\r\n        try {\r\n            //PlayerHandler\r\n            //hasKey\r\n            line = bReader.readLine();\r\n            PlayerHandler.setHasKey(Boolean.parseBoolean(line));\r\n            //lives\r\n            line = bReader.readLine();\r\n            PlayerHandler.setLives(Integer.parseInt(line));\r\n            //Score\r\n            line = bReader.readLine();\r\n            PlayerHandler.setScore(Integer.parseInt(line));\r\n\r\n            //ItemHandler\r\n            //powerPillDuration\r\n            line = bReader.readLine();\r\n            ItemHandler.setPowerPillDuration(Integer.parseInt(line));\r\n            //multiplierDuration\r\n            line = bReader.readLine();\r\n            ItemHandler.setMultiplierDuration(Integer.parseInt(line));\r\n            //speedBootsDuration\r\n            line = bReader.readLine();\r\n            ItemHandler.setSpeedBootsDuration(Integer.parseInt(line));\r\n\r\n            //GameHandler\r\n            //enemyTimeout\r\n            line = bReader.readLine();\r\n            GameHandler.setEnemyTimeout(Integer.parseInt(line));\r\n            //PlayerTurn\r\n            line = bReader.readLine();\r\n            GameHandler.setPlayerTurn(Integer.parseInt(line));\r\n\r\n            //schließe Datei\r\n            bReader.close();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    /**\r\n     * setzt das LevelGrid auf nur wände, fügt jede Art von Objekt einmal in das Grid ein auf y=5\r\n     * und setzt alle zu speichernden werte in PlayerHandler, ItemHandler und GameHandler auf bestimmte werte\r\n     * führt dan die saveGame() methode aus\r\n     */\r\n    public static void debugTestSaveGame(){\r\n        LevelHandler.debugInitGrid();\r\n        //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1\r\n        int n = 1;\r\n        //Geometry\r\n        LevelHandler.setObjectAt(new Location(n,5),new DoorObject(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new PlayerObject(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Key(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new CoinItem(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new EmptyTile(new Location(n,5)));n++;\r\n        //Itemsnew\r\n        LevelHandler.setObjectAt(new Location(n,5),new SpeedBoots(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new ExtraLife(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Stopwatch(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new PowerPill(new Location(n,5)));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Multiplier(new Location(n,5)));n++;\r\n        //Gegner auf Items\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Key(new Location(n,5))));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new CoinItem(new Location(n,5))));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new SpeedBoots(new Location(n,5))));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new ExtraLife(new Location(n,5))));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Stopwatch(new Location(n,5))));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new PowerPill(new Location(n,5))));n++;\r\n        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Multiplier(new Location(n,5))));\r\n\r\n\r\n        PlayerHandler.setHasKey(true);\r\n        PlayerHandler.setLives(5);\r\n        PlayerHandler.setScore(500);\r\n\r\n        ItemHandler.setPowerPillDuration(50);\r\n        ItemHandler.setMultiplierDuration(60);\r\n        ItemHandler.setSpeedBootsDuration(70);\r\n\r\n        GameHandler.setEnemyTimeout(9);\r\n        GameHandler.setPlayerTurn(4);\r\n\r\n        try {\r\n            saveGame();\r\n        } catch (FileNotFoundException e) {\r\n            System.out.println(\"File nicht gefunden in saveGame\");\r\n            e.printStackTrace();\r\n        }\r\n\r\n    }\r\n\r\n    /**\r\n     * führt loadGame() methode aus und gibt dann ein paar der in debugTestSaveGame() gespeicherten werte aus\r\n     * diese sind die werte die von PlayerHandler, ItemHandler und GameHandler gespeichert wurde, gibt auch aus welcher werte in debugTestSaveGame reingespeichert wurden\r\n     * gibt auch einen string aus der reihe y=5 des Grids in den jeweiligen Buchstaben repräsentiert\r\n     */\r\n    public static void debugTestLoadGame(){\r\n        try {\r\n            loadGame();\r\n        } catch (FileNotFoundException e) {\r\n            System.out.println(\"File nicht gefunden in loadGame\");\r\n            e.printStackTrace();\r\n        }\r\n\r\n        System.out.println(\"hasKey: \"+ PlayerHandler.hasKey()+  \" Erwartet: true\");\r\n        System.out.println(\"lives: \"+ PlayerHandler.getLives()+  \" Erwartet: 5\");\r\n        System.out.println(\"score: \"+ PlayerHandler.getScore()+  \" Erwartet: 500\");\r\n\r\n        System.out.println(\"PowerPillDuration: \"+ ItemHandler.getPowerPillDuration()+  \" Erwartet: 50\");\r\n        System.out.println(\"MultiplierDuration: \"+ ItemHandler.getMultiplierDuration()+  \" Erwartet: 60\");\r\n        System.out.println(\"SpeedBootsDuration: \"+ ItemHandler.getSpeedBootsDuration()+  \" Erwartet: 70\");\r\n\r\n        System.out.println(\"EnemyTimeout: \"+ GameHandler.getEnemyTimeout()+  \" Erwartet: 9\");\r\n        System.out.println(\"PlayerTurn: \"+ GameHandler.getPlayerTurn() +  \" Erwartet: 4\");\r\n\r\n        //gibt Reihe mit y=5 aus inder sollten alle Objekte einmal liegen\r\n        for (int x = 0; x < WithGrid;x++){\r\n            GameObject temp = LevelHandler.getObjectAt(new Location(x, 5));\r\n            if (temp instanceof WallTile) {\r\n                System.out.print(wall);\r\n            } else if (temp instanceof EmptyTile) {\r\n                System.out.print(empty);\r\n            } else if (temp instanceof DoorObject) {\r\n                System.out.print(door);\r\n            } else if (temp instanceof PlayerObject) {\r\n                System.out.print(player);\r\n\r\n            } else if (temp instanceof Enemy) {// hier ist bestimmt das auf der postiton ein gegner steht nun wird bestimmt ob der gegner auf einem Item steht und auf welchem\r\n\r\n                if (((Enemy) temp).getObjectOnPosition() instanceof EmptyTile) {\r\n                    System.out.print(enemy);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof CoinItem) {\r\n                    System.out.print(Ecoin);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof ExtraLife) {\r\n                    System.out.print(EhealtUp);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof Key) {\r\n                    System.out.print(Ekey);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof Multiplier) {\r\n                    System.out.print(Emultiplikator);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof PowerPill) {\r\n                    System.out.print(Epower);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof SpeedBoots) {\r\n                    System.out.print(Espeed);\r\n                } else if (((Enemy) temp).getObjectOnPosition() instanceof Stopwatch) {\r\n                    System.out.print(Estopwatch);\r\n                }\r\n            } else if (temp instanceof Item) { //hier wurde bestimmt das ein Item auf der Position Liegt, nun wird bestimmt welches\r\n                if (temp instanceof CoinItem) {\r\n                    System.out.print(coin);\r\n                } else if (temp instanceof ExtraLife) {\r\n                    System.out.print(healtUp);\r\n                } else if (temp instanceof Key) {\r\n                    System.out.print(key);\r\n                } else if (temp instanceof Multiplier) {\r\n                    System.out.print(multiplikator);\r\n                } else if (temp instanceof PowerPill) {\r\n                    System.out.print(power);\r\n                } else if (temp instanceof SpeedBoots) {\r\n                    System.out.print(speed);\r\n                } else if (temp instanceof Stopwatch) {\r\n                    System.out.print(stopwatch);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/handler/FileHandler.java b/src/arcacia/game/handler/FileHandler.java
+--- a/src/arcacia/game/handler/FileHandler.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/handler/FileHandler.java	(date 1640011689272)
+@@ -70,7 +70,7 @@
+ 
+                     if (((Enemy) temp).getObjectOnPosition() instanceof EmptyTile) {
+                         line.append(enemy);
+-                    } else if (((Enemy) temp).getObjectOnPosition() instanceof CoinItem) {
++                    } else if (((Enemy) temp).getObjectOnPosition() instanceof Coin) {
+                         line.append(Ecoin);
+                     } else if (((Enemy) temp).getObjectOnPosition() instanceof ExtraLife) {
+                         line.append(EhealtUp);
+@@ -86,7 +86,7 @@
+                         line.append(Estopwatch);
+                     }
+                 } else if (temp instanceof Item) { //hier wurde bestimmt das ein Item auf der Position Liegt, nun wird bestimmt welches
+-                    if (temp instanceof CoinItem) {
++                    if (temp instanceof Coin) {
+                         line.append(coin);
+                     } else if (temp instanceof ExtraLife) {
+                         line.append(healtUp);
+@@ -159,7 +159,7 @@
+                     case (empty) -> new_grid[x][y] = new EmptyTile(loc);
+                     case (player) -> new_grid[x][y] = new PlayerObject(loc);
+                     case (key) -> new_grid[x][y] = new Key(loc);
+-                    case (coin) -> new_grid[x][y] = new CoinItem(loc);
++                    case (coin) -> new_grid[x][y] = new Coin(loc);
+                     case (door) -> new_grid[x][y] = new DoorObject(loc);
+                     case (speed) -> new_grid[x][y] = new SpeedBoots(loc);
+                     case (healtUp) -> new_grid[x][y] = new ExtraLife(loc);
+@@ -168,7 +168,7 @@
+                     case (multiplikator) -> new_grid[x][y] = new Multiplier(loc);
+                     case (enemy) -> new_grid[x][y] = new Enemy(loc);
+ 
+-                    case (Ecoin) -> new_grid[x][y] = new Enemy(loc, new CoinItem(loc));
++                    case (Ecoin) -> new_grid[x][y] = new Enemy(loc, new Coin(loc));
+                     case (Ekey) -> new_grid[x][y] = new Enemy(loc, new Key(loc));
+                     case (Emultiplikator) -> new_grid[x][y] = new Enemy(loc, new Multiplier(loc));
+                     case (Epower) -> new_grid[x][y] = new Enemy(loc, new PowerPill(loc));
+@@ -233,7 +233,7 @@
+         LevelHandler.setObjectAt(new Location(n,5),new PlayerObject(new Location(n,5)));n++;
+         LevelHandler.setObjectAt(new Location(n,5),new Key(new Location(n,5)));n++;
+         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5)));n++;
+-        LevelHandler.setObjectAt(new Location(n,5),new CoinItem(new Location(n,5)));n++;
++        LevelHandler.setObjectAt(new Location(n,5),new Coin(new Location(n,5)));n++;
+         LevelHandler.setObjectAt(new Location(n,5),new EmptyTile(new Location(n,5)));n++;
+         //Itemsnew
+         LevelHandler.setObjectAt(new Location(n,5),new SpeedBoots(new Location(n,5)));n++;
+@@ -243,7 +243,7 @@
+         LevelHandler.setObjectAt(new Location(n,5),new Multiplier(new Location(n,5)));n++;
+         //Gegner auf Items
+         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Key(new Location(n,5))));n++;
+-        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new CoinItem(new Location(n,5))));n++;
++        LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Coin(new Location(n,5))));n++;
+         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new SpeedBoots(new Location(n,5))));n++;
+         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new ExtraLife(new Location(n,5))));n++;
+         LevelHandler.setObjectAt(new Location(n,5),new Enemy(new Location(n,5),new Stopwatch(new Location(n,5))));n++;
+@@ -311,7 +311,7 @@
+ 
+                 if (((Enemy) temp).getObjectOnPosition() instanceof EmptyTile) {
+                     System.out.print(enemy);
+-                } else if (((Enemy) temp).getObjectOnPosition() instanceof CoinItem) {
++                } else if (((Enemy) temp).getObjectOnPosition() instanceof Coin) {
+                     System.out.print(Ecoin);
+                 } else if (((Enemy) temp).getObjectOnPosition() instanceof ExtraLife) {
+                     System.out.print(EhealtUp);
+@@ -327,7 +327,7 @@
+                     System.out.print(Estopwatch);
+                 }
+             } else if (temp instanceof Item) { //hier wurde bestimmt das ein Item auf der Position Liegt, nun wird bestimmt welches
+-                if (temp instanceof CoinItem) {
++                if (temp instanceof Coin) {
+                     System.out.print(coin);
+                 } else if (temp instanceof ExtraLife) {
+                     System.out.print(healtUp);
+Index: src/arcacia/game/objects/item/CoinItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/arcacia/game/objects/item/CoinItem.java b/src/arcacia/game/objects/item/Coin.java
+rename from src/arcacia/game/objects/item/CoinItem.java
+rename to src/arcacia/game/objects/item/Coin.java
+--- a/src/arcacia/game/objects/item/CoinItem.java	(revision 83df95fa1f501d570c2d1d4fcc1589fef0cc5317)
++++ b/src/arcacia/game/objects/item/Coin.java	(date 1640011689335)
+@@ -5,9 +5,9 @@
+ import arcacia.game.handler.PlayerHandler;
+ import arcacia.game.util.Location;
+ 
+-public class CoinItem extends Item{
++public class Coin extends Item{
+     public static final String path = ConstantHandler.pathImages + "coin.png";
+-    public CoinItem(Location currentLocation) {
++    public Coin(Location currentLocation) {
+         super(currentLocation);
+     }
+ 
