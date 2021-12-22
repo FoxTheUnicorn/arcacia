@@ -51,7 +51,7 @@ public class FileHandler {
      * @throws FileNotFoundException schmeißt eine FileNotFound Exception, wenn zu öffnende Datei nicht geöffnet werden konnte
      */
     public static void saveGame() throws FileNotFoundException {
-        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePathSaveGame +"savegame.txt"));
+        PrintWriter pWriter = new PrintWriter(new FileOutputStream(filePathSaveGame + "savegame.txt"));
         StringBuilder line = new StringBuilder();
         //schreibt den Aktuellen zustand des Spielfelds in die Datei
         for (int y = 0; y < LevelHandler.level_height; y++) {
@@ -132,9 +132,8 @@ public class FileHandler {
      * LevelBuilder
      * lies level aus datei aus
      * Baue Level Grid basierend auf datei
-     *
      */
-    public static void levelBuilder(BufferedReader bReader){
+    public static void levelBuilder(BufferedReader bReader) {
         GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
         Scanner scan;
         String line = "";
@@ -153,7 +152,7 @@ public class FileHandler {
 
             char now;
             for (int x = 0; x < LevelHandler.level_width; x++) {
-                if(x == 1 && y == 1) {
+                if (x == 1 && y == 1) {
                     int tmp = 0;
                 }
 
@@ -165,7 +164,10 @@ public class FileHandler {
                 switch (now) {
                     case (wall) -> new_grid[x][y] = new WallTile(loc);
                     case (empty) -> new_grid[x][y] = new EmptyTile(loc);
-                    case (player) -> { new_grid[x][y] = new PlayerObject(loc); PlayerHandler.setPlayer((PlayerObject) new_grid[x][y]); }
+                    case (player) -> {
+                        new_grid[x][y] = new PlayerObject(loc);
+                        PlayerHandler.setPlayer((PlayerObject) new_grid[x][y]);
+                    }
                     case (key) -> new_grid[x][y] = new Key(loc);
                     case (coin) -> new_grid[x][y] = new CoinItem(loc);
                     case (door) -> new_grid[x][y] = new DoorObject(loc);
@@ -195,35 +197,18 @@ public class FileHandler {
      * loadLevelX
      * läd ein spezifisches level welches Dann gebaut werden soll
      */
-    public static boolean loadLevelX(int i) throws FileNotFoundException {
-        //Scanner scan = new Scanner(new FileReader(filePathLevel +"Level_"+i+".txt"));
+    public static boolean loadLevelX(int i) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathLevel +"Level_"+i+".txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathLevel + "Level_" + i + ".txt"));
             levelBuilder(bufferedReader);
 
-
-
-            /*LevelHandler.level_width = scan.nextInt();
-            if(scan.hasNextInt()) {
-               StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Height!!");
-                return false;
-            }
-            LevelHandler.level_height = scan.nextInt();
-            scan.nextLine();
-
-            String[] newGrid  = new String[LevelHandler.level_height];
-            bufferedReader.close();
-            return true;
-
-
-        */
         } catch (StringIndexOutOfBoundsException | IOException e) {
             System.out.println("Data Width/Height fehlt! Bitte überprüfen Sie die Level-Editor! ");
         }
         try {
 
-            Scanner scan = new Scanner(new FileReader(filePathLevel +"Level_"+i+".txt"));
-            if(scan.hasNextInt()){
+            Scanner scan = new Scanner(new FileReader(filePathLevel + "Level_" + i + ".txt"));
+            if (scan.hasNextInt()) {
                 return true;
             }
         } catch (StringIndexOutOfBoundsException | IOException e) {
@@ -232,34 +217,7 @@ public class FileHandler {
             return false;
 
         }
-      /*   if(!scan.hasNextLine()) {
-            StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Width!!");
-            return false;
-        }*/
-       // int width = scan.nextInt();
-       /* if(!scan.hasNextInt()) {
-            StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Height!!");
-            return false;
-        }
-        //int height = scan.nextInt();
-        scan.nextLine();
 
-        String[] newGrid  = new String[LevelHandler.level_height];
-
-        for(int y = 0; y < LevelHandler.level_height;y++ ){
-            if(!scan.hasNextLine()){
-                StringIndexOutOfBoundsException("Error INVALID FORMAT! Missing lines of Map!");
-                return false;
-            }
-
-            newGrid[y] = scan.nextLine();
-
-            if(newGrid[y].length() != LevelHandler.level_width+1){
-                StringIndexOutOfBoundsException("Error INVALID FORMAT! Map Line " + y + " not at the right size.");
-                return false;
-            }
-        }
-        */
 
         return false;
     }
@@ -278,53 +236,9 @@ public class FileHandler {
      */
     public static void loadGame() throws FileNotFoundException {
         //GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
-        BufferedReader bReader = new BufferedReader(new FileReader(filePathSaveGame +"savegame.txt"));
+        BufferedReader bReader = new BufferedReader(new FileReader(filePathSaveGame + "savegame.txt"));
         levelBuilder(bReader);
 
-
-//        String line = "";
-//
-//        for (int y = 0; y < HeightGrid; y++) {
-//
-//            try {
-//                line = bReader.readLine();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                break;
-//            }
-//
-//            char now;
-//            for (int x = 0; x < WithGrid; x++) {
-//
-//                now = line.charAt(x);
-//                Location loc = new Location(x, y);
-//
-//                //vergleich welches objekt von dem Character dargestellt wird (19 mal)
-//                switch (now) {
-//                    case (wall) -> new_grid[x][y] = new WallTile(loc);
-//                    case (empty) -> new_grid[x][y] = new EmptyTile(loc);
-//                    case (player) -> new_grid[x][y] = new PlayerObject(loc);
-//                    case (key) -> new_grid[x][y] = new Key(loc);
-//                    case (coin) -> new_grid[x][y] = new CoinItem(loc);
-//                    case (door) -> new_grid[x][y] = new DoorObject(loc);
-//                    case (speed) -> new_grid[x][y] = new SpeedBoots(loc);
-//                    case (healtUp) -> new_grid[x][y] = new ExtraLife(loc);
-//                    case (stopwatch) -> new_grid[x][y] = new Stopwatch(loc);
-//                    case (power) -> new_grid[x][y] = new PowerPill(loc);
-//                    case (multiplikator) -> new_grid[x][y] = new Multiplier(loc);
-//                    case (enemy) -> new_grid[x][y] = new Enemy(loc);
-//
-//                    case (Ecoin) -> new_grid[x][y] = new Enemy(loc, new CoinItem(loc));
-//                    case (Ekey) -> new_grid[x][y] = new Enemy(loc, new Key(loc));
-//                    case (Emultiplikator) -> new_grid[x][y] = new Enemy(loc, new Multiplier(loc));
-//                    case (Epower) -> new_grid[x][y] = new Enemy(loc, new PowerPill(loc));
-//                    case (Espeed) -> new_grid[x][y] = new Enemy(loc, new SpeedBoots(loc));
-//                    case (EhealtUp) -> new_grid[x][y] = new Enemy(loc, new ExtraLife(loc));
-//                    case (Estopwatch) -> new_grid[x][y] = new Enemy(loc, new Stopwatch(loc));
-//                }
-//            }
-//        }
-//        LevelHandler.setLevelGrid(new_grid);
 
         String line = "";
         //werte rest der enthaltenen Daten aus
@@ -374,31 +288,48 @@ public class FileHandler {
      * und setzt alle zu speichernden werte in PlayerHandler, ItemHandler und GameHandler auf bestimmte werte
      * führt dan die saveGame() methode aus
      */
-    public static void debugTestSaveGame(){
+    public static void debugTestSaveGame() {
         LevelHandler.debugInitGrid(WallTile.class);
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
         //Geometry
-        LevelHandler.moveObjectTo(new Location(n,5),new DoorObject(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new PlayerObject(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Key(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new CoinItem(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new EmptyTile(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new DoorObject(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new PlayerObject(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Key(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new CoinItem(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new EmptyTile(new Location(n, 5)));
+        n++;
         //Itemsnew
-        LevelHandler.moveObjectTo(new Location(n,5),new SpeedBoots(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new ExtraLife(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Stopwatch(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new PowerPill(new Location(n,5)));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Multiplier(new Location(n,5)));n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new SpeedBoots(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new ExtraLife(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Stopwatch(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new PowerPill(new Location(n, 5)));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Multiplier(new Location(n, 5)));
+        n++;
         //Gegner auf Items
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new Key(new Location(n,5))));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new CoinItem(new Location(n,5))));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new SpeedBoots(new Location(n,5))));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new ExtraLife(new Location(n,5))));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new Stopwatch(new Location(n,5))));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new PowerPill(new Location(n,5))));n++;
-        LevelHandler.moveObjectTo(new Location(n,5),new Enemy(new Location(n,5),new Multiplier(new Location(n,5))));
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new Key(new Location(n, 5))));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new CoinItem(new Location(n, 5))));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new SpeedBoots(new Location(n, 5))));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new ExtraLife(new Location(n, 5))));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new Stopwatch(new Location(n, 5))));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new PowerPill(new Location(n, 5))));
+        n++;
+        LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new Multiplier(new Location(n, 5))));
 
         GameHandler.setLevel_number(3);
 
@@ -427,7 +358,7 @@ public class FileHandler {
      * diese sind die werte die von PlayerHandler, ItemHandler und GameHandler gespeichert wurde, gibt auch aus welcher werte in debugTestSaveGame reingespeichert wurden
      * gibt auch einen string aus der reihe y=5 des Grids in den jeweiligen Buchstaben repräsentiert
      */
-    public static void debugTestLoadGame(){
+    public static void debugTestLoadGame() {
         try {
             loadGame();
         } catch (FileNotFoundException e) {
@@ -435,21 +366,21 @@ public class FileHandler {
             e.printStackTrace();
         }
 
-        System.out.println("LevleNumber: "+GameHandler.getLevel_number()+ " Erwartet: 3");
+        System.out.println("LevleNumber: " + GameHandler.getLevel_number() + " Erwartet: 3");
 
-        System.out.println("hasKey: "+ PlayerHandler.hasKey()+  " Erwartet: true");
-        System.out.println("lives: "+ PlayerHandler.getLives()+  " Erwartet: 5");
-        System.out.println("score: "+ PlayerHandler.getScore()+  " Erwartet: 500");
+        System.out.println("hasKey: " + PlayerHandler.hasKey() + " Erwartet: true");
+        System.out.println("lives: " + PlayerHandler.getLives() + " Erwartet: 5");
+        System.out.println("score: " + PlayerHandler.getScore() + " Erwartet: 500");
 
-        System.out.println("PowerPillDuration: "+ ItemHandler.getPowerPillDuration()+  " Erwartet: 50");
-        System.out.println("MultiplierDuration: "+ ItemHandler.getMultiplierDuration()+  " Erwartet: 60");
-        System.out.println("SpeedBootsDuration: "+ ItemHandler.getSpeedBootsDuration()+  " Erwartet: 70");
+        System.out.println("PowerPillDuration: " + ItemHandler.getPowerPillDuration() + " Erwartet: 50");
+        System.out.println("MultiplierDuration: " + ItemHandler.getMultiplierDuration() + " Erwartet: 60");
+        System.out.println("SpeedBootsDuration: " + ItemHandler.getSpeedBootsDuration() + " Erwartet: 70");
 
-        System.out.println("EnemyTimeout: "+ GameHandler.getEnemyTimeout()+  " Erwartet: 9");
-        System.out.println("PlayerTurn: "+ GameHandler.getPlayerTurn() +  " Erwartet: 4");
+        System.out.println("EnemyTimeout: " + GameHandler.getEnemyTimeout() + " Erwartet: 9");
+        System.out.println("PlayerTurn: " + GameHandler.getPlayerTurn() + " Erwartet: 4");
 
         //gibt Reihe mit y=5 aus inder sollten alle Objekte einmal liegen
-        for (int x = 0; x < LevelHandler.level_width;x++){
+        for (int x = 0; x < LevelHandler.level_width; x++) {
             GameObject temp = LevelHandler.getObjectAt(new Location(x, 5));
             if (temp instanceof WallTile) {
                 System.out.print(wall);
