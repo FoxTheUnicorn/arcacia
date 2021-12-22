@@ -21,9 +21,6 @@ public class PauseMenuPanel extends AbstractMenu {
         add(new MenuButton("Tutorial", (e) -> SceneHandler.showTutorial(), Component.CENTER_ALIGNMENT));
         addSpacer(15);
 
-        add(new MenuButton("Settings", (e) -> {}, Component.CENTER_ALIGNMENT));
-        addSpacer(15);
-
         add(new MenuButton("Quit", (e) -> SceneHandler.showMainMenu(), Component.CENTER_ALIGNMENT));
         addSpacer(15);
     }

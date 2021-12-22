@@ -2,7 +2,7 @@ package arcacia.game.handler;
 
 public class ConstantHandler {
 
-    public static final boolean DEBUG_MODE = true;
+    public static boolean DEBUG_MODE = false;
 
     //region Scores
     public static final int scoreEnemyKill = 10;
