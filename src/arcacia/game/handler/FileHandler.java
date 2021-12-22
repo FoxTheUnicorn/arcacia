@@ -195,12 +195,28 @@ public class FileHandler {
      * loadLevelX
      * läd ein spezifisches level welches Dann gebaut werden soll
      */
-    public static boolean loadLevelX(int i)  {
-
+    public static boolean loadLevelX(int i) throws FileNotFoundException {
+        //Scanner scan = new Scanner(new FileReader(filePathLevel +"Level_"+i+".txt"));
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathLevel +"Level_"+i+".txt"));
             levelBuilder(bufferedReader);
 
+
+
+            /*LevelHandler.level_width = scan.nextInt();
+            if(scan.hasNextInt()) {
+               StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Height!!");
+                return false;
+            }
+            LevelHandler.level_height = scan.nextInt();
+            scan.nextLine();
+
+            String[] newGrid  = new String[LevelHandler.level_height];
+            bufferedReader.close();
+            return true;
+
+
+        */
         } catch (StringIndexOutOfBoundsException | IOException e) {
             System.out.println("Data Width/Height fehlt! Bitte überprüfen Sie die Level-Editor! ");
         }
@@ -216,6 +232,34 @@ public class FileHandler {
             return false;
 
         }
+      /*   if(!scan.hasNextLine()) {
+            StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Width!!");
+            return false;
+        }*/
+       // int width = scan.nextInt();
+       /* if(!scan.hasNextInt()) {
+            StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Height!!");
+            return false;
+        }
+        //int height = scan.nextInt();
+        scan.nextLine();
+
+        String[] newGrid  = new String[LevelHandler.level_height];
+
+        for(int y = 0; y < LevelHandler.level_height;y++ ){
+            if(!scan.hasNextLine()){
+                StringIndexOutOfBoundsException("Error INVALID FORMAT! Missing lines of Map!");
+                return false;
+            }
+
+            newGrid[y] = scan.nextLine();
+
+            if(newGrid[y].length() != LevelHandler.level_width+1){
+                StringIndexOutOfBoundsException("Error INVALID FORMAT! Map Line " + y + " not at the right size.");
+                return false;
+            }
+        }
+        */
 
         return false;
     }
@@ -233,9 +277,54 @@ public class FileHandler {
      * @throws FileNotFoundException schmeißt eine FileNotFoundException, wenn die zu öffnende Datei nicht geöffnet werden konnte
      */
     public static void loadGame() throws FileNotFoundException {
-
+        //GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
         BufferedReader bReader = new BufferedReader(new FileReader(filePathSaveGame +"savegame.txt"));
         levelBuilder(bReader);
+
+
+//        String line = "";
+//
+//        for (int y = 0; y < HeightGrid; y++) {
+//
+//            try {
+//                line = bReader.readLine();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                break;
+//            }
+//
+//            char now;
+//            for (int x = 0; x < WithGrid; x++) {
+//
+//                now = line.charAt(x);
+//                Location loc = new Location(x, y);
+//
+//                //vergleich welches objekt von dem Character dargestellt wird (19 mal)
+//                switch (now) {
+//                    case (wall) -> new_grid[x][y] = new WallTile(loc);
+//                    case (empty) -> new_grid[x][y] = new EmptyTile(loc);
+//                    case (player) -> new_grid[x][y] = new PlayerObject(loc);
+//                    case (key) -> new_grid[x][y] = new Key(loc);
+//                    case (coin) -> new_grid[x][y] = new CoinItem(loc);
+//                    case (door) -> new_grid[x][y] = new DoorObject(loc);
+//                    case (speed) -> new_grid[x][y] = new SpeedBoots(loc);
+//                    case (healtUp) -> new_grid[x][y] = new ExtraLife(loc);
+//                    case (stopwatch) -> new_grid[x][y] = new Stopwatch(loc);
+//                    case (power) -> new_grid[x][y] = new PowerPill(loc);
+//                    case (multiplikator) -> new_grid[x][y] = new Multiplier(loc);
+//                    case (enemy) -> new_grid[x][y] = new Enemy(loc);
+//
+//                    case (Ecoin) -> new_grid[x][y] = new Enemy(loc, new CoinItem(loc));
+//                    case (Ekey) -> new_grid[x][y] = new Enemy(loc, new Key(loc));
+//                    case (Emultiplikator) -> new_grid[x][y] = new Enemy(loc, new Multiplier(loc));
+//                    case (Epower) -> new_grid[x][y] = new Enemy(loc, new PowerPill(loc));
+//                    case (Espeed) -> new_grid[x][y] = new Enemy(loc, new SpeedBoots(loc));
+//                    case (EhealtUp) -> new_grid[x][y] = new Enemy(loc, new ExtraLife(loc));
+//                    case (Estopwatch) -> new_grid[x][y] = new Enemy(loc, new Stopwatch(loc));
+//                }
+//            }
+//        }
+//        LevelHandler.setLevelGrid(new_grid);
 
         String line = "";
         //werte rest der enthaltenen Daten aus
