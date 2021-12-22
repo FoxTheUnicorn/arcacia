@@ -10,6 +10,7 @@ import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class FileHandler {
 
@@ -135,7 +136,7 @@ public class FileHandler {
      */
     public static void levelBuilder(BufferedReader bReader){
         GameObject[][] new_grid = new GameObject[LevelHandler.level_width][LevelHandler.level_height];
-
+        Scanner scan;
         String line = "";
 
         for (int y = 0; y < LevelHandler.level_height; y++) {
@@ -143,7 +144,10 @@ public class FileHandler {
             try {
                 line = bReader.readLine();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Invalid");
+                break;
+            } catch (StringIndexOutOfBoundsException e) {
+                StringIndexOutOfBoundsException("Fehlt noch String");
                 break;
             }
 
@@ -154,6 +158,7 @@ public class FileHandler {
                 }
 
                 now = line.charAt(x);
+
                 Location loc = new Location(x, y);
 
                 //vergleich welches objekt von dem Character dargestellt wird (19 mal)
@@ -181,6 +186,7 @@ public class FileHandler {
                 }
             }
         }
+
         LevelHandler.setLevelGrid(new_grid);
 
     }
@@ -189,21 +195,77 @@ public class FileHandler {
      * loadLevelX
      * läd ein spezifisches level welches Dann gebaut werden soll
      */
-    public static boolean loadLevelX(int i)  {
-
+    public static boolean loadLevelX(int i) throws FileNotFoundException {
+        //Scanner scan = new Scanner(new FileReader(filePathLevel +"Level_"+i+".txt"));
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathLevel +"Level_"+i+".txt"));
             levelBuilder(bufferedReader);
+
+
+
+            /*LevelHandler.level_width = scan.nextInt();
+            if(scan.hasNextInt()) {
+               StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Height!!");
+                return false;
+            }
+            LevelHandler.level_height = scan.nextInt();
+            scan.nextLine();
+
+            String[] newGrid  = new String[LevelHandler.level_height];
             bufferedReader.close();
             return true;
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        */
+        } catch (StringIndexOutOfBoundsException | IOException e) {
+            System.out.println("Data Width/Height fehlt! Bitte überprüfen Sie die Level-Editor! ");
         }
+        try {
+
+            Scanner scan = new Scanner(new FileReader(filePathLevel +"Level_"+i+".txt"));
+            if(scan.hasNextInt()){
+                return true;
+            }
+        } catch (StringIndexOutOfBoundsException | IOException e) {
+
+            System.out.println("Invalid Data");
+            return false;
+
+        }
+      /*   if(!scan.hasNextLine()) {
+            StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Width!!");
+            return false;
+        }*/
+       // int width = scan.nextInt();
+       /* if(!scan.hasNextInt()) {
+            StringIndexOutOfBoundsException("Error INVALID FORMAT! Invalid Height!!");
+            return false;
+        }
+        //int height = scan.nextInt();
+        scan.nextLine();
+
+        String[] newGrid  = new String[LevelHandler.level_height];
+
+        for(int y = 0; y < LevelHandler.level_height;y++ ){
+            if(!scan.hasNextLine()){
+                StringIndexOutOfBoundsException("Error INVALID FORMAT! Missing lines of Map!");
+                return false;
+            }
+
+            newGrid[y] = scan.nextLine();
+
+            if(newGrid[y].length() != LevelHandler.level_width+1){
+                StringIndexOutOfBoundsException("Error INVALID FORMAT! Map Line " + y + " not at the right size.");
+                return false;
+            }
+        }
+        */
 
         return false;
+    }
+
+    public static void StringIndexOutOfBoundsException(String s) {
+        System.out.println(s);
     }
 
     /**
