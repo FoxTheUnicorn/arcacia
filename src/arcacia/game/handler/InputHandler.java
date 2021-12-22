@@ -15,6 +15,16 @@ public class InputHandler implements KeyListener {
     public static final int DIR_LEFT = 2;
     public static final int DIR_RIGHT = 3;
 
+    public static String getPressedButton(int x) {
+        return switch (x) {
+            case DIR_UP -> "DIR_UP";
+            case DIR_DOWN -> "DIR_DOWN";
+            case DIR_LEFT -> "DIR_LEFT";
+            case DIR_RIGHT -> "DIR_RIGHT";
+            default -> "";
+        };
+    }
+
     public static int getPressedButton() {
         if(BUTTON_UP) {
             return DIR_UP;

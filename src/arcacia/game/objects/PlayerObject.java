@@ -14,8 +14,7 @@ public class PlayerObject extends GameObject {
 
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
-        System.out.println(currentLocation);
-
+        if(ConstantHandler.DEBUG_MODE) System.out.println("Spieler instanziiert bei: " + currentLocation);
     }
 
     /**
@@ -32,7 +31,6 @@ public class PlayerObject extends GameObject {
 
         Location newLocation = getLocation();
 
-        System.out.println(input);
         switch (input) {
             case InputHandler.DIR_UP -> {
                 if (LevelHandler.isWall(xPos, yPos - 1, this)) {
@@ -63,6 +61,10 @@ public class PlayerObject extends GameObject {
                 newLocation.setY((yPos));
             }
         }
+        if(ConstantHandler.DEBUG_MODE) {
+            System.out.println("Player moved in Direction: " + InputHandler.getPressedButton(input));
+        }
+
         GameObject tmp = LevelHandler.moveObjectTo(newLocation, this);
 
         CollisionHandler.collision(this, tmp);
