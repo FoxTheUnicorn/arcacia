@@ -11,9 +11,11 @@ import java.io.IOException;
 
 public class PlayerObject extends GameObject {
     public static final String path = ConstantHandler.pathImages + "James.png";
+    Location start;
 
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
+        start = currentLocation;
         if(ConstantHandler.DEBUG_MODE) System.out.println("Spieler instanziiert bei: " + currentLocation);
     }
 
@@ -75,6 +77,7 @@ public class PlayerObject extends GameObject {
 
     public PlayerObject(int x, int y) {
         super(new Location(x, y));
+        start = new Location(x,y);
     }
 
     public BufferedImage getImage() {
@@ -84,5 +87,10 @@ public class PlayerObject extends GameObject {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void resetPlayer(){
+        this.currentLocation = start;
+        LevelHandler.moveObjectTo(currentLocation,this);
     }
 }

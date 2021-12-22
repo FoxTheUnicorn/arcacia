@@ -17,7 +17,7 @@ public class Highscore implements Serializable {
     protected String description;
     protected List<Score> scoreList;
     protected static int numberOfEntries = 10;
-    protected String dirName = "./highscore/highscore.txt";
+    protected String dirName = "./TopScore/highscore.txt";
 
    /** Constructor für Class Highscore
     * der eine neue ArrayList von Score Objekten erzeugt

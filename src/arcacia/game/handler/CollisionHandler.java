@@ -35,6 +35,17 @@ public class CollisionHandler {
             } else {
                 PlayerHandler.decrementLives();
                 //Restart Game
+                if (PlayerHandler.getLives()>0){
+                    player.resetPlayer();
+                    //System.out.println("resete Player");
+                    //reset alle gegner
+                    for (Enemy enemys : LevelHandler.enemies) {enemys.reset();}
+                    //System.out.println("resete gegner");
+                } else if(PlayerHandler.getLives() <=0){
+                    //ToDO beende Game Hier
+                    //beende Game
+                    //System.out.println("Player Lives auf 0: " + PlayerHandler.getLives());
+                }
             }
         }
         else if (collider instanceof DoorObject) {
@@ -57,6 +68,17 @@ public class CollisionHandler {
             } else {
                 PlayerHandler.decrementLives();
                 //Restart Game
+                if (PlayerHandler.getLives()>0){
+                    ((PlayerObject) collider).resetPlayer();
+                    //System.out.println("resete Player");
+                    //resete alle gegner
+                    for (Enemy enemys : LevelHandler.enemies) {enemys.reset();}
+                    //System.out.println("resete gegner");
+                } else if(PlayerHandler.getLives() <=0){
+                    //TODO beende Game Hier
+                    //beende Game
+                    //System.out.println("Player Lives auf 0: " + PlayerHandler.getLives());
+                }
             }
         }
         else if (collider instanceof WallTile) {
