@@ -1,6 +1,7 @@
 package arcacia.game.handler;
 
 import arcacia.game.objects.PlayerObject;
+import arcacia.game.scene.SceneHandler;
 
 public class PlayerHandler {
     private static boolean hasKey = false;
@@ -20,6 +21,7 @@ public class PlayerHandler {
     public static void addToScore(int x)
     {
         score += x * multiplier;
+        SceneHandler.levelPanel.setScore(score);
     }
 
     //region Getter/Setter
@@ -41,6 +43,7 @@ public class PlayerHandler {
     }
     public static void setScore(int score) {
         PlayerHandler.score = score;
+        SceneHandler.levelPanel.setScore(score);
     }
     public static PlayerObject getPlayer() {
         return player;

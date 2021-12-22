@@ -11,6 +11,7 @@ import java.util.logging.Level;
 
 public class LevelPanel extends JPanel {
     private final LevelCanvas canvas = new LevelCanvas();
+    private final JLabel scoreLabel = new JLabel();
 
     public LevelPanel() {
         setFocusable(false);
@@ -19,6 +20,11 @@ public class LevelPanel extends JPanel {
         JButton redrawButton = new JButton("Redraw");
         redrawButton.addActionListener((e) -> SceneHandler.drawGrid());
         add(redrawButton);
+
+        setScore(0);
+        add(scoreLabel);
+
+
 
         JButton testButton = new JButton("Toggle Key");
         testButton.addActionListener((e) -> PlayerHandler.setHasKey(!PlayerHandler.hasKey()));
@@ -29,6 +35,10 @@ public class LevelPanel extends JPanel {
         add(homeButton);
 
         add(canvas);
+    }
+
+    public void setScore(int x) {
+         scoreLabel.setText("Score: " + x);
     }
 
     public void updateFocus() {

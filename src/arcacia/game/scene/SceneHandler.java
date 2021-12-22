@@ -7,17 +7,13 @@ import java.util.Locale;
 
 public class SceneHandler {
     public static String lastMenu = "null";
-    private static final MainFrame frame = new MainFrame();
-    private static final MainMenuPanel mainMenuPanel = new MainMenuPanel();
-    private static final TutorialPanel tutorialPanel = new TutorialPanel();
-    private static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
-    private static final GameOverPanel gameOverPanel = new GameOverPanel();
-    private static final HighscorePanel highScorePanel = new HighscorePanel();
-    private static final LevelPanel levelPanel = new LevelPanel();
-
-
-
-    //region showScene Functions
+    public static final MainFrame frame = new MainFrame();
+    public static final MainMenuPanel mainMenuPanel = new MainMenuPanel();
+    public static final TutorialPanel tutorialPanel = new TutorialPanel();
+    public static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
+    public static final GameOverPanel gameOverPanel = new GameOverPanel();
+    public static final HighscorePanel highScorePanel = new HighscorePanel();
+    public static final LevelPanel levelPanel = new LevelPanel();
 
     public static void goBack() {
         switch(lastMenu.toLowerCase(Locale.ROOT)) {
@@ -26,6 +22,19 @@ public class SceneHandler {
         }
     }
 
+    public static void drawGrid() {
+        levelPanel.drawGrid();
+    }
+
+    public static void updateFocus() {
+        levelPanel.updateFocus();
+    }
+
+    public static void dispose() {
+        frame.dispose();
+    }
+
+    //region showScene Functions
     public static void showMainMenu() {
         frame.setContentPane(mainMenuPanel);
         lastMenu = "main";
@@ -53,25 +62,12 @@ public class SceneHandler {
         frame.update();
     }
 
-    public static void drawGrid() {
-        levelPanel.drawGrid();
-    }
-
-    public static void updateFocus() {
-        levelPanel.updateFocus();
-    }
-
     public static void showTutorial() {
         frame.setContentPane(tutorialPanel);
         frame.update();
     }
-
-    public static void dispose() {
-        frame.dispose();
-    }
     //endregion
 
-    public static void initialise() {
-    }
+
 
 }
