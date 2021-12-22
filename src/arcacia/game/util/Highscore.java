@@ -42,18 +42,21 @@ public class Highscore implements Serializable {
      * @param score übergibt Score Object (neue erreichte Score von Spieler) die in scoreList hinzugefügt wird
      */
     public void addScore(Score score) {
+        load();
         if (scoreList.size() < numberOfEntries) {
-            scoreList.add(score);
-            sort();
-            save();
-        }
 
-        Score lowestScore = scoreList.get(0);
-        if (score.getPoints() > lowestScore.getPoints()) {
-            scoreList.remove(lowestScore);
             scoreList.add(score);
             sort();
             save();
+        }else {
+
+            Score lowestScore = scoreList.get(0);
+            if (score.getPoints() > lowestScore.getPoints()) {
+                scoreList.remove(lowestScore);
+                scoreList.add(score);
+                sort();
+                save();
+            }
         }
     }
     /**
@@ -62,7 +65,7 @@ public class Highscore implements Serializable {
     public void save() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dirName))) {
             oos.writeObject(this);
-
+            oos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,18 +110,24 @@ public class Highscore implements Serializable {
     }
 
     /**
-     * fügt 10 dummy Werte ein mit einem Höhst score von 379
+     * fügt 10 dummy Werte ein mit einem Höhst score von 379 in die Datei Ein
      */
     public void debugDefautlListe(){
-        addScore(new Score("Oscar Heuwes",35));
-        addScore(new Score(" Mert Öztürk",37));
-        addScore(new Score("Lucas Beyel",42));
-        addScore(new Score("Elliot Schibilla",41));
-        addScore(new Score("Farhan Sasono",42));
-        addScore(new Score("I Made Paundra Daran",36));
-        addScore(new Score("Byungjun Kim",51));
-        addScore(new Score("Vincent Salgado",52));
-        addScore(new Score("Mert Tanrisever",43));
-        addScore(new Score("Arcadia",379));
+        scoreList.add(new Score("Oscar Heuwes",35));
+        scoreList.add(new Score(" Mert Öztürk",37));
+        scoreList.add(new Score("Lucas Beyel",42));
+        scoreList.add(new Score("Elliot Schibilla",41));
+        scoreList.add(new Score("Farhan Sasono",42));
+        scoreList.add(new Score("I Made Paundra Daran",36));
+        scoreList.add(new Score("Byungjun Kim",51));
+        scoreList.add(new Score("Vincent Salgado",52));
+        scoreList.add(new Score("Mert Tanrisever",43));
+        scoreList.add(new Score("Arcadia",379));
+        save();
+    }
+
+    public void debugEmptyListe(){
+        scoreList = new ArrayList<Score>();
+        save();
     }
 }

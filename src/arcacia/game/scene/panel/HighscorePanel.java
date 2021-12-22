@@ -35,11 +35,12 @@ public class HighscorePanel extends AbstractMenu {
         Highscore highscore = new Highscore("highScoreListe");
         List<Score> highscoreList = highscore.getScoreList();
 
+        int size = highscoreList.size();
         String[][] rec = new String[10][3];
-        for (int i = 0; i<highscoreList.size();i++){
-            rec[i][0] = String.valueOf(i+1);
-            rec[i][1] = highscoreList.get(i).getName();
-            rec[i][2] = String.valueOf(highscoreList.get(i).getPoints());
+        for (int i = 0; i<size;i++){
+            rec[(size-1)-i][0] = String.valueOf(size-i);
+            rec[(size-1)-i][1] = highscoreList.get(i).getName();
+            rec[(size-1)-i][2] = String.valueOf(highscoreList.get(i).getPoints());
         }
 
         //ende Lucas
