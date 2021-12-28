@@ -1,5 +1,7 @@
 package arcacia.game.handler;
 
+import arcacia.game.scene.SceneHandler;
+
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
@@ -25,6 +27,14 @@ public class InputHandler implements KeyListener {
         };
     }
 
+    public static void setBack()
+    {
+        BUTTON_UP = false;
+        BUTTON_DOWN = false;
+        BUTTON_RIGHT = false;
+        BUTTON_LEFT = false;
+    }
+
     public static int getPressedButton() {
         if(BUTTON_UP) {
             return DIR_UP;
@@ -45,23 +55,17 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.VK_UP, KeyEvent.VK_W -> BUTTON_UP = true;
-            case KeyEvent.VK_DOWN, KeyEvent.VK_S -> BUTTON_DOWN = true;
-            case KeyEvent.VK_LEFT, KeyEvent.VK_A -> BUTTON_LEFT = true;
-            case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> BUTTON_RIGHT = true;
-        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
-            case KeyEvent.VK_UP, KeyEvent.VK_W -> BUTTON_UP = false;
-            case KeyEvent.VK_DOWN, KeyEvent.VK_S -> BUTTON_DOWN = false;
-            case KeyEvent.VK_LEFT, KeyEvent.VK_A -> BUTTON_LEFT = false;
-            case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> BUTTON_RIGHT = false;
+            case KeyEvent.VK_UP, KeyEvent.VK_W -> BUTTON_UP = true;
+            case KeyEvent.VK_DOWN, KeyEvent.VK_S -> BUTTON_DOWN = true;
+            case KeyEvent.VK_LEFT, KeyEvent.VK_A -> BUTTON_LEFT = true;
+            case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> BUTTON_RIGHT = true;
+            case KeyEvent.VK_ESCAPE -> SceneHandler.showPauseMenu();
         }
     }
 

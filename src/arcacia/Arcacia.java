@@ -1,18 +1,18 @@
 package arcacia;
 
-import arcacia.game.handler.ConstantHandler;
+import arcacia.game.handler.FileHandler;
+import arcacia.game.handler.LevelHandler;
+import arcacia.game.objects.PlayerObject;
+import arcacia.game.objects.item.CoinItem;
+import arcacia.game.objects.item.ExtraLife;
+import arcacia.game.objects.tile.DoorObject;
 import arcacia.game.scene.SceneHandler;
-
-import java.util.*;
 
 public class Arcacia {
     public static void main(String[] args) {
-        List<String> args2 = Arrays.asList(args);
-        if(args.length != 0) {
-            if(args2.contains("-debug")) {
-                ConstantHandler.DEBUG_MODE = true;
-            }
-        }
+
+      //  LevelHandler.debugInitGrid(ExtraLife.class);
         SceneHandler.showMainMenu();
+        FileHandler.loadLevelX(1);
     }
 }
