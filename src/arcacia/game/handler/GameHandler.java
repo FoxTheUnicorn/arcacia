@@ -4,6 +4,8 @@ import arcacia.game.GameLoop;
 import arcacia.game.objects.enemy.Enemy;
 import arcacia.game.scene.SceneHandler;
 
+import java.util.ArrayList;
+
 public class GameHandler extends Thread {
 
     //TODO Fully integrate
@@ -16,6 +18,11 @@ public class GameHandler extends Thread {
     private static int enemyTurn = 1;
     private static boolean levelComplete = false;
     private static Thread thread = null;
+
+    public static void resetGame() {
+        if(thread == null) return;
+        LevelHandler.enemies = new ArrayList<>();
+    }
 
     public static void startNewGame() {
         setLevel_number(1);

@@ -1,5 +1,6 @@
 package arcacia.game.scene;
 
+import arcacia.game.handler.GameHandler;
 import arcacia.game.handler.InputHandler;
 import arcacia.game.scene.panel.*;
 
@@ -36,6 +37,7 @@ public class SceneHandler {
 
     //region showScene Functions
     public static void showMainMenu() {
+        GameHandler.resetGame();
         frame.setContentPane(mainMenuPanel);
         lastMenu = "main";
         frame.update();
