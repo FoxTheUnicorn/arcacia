@@ -1,6 +1,7 @@
 package arcacia.game.handler;
 
 import arcacia.game.objects.enemy.Enemy;
+import arcacia.game.scene.panel.LevelPanel;
 
 import java.util.ArrayList;
 
@@ -8,13 +9,25 @@ public class ItemHandler {
     private static int powerPillDuration = 0;
     private static int multiplierDuration = 0;
     private static int speedBootsDuration = 0;
-
-
+    private static int stopwatchDuration = 0;
 
     public static void tick() {
-        if(powerPillDuration > 0) powerPillDuration--;
-        if(multiplierDuration > 0) multiplierDuration--;
-        if(speedBootsDuration > 0) speedBootsDuration--;
+        if(powerPillDuration > 0) {
+            powerPillDuration--;
+            LevelPanel.setPowerPill(powerPillDuration);
+        }
+        if(multiplierDuration > 0) {
+            multiplierDuration--;
+            LevelPanel.setMultiplier(multiplierDuration);
+        }
+        if(speedBootsDuration > 0) {
+            speedBootsDuration--;
+            LevelPanel.setSpeed(speedBootsDuration);
+        }
+        if(stopwatchDuration > 0) {
+            stopwatchDuration--;
+            LevelPanel.setStopwatch(stopwatchDuration);
+        }
 
         if(speedBootsDuration == 0) GameHandler.setPlayerTurn(ConstantHandler.gamePlayerStepsPerTurn);
         if(multiplierDuration == 0) PlayerHandler.setMultiplier(ConstantHandler.scoreDefaultMultiplier);
@@ -65,5 +78,18 @@ public class ItemHandler {
     public static void setPowerPillDuration(int powerPillDuration) {
         ItemHandler.powerPillDuration = powerPillDuration;
     }
+
+    public static int getStopwatchDuration() {
+        return stopwatchDuration;
+    }
+
+    public static void aktivateStopwatch() {
+        stopwatchDuration = ConstantHandler.itemStopwatchDuration;
+    }
+
+    public static void setStopwatchDuration(int stopwatchDuration) {
+        ItemHandler.stopwatchDuration = stopwatchDuration;
+    }
+
     //endregion
 }
