@@ -17,7 +17,7 @@ public class PlayerObject extends GameObject {
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
         start = currentLocation;
-        DebugHandler.player.showInitPosition(start);
+        DebugHandler.objects.player.showInitPosition(start);
     }
 
     /**
@@ -29,12 +29,12 @@ public class PlayerObject extends GameObject {
 
         if(direction == -1) return false;
 
-        DebugHandler.player.showMoveDirection(direction);
+        DebugHandler.objects.player.showMoveDirection(direction);
 
         int xPos = getLocation().getX();
         int yPos = getLocation().getY();
 
-        DebugHandler.player.showPlayerPosition(getLocation());
+        DebugHandler.objects.player.showPlayerPosition(getLocation());
 
         Location newLocation = getLocation();
 
@@ -69,7 +69,7 @@ public class PlayerObject extends GameObject {
             }
         }
 
-        DebugHandler.player.showPlayerNewPosition(newLocation);
+        DebugHandler.objects.player.showPlayerNewPosition(newLocation);
 
         GameObject tmp = LevelHandler.moveObjectTo(newLocation, this);
 

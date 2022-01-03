@@ -33,7 +33,7 @@ public class LevelPanel extends JPanel {
         add(speed); speed.setBounds(550, 20, 50, 30);
         if(testButtons)
         {
-            JButton ToggleKey = new MenuButton("Toggle key", (e) -> PlayerHandler.setHasKey(true), Component.RIGHT_ALIGNMENT);
+            JButton ToggleKey = new MenuButton("Toggle key", (e) -> PlayerHandler.setHasKey(!PlayerHandler.hasKey()), Component.RIGHT_ALIGNMENT);
             add(ToggleKey); ToggleKey.setBounds(0,0,150, 20);
             JButton Highscore = new MenuButton("Go to Highscore", (e) -> GameHandler.setLevel_number(4), Component.RIGHT_ALIGNMENT);
             add(Highscore); Highscore.setBounds(0, 30, 150, 20);

@@ -1,5 +1,6 @@
 package arcacia.game.handler;
 
+import arcacia.debug.DebugHandler;
 import arcacia.game.objects.GameObject;
 import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.enemy.Enemy;
@@ -34,17 +35,12 @@ public class CollisionHandler {
                 PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);
             } else {
                 PlayerHandler.decrementLives();
-                //Restart Game
                 player.resetPlayer();
-                //System.out.println("resete Player");
-                //reset alle gegner
                 for (Enemy enemys : LevelHandler.enemies) {enemys.reset();}
-                //System.out.println("resete gegner");
             }
         }
         else if (collider instanceof DoorObject) {
             if(PlayerHandler.hasKey()) {
-                //GameHandler.setLevelComplete();
                 GameHandler.setLevel_number(GameHandler.getLevel_number() + 1);
                 LevelHandler.enemies.clear();
                 GameHandler.nextLevel();
@@ -56,18 +52,14 @@ public class CollisionHandler {
     }
 
     private static void enemyCollision(Enemy enemy, GameObject collider) {
-        if (collider instanceof PlayerObject) {
+        if (collider instanceof PlayerObject player) {
             if(ItemHandler.isPowerPillActive()) {
                 enemy.reset();
                 PlayerHandler.addToScore(ConstantHandler.scoreEnemyKill);
             } else {
                 PlayerHandler.decrementLives();
-                //Restart Game
-                ((PlayerObject) collider).resetPlayer();
-                //System.out.println("resete Player");
-                //resete alle gegner
+                player.resetPlayer();
                 for (Enemy enemys : LevelHandler.enemies) {enemys.reset();}
-                //System.out.println("resete gegner");
             }
         }
         else if (collider instanceof WallTile) {

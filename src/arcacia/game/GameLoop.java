@@ -24,8 +24,8 @@ public class GameLoop implements Runnable {
                 }
                 if(GameHandler.isLevelComplete()) return;
             }
-            SceneHandler.drawGrid();
             Thread.sleep(100);
+            SceneHandler.drawGrid();
         }
 
         for (int i = 0; i < GameHandler.getEnemyTurn(); i++) {
@@ -38,6 +38,7 @@ public class GameLoop implements Runnable {
             }
         }
         ItemHandler.tick();
+        SceneHandler.drawGrid();
     }
 
     @Override

@@ -1,13 +1,7 @@
 package arcacia.debug;
 
-import arcacia.debug.objects.PlayerDebug;
-import arcacia.game.handler.ConstantHandler;
+import arcacia.debug.objects.ObjectDebugger;
 
 public class DebugHandler {
-
-    public final static PlayerDebug player = new PlayerDebug();
-
-    private static boolean debugOn() {
-        return ConstantHandler.DEBUG_MODE;
-    }
+    public final static ObjectDebugger objects = new ObjectDebugger();
 }
