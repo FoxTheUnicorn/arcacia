@@ -13,9 +13,14 @@ public class PlayerHandler {
 
     public static void incrementLives() {
         lives++;
+        SceneHandler.levelPanel.setLives(lives);
     }
     public static void decrementLives() {
         lives--;
+        SceneHandler.levelPanel.setLives(lives);
+        if(lives == 0) {
+            SceneHandler.showGameOver();
+        }
     }
 
     public static void addToScore(int x)

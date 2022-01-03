@@ -1,5 +1,7 @@
 package arcacia.game.scene.panel;
 
+import arcacia.game.handler.FileHandler;
+import arcacia.game.handler.GameHandler;
 import arcacia.game.scene.SceneHandler;
 import arcacia.game.scene.other.MenuButton;
 
@@ -23,13 +25,13 @@ public class GameOverPanel extends AbstractMenu {
 
         addSpacer(15);
 
-        add(new MenuButton("Restart", e -> {}, Component.CENTER_ALIGNMENT));
+        add(new MenuButton("Restart", e -> {FileHandler.loadLevelX(GameHandler.getLevel_number()); SceneHandler.showLevel();}, Component.CENTER_ALIGNMENT));
         addSpacer(15);
 
-        add(new MenuButton("Next Level", e -> {}, Component.CENTER_ALIGNMENT));
-        addSpacer(15);
+        //add(new MenuButton("Next Level", e -> {}, Component.CENTER_ALIGNMENT));
+        //addSpacer(15);
 
-        add(new MenuButton("Back Button", e -> SceneHandler.showMainMenu(), Component.CENTER_ALIGNMENT));
+        add(new MenuButton("Main Menu", e -> SceneHandler.showMainMenu(), Component.CENTER_ALIGNMENT));
         addSpacer(15);
     }
 }
