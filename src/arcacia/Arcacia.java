@@ -10,9 +10,6 @@ import arcacia.game.scene.SceneHandler;
 
 public class Arcacia {
     public static void main(String[] args) {
-
-      //  LevelHandler.debugInitGrid(ExtraLife.class);
         SceneHandler.showMainMenu();
-        FileHandler.loadLevelX(1);
     }
 }

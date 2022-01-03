@@ -15,14 +15,15 @@ public class GameHandler extends Thread {
     private static int enemyTimeout = 0;
     private static int enemyTurn = 1;
     private static boolean levelComplete = false;
+    private static Thread thread = null;
 
     public static void startNewGame() {
         setLevel_number(1);
         SceneHandler.showLevel();
         FileHandler.loadLevelX(level_number);
         GameLoop gameLoop = new GameLoop();
-        Thread t = new Thread(gameLoop);
-        t.start();
+        thread = new Thread(gameLoop);
+        thread.start();
     }
 
     public static void nextLevel()
