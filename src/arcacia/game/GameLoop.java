@@ -20,8 +20,8 @@ public class GameLoop implements Runnable {
                     SceneHandler.updateFocus();
                     temp = InputHandler.getPressedButton();
                     moved = PlayerHandler.getPlayer().playerMove(temp);
+                    InputHandler.setBack();
                 }
-                InputHandler.setBack();
                 if(GameHandler.isLevelComplete()) return;
             }
             SceneHandler.drawGrid();

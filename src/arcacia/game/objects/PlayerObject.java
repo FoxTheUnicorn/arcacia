@@ -1,5 +1,6 @@
 package arcacia.game.objects;
 
+import arcacia.debug.DebugHandler;
 import arcacia.game.handler.*;
 import arcacia.game.util.Location;
 
@@ -16,24 +17,28 @@ public class PlayerObject extends GameObject {
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
         start = currentLocation;
-        if(ConstantHandler.DEBUG_MODE) System.out.println("Spieler instanziiert bei: " + currentLocation);
+        DebugHandler.player.showInitPosition(start);
     }
 
     /**
      * Bewegt den Spieler ein Feld weiter entsprechend der Eingabe. Wenn die neue Position in einer wand wäre passiert nichts
-     * @param input die key eingabe in welche richtung sich der Spieler bewegen soll
+     * @param direction die key eingabe in welche richtung sich der Spieler bewegen soll
      *
      */
-    public boolean playerMove(int input) {
+    public boolean playerMove(int direction) {
 
-        if(input == -1) return false;
+        if(direction == -1) return false;
+
+        DebugHandler.player.showMoveDirection(direction);
 
         int xPos = getLocation().getX();
         int yPos = getLocation().getY();
 
+        DebugHandler.player.showPlayerPosition(getLocation());
+
         Location newLocation = getLocation();
 
-        switch (input) {
+        switch (direction) {
             case InputHandler.DIR_UP -> {
                 if (LevelHandler.isWall(xPos, yPos - 1, this)) {
                     return false;
@@ -63,9 +68,8 @@ public class PlayerObject extends GameObject {
                 newLocation.setY((yPos));
             }
         }
-        if(ConstantHandler.DEBUG_MODE) {
-            System.out.println("Player moved in Direction: " + InputHandler.getPressedButton(input));
-        }
+
+        DebugHandler.player.showPlayerNewPosition(newLocation);
 
         GameObject tmp = LevelHandler.moveObjectTo(newLocation, this);
 
