@@ -8,7 +8,6 @@ public class GameLoop implements Runnable {
 
     public static void loop() throws InterruptedException {
         GameHandler.setRunning(true);
-        SceneHandler.drawGrid();
         Thread.sleep(100);
 
         for (int i = 0; i < GameHandler.getPlayerTurn(); i++) {
@@ -37,9 +36,7 @@ public class GameLoop implements Runnable {
                     e.movement(PlayerHandler.getPlayer().getLocation());
                 }
             }
-            SceneHandler.drawGrid();
         }
-
         ItemHandler.tick();
     }
 
