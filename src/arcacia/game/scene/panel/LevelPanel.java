@@ -13,6 +13,7 @@ public class LevelPanel extends JPanel {
     private final LevelCanvas canvas = new LevelCanvas();
     private final JLabel scoreLabel = new JLabel();
     private final JLabel lives = new IconLabel("Leben: 3", ExtraLife.path);
+    private boolean testButtons = false;
 
     public LevelPanel() {
         setFocusable(false);
@@ -22,8 +23,12 @@ public class LevelPanel extends JPanel {
 
         add(scoreLabel);
         add(lives);
-        add(new MenuButton("Toggle key", (e) -> PlayerHandler.setHasKey(true), Component.RIGHT_ALIGNMENT));
-        add(new MenuButton("Go to Highscore", (e) -> GameHandler.setLevel_number(4), Component.RIGHT_ALIGNMENT));
+        if(testButtons)
+        {
+            add(new MenuButton("Toggle key", (e) -> PlayerHandler.setHasKey(true), Component.RIGHT_ALIGNMENT));
+            add(new MenuButton("Go to Highscore", (e) -> GameHandler.setLevel_number(4), Component.RIGHT_ALIGNMENT));
+        }
+
         add(canvas);
     }
 
