@@ -1,7 +1,10 @@
 package arcacia.game.scene.panel;
 
+import arcacia.game.handler.GameHandler;
+import arcacia.game.handler.PlayerHandler;
 import arcacia.game.objects.item.ExtraLife;
 import arcacia.game.scene.other.IconLabel;
+import arcacia.game.scene.other.MenuButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +22,8 @@ public class LevelPanel extends JPanel {
 
         add(scoreLabel);
         add(lives);
+        add(new MenuButton("Toggle key", (e) -> PlayerHandler.setHasKey(true), Component.RIGHT_ALIGNMENT));
+        add(new MenuButton("Go to Highscore", (e) -> GameHandler.setLevel_number(4), Component.RIGHT_ALIGNMENT));
         add(canvas);
     }
 

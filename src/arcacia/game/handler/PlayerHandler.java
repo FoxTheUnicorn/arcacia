@@ -19,6 +19,7 @@ public class PlayerHandler {
         lives--;
         SceneHandler.levelPanel.setLives(lives);
         if(lives == 0) {
+            GameHandler.setLevel_number(1);
             SceneHandler.showGameOver();
         }
     }

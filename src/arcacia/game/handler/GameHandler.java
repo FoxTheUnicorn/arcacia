@@ -17,11 +17,18 @@ public class GameHandler extends Thread {
     private static boolean levelComplete = false;
 
     public static void startNewGame() {
+        setLevel_number(1);
         SceneHandler.showLevel();
-        FileHandler.loadLevelX(1);
+        FileHandler.loadLevelX(level_number);
         GameLoop gameLoop = new GameLoop();
         Thread t = new Thread(gameLoop);
         t.start();
+    }
+
+    public static void nextLevel()
+    {
+        FileHandler.loadLevelX(level_number);
+        PlayerHandler.setHasKey(false);
     }
 
     //region Getter/Setter
@@ -64,6 +71,10 @@ public class GameHandler extends Thread {
 
     public static void setLevel_number(int level_number) {
         GameHandler.level_number = level_number;
+        if(level_number == 4)
+        {
+            SceneHandler.showHighscore();
+        }
     }
 
     public static void setLevelComplete() { levelComplete = true;}

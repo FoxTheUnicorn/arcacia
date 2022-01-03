@@ -63,10 +63,10 @@ public class TutorialPanel extends JPanel {
 
         itemList.add(new IconLabel("Beim aufsammeln erhöht dies die Punkte des Spielers um 1.", CoinItem.path));
         itemList.add(new IconLabel("Wenn der Spieler diesen Schlüssel aufsammelt, kann er zum Ausgang gehen um ins nächste Level zu kommen.", Key.path));
-        itemList.add(new IconLabel("Der Spieler kann zwei Züge machen bevor die Gegner wieder ziehen können.", SpeedBoots.path));
-        itemList.add(new IconLabel("Die Gegner bleiben für 10 Runden stehen.", Stopwatch.path));
-        itemList.add(new IconLabel("Wenn der Spieler dieses Item aufgesammelt hat, kann er für 10 Runden lang die Gegner berühren und sie somit zurück zu ihrem Startpunkt befördern.", PowerPill.path));
-        itemList.add(new IconLabel("Wenn der Spieler nach dem Aufsammeln dieses Items Punkte bekommt, werden diese verdoppelt.", Multiplier.path));
+        itemList.add(new IconLabel("Der Spieler kann für 20 Runden zwei Züge machen bevor die Gegner wieder ziehen können.", SpeedBoots.path));
+        itemList.add(new IconLabel("Die Gegner bleiben für 20 Runden stehen.", Stopwatch.path));
+        itemList.add(new IconLabel("Wenn der Spieler dieses Item aufgesammelt hat, kann er für 20 Runden lang die Gegner berühren und sie somit zurück zu ihrem Startpunkt befördern.", PowerPill.path));
+        itemList.add(new IconLabel("Für 20 Runden bekommt der Spieler beim Aufsammeln von Punkten die doppelte Anzahl.", Multiplier.path));
         itemList.add(new IconLabel("Der Spieler bekommt ein extra Leben.",ExtraLife.path));
         //endregion
 

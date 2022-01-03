@@ -17,7 +17,7 @@ public class GameLoop implements Runnable {
             } else {
                 int temp = -1;
                 boolean moved = false;
-                while(temp == -1 || !moved) {
+                while(temp == -1 && !moved) {
                     SceneHandler.updateFocus();
                     temp = InputHandler.getPressedButton();
                     moved = PlayerHandler.getPlayer().playerMove(temp);
