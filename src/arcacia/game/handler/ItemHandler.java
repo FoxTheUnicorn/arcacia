@@ -33,6 +33,14 @@ public class ItemHandler {
         if(multiplierDuration == 0) PlayerHandler.setMultiplier(ConstantHandler.scoreDefaultMultiplier);
     }
 
+    public static void reset() {
+        powerPillDuration = 0;
+        multiplierDuration = 0;
+        speedBootsDuration = 0;
+        stopwatchDuration = 0;
+    }
+
+
     //region Functions
     public static boolean isMultiplierActive() { return multiplierDuration > 0; }
     public static void activateMultiplier() {

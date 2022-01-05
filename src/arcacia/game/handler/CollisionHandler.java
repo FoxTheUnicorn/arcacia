@@ -1,6 +1,5 @@
 package arcacia.game.handler;
 
-import arcacia.debug.DebugHandler;
 import arcacia.game.objects.GameObject;
 import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.enemy.Enemy;
@@ -41,7 +40,7 @@ public class CollisionHandler {
         }
         else if (collider instanceof DoorObject) {
             if(PlayerHandler.hasKey()) {
-                GameHandler.setLevel_number(GameHandler.getLevel_number() + 1);
+                GameHandler.setLevel(GameHandler.getLevel() + 1);
                 LevelHandler.enemies.clear();
                 GameHandler.nextLevel();
             }

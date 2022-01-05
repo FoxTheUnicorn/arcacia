@@ -111,7 +111,7 @@ public class FileHandler {
         //schreibt die Restlichen zu merkenden Variablen in die Datei in einer Bestimten Reihenfolge
 
         //LevelNumber
-        pWriter.println(GameHandler.getLevel_number());
+        pWriter.println(GameHandler.getLevel());
         //PlayerHandler
         pWriter.println(PlayerHandler.hasKey());
         pWriter.println(PlayerHandler.getLives());
@@ -245,7 +245,7 @@ public class FileHandler {
         try {
             //LevelNumber
             line = bReader.readLine();
-            GameHandler.setLevel_number(Integer.parseInt(line));
+            GameHandler.setLevel(Integer.parseInt(line));
             //PlayerHandler
             //hasKey
             line = bReader.readLine();
@@ -331,7 +331,7 @@ public class FileHandler {
         n++;
         LevelHandler.moveObjectTo(new Location(n, 5), new Enemy(new Location(n, 5), new Multiplier(new Location(n, 5))));
 
-        GameHandler.setLevel_number(3);
+        GameHandler.setLevel(3);
 
         PlayerHandler.setHasKey(true);
         PlayerHandler.setLives(5);
@@ -366,7 +366,7 @@ public class FileHandler {
             e.printStackTrace();
         }
 
-        System.out.println("LevleNumber: " + GameHandler.getLevel_number() + " Erwartet: 3");
+        System.out.println("LevleNumber: " + GameHandler.getLevel() + " Erwartet: 3");
 
         System.out.println("hasKey: " + PlayerHandler.hasKey() + " Erwartet: true");
         System.out.println("lives: " + PlayerHandler.getLives() + " Erwartet: 5");

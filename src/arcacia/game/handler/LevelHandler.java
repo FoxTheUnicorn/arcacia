@@ -103,6 +103,11 @@ public class LevelHandler {
         }
     }
 
+    public static void reset() {
+        enemies = new ArrayList<>();
+        grid = new GameObject[level_width][level_height];
+    }
+
     public static void removeObjectAt(Location loc) {
         grid[loc.getX()][loc.getY()] = new EmptyTile(loc);
     }

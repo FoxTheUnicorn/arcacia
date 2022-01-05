@@ -10,6 +10,12 @@ public class PlayerHandler {
     private static int multiplier = ConstantHandler.scoreDefaultMultiplier;
     private static PlayerObject player;
 
+    public static void reset() {
+        hasKey = false;
+        lives = 3;
+        score = 0;
+        multiplier = ConstantHandler.scoreDefaultMultiplier;
+    }
 
     public static void incrementLives() {
         lives++;
@@ -19,7 +25,7 @@ public class PlayerHandler {
         lives--;
         SceneHandler.levelPanel.setLives(lives);
         if(lives == 0) {
-            GameHandler.setLevel_number(1);
+            GameHandler.setLevel(1);
             SceneHandler.showGameOver();
         }
     }
