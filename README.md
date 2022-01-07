@@ -79,4 +79,4 @@ You can also combine them with relative links and line references:
 [<code>String: debugTest()</code>](example.java#L9): Lorem Ipsum
 </details>
 
-[Or click here](/src/arcacia/game/handler/README.md)
+[Or click here](/src/main/arcacia/game/handler/README.md)
