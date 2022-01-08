@@ -214,19 +214,19 @@ public class Enemy extends GameObject {
      * lässt den gegner in eine der vier richtungen (rechts, oben, links, unten) gehen
      * entscheidet random in welche
      */
-    void moveRandom(){
+    public void moveRandom(){
         //aus allen validen Richtungen bestimmt der genera eine und geht einen schritt in diese Richtung
         int richtung = ThreadLocalRandom.current().nextInt(1,5);//generiert eine zahl aus {1,2,3,4}
 
         switch (richtung) {
             case 1:
-                if (moveY(1)){ break;}
+                if (moveY(1)){ break;}else {richtung++;}
             case 2:
-                if (moveX(1)){break;}
+                if (moveX(1)){break;}else {richtung++;}
             case 3:
-                if (moveY(-1)){break;}
+                if (moveY(-1)){break;}else {richtung++;}
             case 4:
-                if (moveX(-1)){break;}
+                if (moveX(-1)){break;}else {richtung = 1;}
             default:
                 //wenn in der ersten runde kein erfolgreicher gegangen werden konnte weil z.b. richtung  = 3 war und sowol 3 und 4 nicht ausgeführt werden konnte
                 // dann ist hier die möglichkeit gegeben das 1 oder 2 erfolgreich werden kann
@@ -329,76 +329,8 @@ public class Enemy extends GameObject {
 
     }
 
+    public void setPlayer(Location p){
+        this.player=p;
+    }
+    public void DebuggMove_To_Position(Location l){move_to_Position(l);}
 }
-
-
-
-      /*  if (!Location.isSame(this.currentLocation, location))
-        {
-            if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() <= location.getY()) {
-                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-                switch (richtung) {
-                    case 1:
-                        if (bewegeY(1)) {
-                            bewegeY(1);
-                            break;
-                        }
-                    case 2:
-                        if (bewegeX(1)) {
-                            bewegeX(1);
-                            break;
-                        }
-                }
-            }
-            if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() <= location.getY()) {
-                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-
-                switch (richtung) {
-                    case 1:
-                        if (bewegeY(1)) {
-                            bewegeY(1);
-                            break;
-                        }
-                    case 2:
-                        if (bewegeX(-1)) {
-                            bewegeX(-1);
-                            break;
-                        }
-                }
-            }
-            if (this.currentLocation.getX() <= location.getX() && this.currentLocation.getY() >= location.getY()) {
-                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-
-                switch (richtung) {
-                    case 1:
-                        if (bewegeY(-1)) {
-                            bewegeY(-1);
-                            break;
-                        }
-                    case 2:
-                        if (bewegeX(1)) {
-                            bewegeX(1);
-                            break;
-                        }
-                }
-            }
-            if (this.currentLocation.getX() >= location.getX() && this.currentLocation.getY() >= location.getY()) {
-                int richtung = ThreadLocalRandom.current().nextInt(1, 3);//generiert eine zahl aus {1,2}
-
-                switch (richtung) {
-                    case 1:
-                        if (bewegeY(-1)) {
-                            bewegeY(-1);
-                            break;
-                        }
-                    case 2:
-                        if (bewegeX(-1)) {
-                            bewegeX(-1);
-                            break;
-                        }
-                }
-            }
-        }
-
-       */
-
