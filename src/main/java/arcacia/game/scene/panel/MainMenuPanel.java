@@ -17,7 +17,7 @@ public class MainMenuPanel extends AbstractMenu {
         add(new MenuButton("New Game", (e) -> GameHandler.startNewGame(), Component.RIGHT_ALIGNMENT));
         addSpacer(15);
 
-        add(new MenuButton("Load Game", (e) -> SceneHandler.showLevel(), Component.RIGHT_ALIGNMENT));
+        add(new MenuButton("Load Game", (e) -> {GameHandler.resumeGame(); }, Component.RIGHT_ALIGNMENT));
         addSpacer(15);
 
         add(new MenuButton("Highscores", (e) -> SceneHandler.showHighscore(), Component.RIGHT_ALIGNMENT));

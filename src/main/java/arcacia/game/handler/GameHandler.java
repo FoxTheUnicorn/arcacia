@@ -1,10 +1,10 @@
 package arcacia.game.handler;
 
 import arcacia.game.GameLoop;
-import arcacia.game.objects.item.Item;
 import arcacia.game.scene.SceneHandler;
 import arcacia.game.scene.panel.LevelPanel;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class GameHandler extends Thread {
@@ -20,7 +20,7 @@ public class GameHandler extends Thread {
     private static boolean levelComplete = false;
     private static Thread thread = null;
 
-    public static void reset() {
+    private static void reset() {
         playerTimeout = 0;
         enemyTimeout = 0;
     }
@@ -38,7 +38,21 @@ public class GameHandler extends Thread {
         LevelHandler.enemies = new ArrayList<>();
     }
 
+    public static void resumeGame() {
+        resetGame();
+        try {
+            FileHandler.loadGame();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        SceneHandler.showLevel();
+        GameLoop gameLoop = new GameLoop();
+        thread = new Thread(gameLoop);
+        thread.start();
+    }
+
     public static void startNewGame() {
+        resetGame();
         setLevel(1);
         SceneHandler.showLevel();
         FileHandler.loadLevelX(level);
