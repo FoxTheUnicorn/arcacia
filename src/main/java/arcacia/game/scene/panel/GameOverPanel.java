@@ -25,7 +25,7 @@ public class GameOverPanel extends AbstractMenu {
 
         addSpacer(15);
 
-        add(new MenuButton("Restart", e -> {FileHandler.loadLevelX(GameHandler.getLevel()); SceneHandler.showLevel();}, Component.CENTER_ALIGNMENT));
+        add(new MenuButton("Restart", e -> {GameHandler.startNewGame(); SceneHandler.showLevel();}, Component.CENTER_ALIGNMENT));
         addSpacer(15);
 
         //add(new MenuButton("Next Level", e -> {}, Component.CENTER_ALIGNMENT));
