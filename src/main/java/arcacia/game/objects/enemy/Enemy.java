@@ -4,6 +4,7 @@ import arcacia.game.handler.CollisionHandler;
 import arcacia.game.handler.ConstantHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.objects.GameObject;
+import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.tile.DoorObject;
 import arcacia.game.objects.tile.EmptyTile;
 import arcacia.game.util.Location;
@@ -268,7 +269,9 @@ public class Enemy extends GameObject {
      */
     public void reset(){
         //setzt die Position des Gegners auf die StartPosition zurück
-        LevelHandler.moveObjectTo(currentLocation,objectOnPosition);
+        if (objectOnPosition instanceof PlayerObject)
+        { LevelHandler.moveObjectTo(currentLocation,new EmptyTile(currentLocation));}
+        else {LevelHandler.moveObjectTo(currentLocation,objectOnPosition);}
         this.currentLocation = start;
         countdown = -1;
         objectOnPosition = LevelHandler.moveObjectTo(currentLocation,this);
