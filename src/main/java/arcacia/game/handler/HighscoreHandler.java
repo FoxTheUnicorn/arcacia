@@ -1,4 +1,7 @@
-package arcacia.game.util;
+package arcacia.game.handler;
+
+import arcacia.game.util.Score;
+
 import java.io.*;
 import java.util.*;
 
@@ -13,44 +16,30 @@ import java.util.*;
  * int    : numberOfEntries, Size von scoreList (Anzahl von Elementen in List)
  * String : dirName, path zu .txt datei Ordner
  */
-public class Highscore implements Serializable {
-    protected String description;
-    protected List<Score> scoreList;
+public class HighscoreHandler implements Serializable {
+    protected static List<Score> scoreList = new ArrayList<>();
     protected static int numberOfEntries = 10;
-    protected String dirName = "./TopScore/highscore.txt";
+    protected static String dirName = "./TopScore/highscore.txt";
 
-   /** Constructor für Class Highscore
-    * der eine neue ArrayList von Score Objekten erzeugt
-     * @param description ist der Titel
-     */
-    public Highscore(String description) {
-        this.description = description;
-        scoreList = new ArrayList<Score>();
-    }
     /**
      * Sorts scoreList
      */
-    private void sort() {
-        scoreList.sort((score1, score2) -> {
-            Integer int1 = score1.getPoints();
-            Integer int2 = score2.getPoints();
-            return int1.compareTo(int2);
-        });
+    private static void sort() {
+        scoreList.sort(Comparator.comparing(Score::getPoints));
+        Collections.reverse(scoreList);
     }
     /**
      * fügt score zur scoreListe:List hinzu, wenn sie höher als die niedrigste Score ist
      * @param score übergibt Score Object (neue erreichte Score von Spieler) die in scoreList hinzugefügt wird
      */
-    public void addScore(Score score) {
+    public static void addScore(Score score) {
         load();
         if (scoreList.size() < numberOfEntries) {
-
             scoreList.add(score);
             sort();
             save();
         }else {
-
-            Score lowestScore = scoreList.get(0);
+            Score lowestScore = scoreList.get(9);
             if (score.getPoints() > lowestScore.getPoints()) {
                 scoreList.remove(lowestScore);
                 scoreList.add(score);
@@ -62,23 +51,29 @@ public class Highscore implements Serializable {
     /**
      * Objekt ins directory schreiben bzw. speichern
      */
-    public void save() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dirName))) {
-            oos.writeObject(this);
-            oos.close();
-        } catch (IOException e) {
+    public static void save() {
+        try{
+            FileOutputStream writeData = new FileOutputStream(dirName);
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            writeStream.writeObject(scoreList);
+            writeStream.flush();
+            writeStream.close();
+
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
     /**
      * Objekt aus directory lesen bzw. laden
      */
-    public void load(){
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dirName))){
-            Highscore loadedGame = (Highscore) ois.readObject();
-            this.scoreList = loadedGame.scoreList;
-            ois.close();
-        }catch (Exception e){
+    public static void load(){
+        try{
+            FileInputStream readData = new FileInputStream(dirName);
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+
+            scoreList = (List<Score>) readStream.readObject();
+            readStream.close();
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -93,7 +88,6 @@ public class Highscore implements Serializable {
     public String toString() {
         StringBuilder output = new StringBuilder();
         Collections.reverse(scoreList);
-        output.append(description);
         output.append("\n\n");
         for (Score score : scoreList) {
             output.append(score.getName());
@@ -104,15 +98,16 @@ public class Highscore implements Serializable {
         return output.toString();
     }
 
-    public List<Score> getScoreList(){
+    public static List<Score> getScoreList(){
         load();
+        sort();
         return scoreList;
     }
 
     /**
      * fügt 10 dummy Werte ein mit einem Höhst score von 379 in die Datei Ein
      */
-    public void debugDefautlListe(){
+    public static void debugDefautlListe(){
         scoreList.add(new Score("Oscar Heuwes",35));
         scoreList.add(new Score(" Mert Öztürk",37));
         scoreList.add(new Score("Lucas Beyel",42));
@@ -122,7 +117,7 @@ public class Highscore implements Serializable {
         scoreList.add(new Score("Byungjun Kim",51));
         scoreList.add(new Score("Vincent Salgado",52));
         scoreList.add(new Score("Mert Tanrisever",43));
-        scoreList.add(new Score("Arcadia",379));
+        scoreList.add(new Score("Arcacia",379));
         save();
     }
 

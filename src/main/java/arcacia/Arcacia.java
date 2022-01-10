@@ -1,6 +1,7 @@
 package arcacia;
 
 import arcacia.game.handler.FileHandler;
+import arcacia.game.handler.HighscoreHandler;
 import arcacia.game.handler.LevelHandler;
 import arcacia.game.objects.PlayerObject;
 import arcacia.game.objects.item.CoinItem;

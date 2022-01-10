@@ -1,12 +1,8 @@
 package arcacia.game.scene.panel;
 
 import arcacia.game.handler.ConstantHandler;
-import arcacia.game.objects.GameObject;
-import arcacia.game.objects.item.CoinItem;
-import arcacia.game.objects.tile.WallTile;
 import arcacia.game.scene.other.HomeButton;
-import arcacia.game.util.Highscore;
-import arcacia.game.util.Location;
+import arcacia.game.handler.HighscoreHandler;
 import arcacia.game.util.Score;
 
 import javax.swing.*;
@@ -31,25 +27,20 @@ public class HighscorePanel extends AbstractMenu {
         highScoreLabel.setIcon(highScoreIcon);
         add(highScoreLabel);
 
-        //ab hier Lucas
-        Highscore highscore = new Highscore("highScoreListe");
-        List<Score> highscoreList = highscore.getScoreList();
+        List<Score> highscoreList = HighscoreHandler.getScoreList();
 
         int size = highscoreList.size();
-        String[][] rec = new String[10][3];
+        String[][] list = new String[10][3];
         for (int i = 0; i<size;i++){
-            rec[(size-1)-i][0] = String.valueOf(size-i);
-            rec[(size-1)-i][1] = highscoreList.get(i).getName();
-            rec[(size-1)-i][2] = String.valueOf(highscoreList.get(i).getPoints());
+            list[i][0] = "" + (i+1);
+            list[i][1] = highscoreList.get(i).getName();
+            list[i][2] = "" + highscoreList.get(i).getPoints();
         }
 
-        //ende Lucas
-
-        //TODO Change to use Highscore.class
         String[] header = { "Rank", "Player", "Score"};
-        JTable table = new JTable(rec, header);
-        table.setRowHeight(20);
-        table.setPreferredSize(new Dimension(500, 200));
+        JTable table = new JTable(list, header);
+        table.setRowHeight(21);
+        table.setPreferredSize(new Dimension(500, 210));
         table.setDefaultEditor(Object.class, null);
         add(table);
     }

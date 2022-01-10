@@ -13,7 +13,8 @@ public class SceneHandler {
     public static final TutorialPanel tutorialPanel = new TutorialPanel();
     public static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
     public static final GameOverPanel gameOverPanel = new GameOverPanel();
-    public static final HighscorePanel highScorePanel = new HighscorePanel();
+    public static HighscorePanel highScorePanel = new HighscorePanel();
+    public static final AddScorePanel addScorePanel = new AddScorePanel();
     public static final LevelPanel levelPanel = new LevelPanel();
 
     public static void goBack() {
@@ -50,7 +51,13 @@ public class SceneHandler {
     }
 
     public static void showHighscore() {
+        highScorePanel = new HighscorePanel();
         frame.setContentPane(highScorePanel);
+        frame.update();
+    }
+
+    public static void showScore() {
+        frame.setContentPane(addScorePanel);
         frame.update();
     }
 

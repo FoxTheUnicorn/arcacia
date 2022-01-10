@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class GameHandler extends Thread {
 
-    //TODO Fully integrate
-
     private static boolean running = false;
     private static int level = 1;
     private static int playerTimeout = 0;
@@ -109,7 +107,7 @@ public class GameHandler extends Thread {
         GameHandler.level = level;
         if(level == 4)
         {
-            SceneHandler.showHighscore();
+            SceneHandler.showScore();
         }
     }
 
