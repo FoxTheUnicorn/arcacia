@@ -10,6 +10,7 @@ import arcacia.game.objects.tile.WallTile;
 import arcacia.game.util.Location;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -41,6 +42,11 @@ public class FileHandler {
     private static final String filePathLevel = "./Level-editor/Level/";
     private static final String filePathSaveGame = "./Level-editor/SaveGames/";
 
+    public static int getLevelnumber()
+    {
+        File file = new File(filePathLevel);
+        return Objects.requireNonNull(file.list()).length;
+    }
 
     /**
      * Nimmt für die Spielfeldgröße die werte in LevelHandler.level_width und LevelHandler.level_height in dieser Klasse

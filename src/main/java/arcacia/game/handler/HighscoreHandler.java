@@ -39,6 +39,7 @@ public class HighscoreHandler implements Serializable {
             sort();
             save();
         }else {
+            sort();
             Score lowestScore = scoreList.get(9);
             if (score.getPoints() > lowestScore.getPoints()) {
                 scoreList.remove(lowestScore);
@@ -58,7 +59,6 @@ public class HighscoreHandler implements Serializable {
             writeStream.writeObject(scoreList);
             writeStream.flush();
             writeStream.close();
-
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +70,6 @@ public class HighscoreHandler implements Serializable {
         try{
             FileInputStream readData = new FileInputStream(dirName);
             ObjectInputStream readStream = new ObjectInputStream(readData);
-
             scoreList = (List<Score>) readStream.readObject();
             readStream.close();
         }catch (Exception e) {

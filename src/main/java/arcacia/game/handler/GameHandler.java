@@ -105,7 +105,7 @@ public class GameHandler extends Thread {
 
     public static void setLevel(int level) {
         GameHandler.level = level;
-        if(level == 4)
+        if(level == FileHandler.getLevelnumber()+1)
         {
             SceneHandler.showScore();
         }
