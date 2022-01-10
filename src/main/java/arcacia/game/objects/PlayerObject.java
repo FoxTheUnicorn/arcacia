@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class PlayerObject extends GameObject {
     public static final String path = ConstantHandler.pathImages + "James.png";
+
     Location start;
 
     public PlayerObject(Location currentLocation) {
@@ -90,4 +91,12 @@ public class PlayerObject extends GameObject {
         this.currentLocation = start;
         LevelHandler.moveObjectTo(currentLocation,this);
     }
+    public Location getStart() {
+        return start;
+    }
+
+    public void setStart(Location start) {
+        this.start = start;
+    }
+
 }

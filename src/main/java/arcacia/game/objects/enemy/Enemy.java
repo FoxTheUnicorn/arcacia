@@ -336,4 +336,12 @@ public class Enemy extends GameObject {
         this.player=p;
     }
     public void DebuggMove_To_Position(Location l){move_to_Position(l);}
+    public Location getStart() {
+        return start;
+    }
+
+    public void setStart(Location start) {
+        this.start = start;
+    }
+
 }

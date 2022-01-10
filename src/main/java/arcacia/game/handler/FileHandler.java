@@ -130,6 +130,14 @@ public class FileHandler {
         pWriter.println(GameHandler.getEnemyTimeout());
         pWriter.println(GameHandler.getPlayerTurn());
 
+        //startPunkte
+        //Player
+        pWriter.println(PlayerHandler.getPlayer().getStart().getX() +":"+ PlayerHandler.getPlayer().getStart().getY());
+        //Enemys
+        for (Enemy e :LevelHandler.enemies) {
+            pWriter.println(e.getStart().getX()+":"+e.getStart().getY());
+        }
+
         pWriter.close();
     }
 
@@ -282,6 +290,18 @@ public class FileHandler {
             line = bReader.readLine();
             GameHandler.setPlayerTurn(Integer.parseInt(line));
 
+            //Startpunkte
+            //Spieler
+            line = bReader.readLine();
+            String[] newPLocation = line.split(":");
+            PlayerHandler.getPlayer().setStart(new Location(Integer.parseInt(newPLocation[0]),Integer.parseInt(newPLocation[1])));
+            //Enemys
+            for (Enemy e:LevelHandler.enemies) {
+                line = bReader.readLine();
+                String[] newELocation = line.split(":");
+                e.setStart(new Location(Integer.parseInt(newELocation[0]),Integer.parseInt(newELocation[1])));
+            }
+
             //schließe Datei
             bReader.close();
         } catch (IOException e) {
@@ -294,7 +314,7 @@ public class FileHandler {
      * und setzt alle zu speichernden werte in PlayerHandler, ItemHandler und GameHandler auf bestimmte werte
      * führt dan die saveGame() methode aus
      */
-    public static void debugTestSaveGame() {
+    /*public static void debugTestSaveGame() { // funktioniert nicht mehr
         LevelHandler.debugInitGrid(WallTile.class);
         //setze eins von jeder art objekt auf grid[n][5] starte mit n = 1
         int n = 1;
@@ -357,7 +377,7 @@ public class FileHandler {
             e.printStackTrace();
         }
 
-    }
+    } */
 
     /**
      * führt loadGame() methode aus und gibt dann ein paar der in debugTestSaveGame() gespeicherten werte aus
