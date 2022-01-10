@@ -1,6 +1,5 @@
 package arcacia.game.objects;
 
-import arcacia.debug.DebugHandler;
 import arcacia.game.handler.*;
 import arcacia.game.util.Location;
 
@@ -17,7 +16,6 @@ public class PlayerObject extends GameObject {
     public PlayerObject(Location currentLocation) {
         super(currentLocation);
         start = currentLocation;
-        DebugHandler.objects.player.showInitPosition(start);
     }
 
     /**
@@ -29,12 +27,9 @@ public class PlayerObject extends GameObject {
 
         if(direction == -1) return false;
 
-        DebugHandler.objects.player.showMoveDirection(direction);
-
         int xPos = getLocation().getX();
         int yPos = getLocation().getY();
 
-        DebugHandler.objects.player.showPlayerPosition(getLocation());
 
         Location newLocation = getLocation();
 
@@ -68,8 +63,6 @@ public class PlayerObject extends GameObject {
                 newLocation.setY((yPos));
             }
         }
-
-        DebugHandler.objects.player.showPlayerNewPosition(newLocation);
 
         GameObject tmp = LevelHandler.moveObjectTo(newLocation, this);
 
