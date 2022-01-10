@@ -18,7 +18,7 @@ public class PauseMenuPanel extends AbstractMenu {
         add(new MenuButton("Resume", (e) -> SceneHandler.showLevel(), Component.CENTER_ALIGNMENT));
         addSpacer(15);
 
-        add(new MenuButton("Restart", (e) -> {FileHandler.loadLevelX(GameHandler.getLevel()); SceneHandler.showLevel();}, Component.CENTER_ALIGNMENT));
+        add(new MenuButton("Restart", (e) -> {GameHandler.startNewGame(); SceneHandler.showLevel();}, Component.CENTER_ALIGNMENT));
         addSpacer(15);
 
         add(new MenuButton("Save", (e) -> {
