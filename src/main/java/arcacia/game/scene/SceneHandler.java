@@ -11,7 +11,7 @@ public class SceneHandler {
     public static final MainFrame frame = new MainFrame();
     public static final MainMenuPanel mainMenuPanel = new MainMenuPanel();
     public static final TutorialPanel tutorialPanel = new TutorialPanel();
-    public static final PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
+    public static PauseMenuPanel pauseMenuPanel = new PauseMenuPanel();
     public static final GameOverPanel gameOverPanel = new GameOverPanel();
     public static HighscorePanel highScorePanel = new HighscorePanel();
     public static final AddScorePanel addScorePanel = new AddScorePanel();
@@ -45,6 +45,7 @@ public class SceneHandler {
     }
 
     public static void showPauseMenu() {
+        pauseMenuPanel = new PauseMenuPanel();
         frame.setContentPane(pauseMenuPanel);
         lastMenu = "pause";
         frame.update();

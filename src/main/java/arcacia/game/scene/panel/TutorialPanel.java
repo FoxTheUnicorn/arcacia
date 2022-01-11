@@ -25,8 +25,8 @@ public class TutorialPanel extends JPanel {
     private void initGameDescription() {
         JLabel game = new JLabel("Spielbeschreibung");
         JTextArea gameDescription = new JTextArea("""
-                Allgemein geht es in dem Spiel darum in einem Labyrinth mit Gegnern zu überleben und alle drei Level zu schaffen.
-                Der Spieler muss einen Schlüssel einsammeln und damit zum Ausgang gehen um ins nächste Level zu kommen.
+                Allgemein geht es in dem Spiel darum in einem Labyrinth mit Gegnern zu ueberleben und alle drei Level zu schaffen.
+                Der Spieler muss einen Schluessel einsammeln und damit zum Ausgang gehen um ins naechste Level zu kommen.
                 Die Level werden dabei immer schwieriger, aber der Spieler kann Items einsammeln, die ihm helfen.
                 Wenn der Spieler alle Leben verliert oder in dem dritten Level durch den Ausgang geht ist das Spiel vorbei.
                 Wenn der Spieler alle Level beendet hat kann er seine Punktanzahl in eine Highscore Liste eintragen.""");
@@ -47,8 +47,9 @@ public class TutorialPanel extends JPanel {
         l1.addElement("A/Pfeil links:    Spieler bewegt sich nach links");
         l1.addElement("S/Pfeil unten:    Spieler bewegt sich nach unten");
         l1.addElement("D/Pfeil rechts:   Spieler bewegt sich nach rechts");
+        l1.addElement("Escape:           Pause Menu aufrufen");
         JList<String> list = new JList<>(l1);
-        list.setBounds(300,30,300,80);
+        list.setBounds(300,30,300,90);
         //endregion
 
         add(inputLabel);
@@ -61,12 +62,12 @@ public class TutorialPanel extends JPanel {
         //region Definition of Labels
         JLabel itemLabel = new JLabel("Items:"); itemLabel.setBounds(400,120,200,30);
 
-        itemList.add(new IconLabel("Beim aufsammeln erhöht dies die Punkte des Spielers um 1.", CoinItem.path));
-        itemList.add(new IconLabel("Wenn der Spieler diesen Schlüssel aufsammelt, kann er zum Ausgang gehen um ins nächste Level zu kommen.", Key.path));
-        itemList.add(new IconLabel("Der Spieler kann für 20 Runden zwei Züge machen bevor die Gegner wieder ziehen können.", SpeedBoots.path));
-        itemList.add(new IconLabel("Die Gegner bleiben für 20 Runden stehen.", Stopwatch.path));
-        itemList.add(new IconLabel("Wenn der Spieler dieses Item aufgesammelt hat, kann er für 20 Runden lang die Gegner berühren und sie somit zurück zu ihrem Startpunkt befördern.", PowerPill.path));
-        itemList.add(new IconLabel("Für 20 Runden bekommt der Spieler beim Aufsammeln von Punkten die doppelte Anzahl.", Multiplier.path));
+        itemList.add(new IconLabel("Beim aufsammeln erhoeht dies die Punkte des Spielers um 1.", CoinItem.path));
+        itemList.add(new IconLabel("Wenn der Spieler diesen Schluessel aufsammelt, kann er zum Ausgang gehen um ins naechste Level zu kommen.", Key.path));
+        itemList.add(new IconLabel("Der Spieler kann fuer 20 Runden zwei Zuege machen bevor die Gegner wieder ziehen koennen.", SpeedBoots.path));
+        itemList.add(new IconLabel("Die Gegner bleiben fuer 20 Runden stehen.", Stopwatch.path));
+        itemList.add(new IconLabel("Wenn der Spieler dieses Item aufgesammelt hat, kann er fuer 20 Runden lang die Gegner beruehren und sie somit zurueck zu ihrem Startpunkt befoerdern.", PowerPill.path));
+        itemList.add(new IconLabel("Fuer 20 Runden bekommt der Spieler beim Aufsammeln von Punkten die doppelte Anzahl.", Multiplier.path));
         itemList.add(new IconLabel("Der Spieler bekommt ein extra Leben.",ExtraLife.path));
         //endregion
 
