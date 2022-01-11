@@ -17,7 +17,7 @@ public class LevelPanel extends JPanel {
     private static final JLabel multiplier = new IconLabel("0", Multiplier.path);
     private static final JLabel stopwatch = new IconLabel("0", Stopwatch.path);
     private static final JLabel speed = new IconLabel("0", SpeedBoots.path);
-    private boolean testButtons = true;
+    private boolean testButtons = false;
 
     public LevelPanel() {
         setFocusable(false);
